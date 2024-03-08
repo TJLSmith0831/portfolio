@@ -42,12 +42,13 @@
 
 /* Class for the regular navigation buttons */
 .navButton {
-  color: #ffffff;
   background-color: transparent;
+  color: #ffffff;
   border: 2px solid transparent;
 }
 
 .navButton:hover {
+  background-color: transparent !important;
   border: 2px solid #4d96ff;
   border-radius: 9999px;
 }
