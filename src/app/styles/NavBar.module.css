@@ -1,0 +1,53 @@
+.title {
+  font-size: 36px;
+  color: #ffffff;
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+}
+
+.navigation {
+  display: flex;
+  justify-content: inherit;
+  align-items: inherit;
+  font-size: 0.85rem;
+  max-width: var(--max-width);
+  width: 80vw;
+  z-index: 2;
+  font-family: var(--font-mono);
+  border: 2px solid #4d96ff;
+  border-radius: 8px;
+  padding: 0 1.5rem;
+}
+
+.navButtons {
+  display: grid;
+  grid-template-columns: repeat(
+    4,
+    1fr
+  ); /* Creates four columns with equal width */
+  gap: 5px; /* Adjust the gap size as needed */
+  justify-content: center; /* Centers the grid within the navButtons div */
+  align-items: center; /* Centers the grid items vertically within their cells */
+  padding-right: 5px;
+}
+
+/* Class for the active navigation button */
+.navButtonActive,
+.navButtonActive:hover {
+  background-color: #4d96ff !important; /* Blue background */
+  color: #ffffff !important; /* White text */
+  border-radius: 9999px !important; /* Fully rounded corners */
+  border: 2px solid transparent;
+}
+
+/* Class for the regular navigation buttons */
+.navButton {
+  color: #ffffff;
+  background-color: transparent;
+  border: 2px solid transparent;
+}
+
+.navButton:hover {
+  border: 2px solid #4d96ff;
+  border-radius: 9999px;
+}

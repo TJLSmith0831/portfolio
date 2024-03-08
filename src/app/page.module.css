@@ -5,33 +5,21 @@
   align-items: center;
   padding: 6rem;
   min-height: 100vh;
+  background: linear-gradient(
+    153deg,
+    rgba(0, 0, 0, 1) 31%,
+    rgba(77, 150, 255, 1) 82%
+  );
 }
 
-.description {
-  display: inherit;
-  justify-content: inherit;
-  align-items: inherit;
-  font-size: 0.85rem;
-  max-width: var(--max-width);
-  width: 100%;
-  z-index: 2;
-  font-family: var(--font-mono);
-}
-
-.description a {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.description p {
-  position: relative;
-  margin: 0;
-  padding: 1rem;
-  background-color: rgba(var(--callout-rgb), 0.5);
-  border: 1px solid rgba(var(--callout-border-rgb), 0.3);
-  border-radius: var(--border-radius);
+.homeRectangle {
+  border: 2px solid #4d96ff; /* Sets the border color */
+  border-radius: 8px; /* Sets the rounded corners */
+  width: 55%; /* Sets the width to be 80% of its parent */
+  height: 60vh; /* Adjusts the height automatically based on content */
+  /* If you want a fixed height, you can specify a value like height: 200px; */
+  margin: 5vh auto; /* Centers the rectangle horizontally */
+  padding: 20px; /* Adds some space inside the rectangle */
 }
 
 .code {
@@ -49,9 +37,11 @@
 .card {
   padding: 1rem 1.2rem;
   border-radius: var(--border-radius);
-  background: rgba(var(--card-rgb), 0);
+  /* background: rgba(var(--card-rgb), 0); */
   border: 1px solid rgba(var(--card-border-rgb), 0);
-  transition: background 200ms, border 200ms;
+  transition:
+    background 200ms,
+    border 200ms;
 }
 
 .card span {
@@ -82,7 +72,6 @@
 }
 
 .center::before {
-  background: var(--secondary-glow);
   border-radius: 50%;
   width: 480px;
   height: 360px;
@@ -90,7 +79,6 @@
 }
 
 .center::after {
-  background: var(--primary-glow);
   width: 240px;
   height: 180px;
   z-index: -1;
@@ -98,7 +86,7 @@
 
 .center::before,
 .center::after {
-  content: "";
+  content: '';
   left: 50%;
   position: absolute;
   filter: blur(45px);
@@ -156,23 +144,23 @@
     height: 300px;
   }
 
-  .description {
+  .navigation {
     font-size: 0.8rem;
   }
 
-  .description a {
+  .navigation a {
     padding: 1rem;
   }
 
-  .description p,
-  .description div {
+  .navigation p,
+  .navigation div {
     display: flex;
     justify-content: center;
     position: fixed;
     width: 100%;
   }
 
-  .description p {
+  .navigation p {
     align-items: center;
     inset: 0 0 auto;
     padding: 2rem 1rem 1.4rem;
@@ -188,7 +176,7 @@
     backdrop-filter: blur(24px);
   }
 
-  .description div {
+  .navigation div {
     align-items: flex-end;
     pointer-events: none;
     inset: auto 0 0;
