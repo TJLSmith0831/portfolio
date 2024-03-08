@@ -1,0 +1,54 @@
+.homeRectangleOuter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-style: solid;
+  border-width: 0px 2px;
+  border-color: transparent #23d18b;
+  max-width: calc(var(--navbar-max-width) - 10px);
+  width: calc(60vw - 30px);
+  height: 60vh;
+  margin: 5vh auto;
+  padding: 10px;
+}
+
+.homeRectangleInner {
+  border: 2px solid #4d96ff;
+  border-radius: 8px;
+  width: calc(100% - 40px);
+  height: 65vh;
+  display: flex;
+}
+
+.homeBody {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  background-color: transparent;
+}
+
+.callToAction {
+  color: #ffffff;
+  font-weight: bold;
+  line-height: 1.2;
+  font-family: 'JetBrains Mono';
+  margin-left: 5%;
+}
+
+.avatarStyle {
+  justify-self: flex-end;
+  align-self: flex-start;
+  height: 30vh;
+  width: 60%;
+  margin-right: 15%;
+  margin-top: 15%;
+}
+
+.homeLinks {
+  display: flex;
+  justify-self: flex-start;
+  align-items: center;
+  gap: 20px; /* Adjust the gap as needed */
+}

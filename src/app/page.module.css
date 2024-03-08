@@ -12,16 +12,6 @@
   );
 }
 
-.homeRectangle {
-  border: 2px solid #4d96ff; /* Sets the border color */
-  border-radius: 8px; /* Sets the rounded corners */
-  width: 55%; /* Sets the width to be 80% of its parent */
-  height: 60vh; /* Adjusts the height automatically based on content */
-  /* If you want a fixed height, you can specify a value like height: 200px; */
-  margin: 5vh auto; /* Centers the rectangle horizontally */
-  padding: 20px; /* Adds some space inside the rectangle */
-}
-
 .code {
   font-weight: 700;
   font-family: var(--font-mono);

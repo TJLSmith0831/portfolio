@@ -1,22 +1,22 @@
-.title {
-  font-size: 36px;
-  color: #ffffff;
-  font-family: 'Inter', sans-serif;
-  font-weight: 700;
-}
-
 .navigation {
   display: flex;
-  justify-content: inherit;
-  align-items: inherit;
+  justify-content: space-between;
+  align-items: center;
   font-size: 0.85rem;
-  max-width: var(--max-width);
-  width: 80vw;
+  max-width: var(--navbar-max-width);
+  width: 70vw;
   z-index: 2;
   font-family: var(--font-mono);
   border: 2px solid #4d96ff;
   border-radius: 8px;
   padding: 0 1.5rem;
+}
+
+.title {
+  font-size: 36px;
+  color: #ffffff;
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
 }
 
 .navButtons {
@@ -51,4 +51,29 @@
   background-color: transparent !important;
   border: 2px solid #4d96ff;
   border-radius: 9999px;
+}
+
+/* Media query for smaller screens */
+@media (max-width: 768px) {
+  /* Adjust the max-width as needed */
+  .navigation {
+    flex-direction: column; /* Stack children vertically on small screens */
+  }
+
+  .title {
+    width: 100%;
+    justify-content: center; /* Center-align for visual appeal */
+    text-align: center;
+  }
+  .navButtons {
+    width: 50%; /* Full width on small screens for stacking */
+    justify-content: center; /* Center-align for visual appeal */
+    text-align: center; /* Ensure title text is centered if it's inline or inline-block */
+  }
+
+  .navButtons {
+    grid-template-columns: 1fr 1fr; /* Stack buttons vertically */
+    padding-right: 0; /* Remove padding-right on small screens */
+    padding-bottom: 5px;
+  }
 }
