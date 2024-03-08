@@ -41,7 +41,7 @@ const NavBar = () => {
     <div className={styles.navigation}>
       <Typography className={styles.title}>TRISTAN SMITH</Typography>
       <div className={styles.navButtons}>
-        <NavButton name={'Home'} href={'/'}/>
+        <NavButton name={'Home'} href={'/home'}/>
         <NavButton name={'About'} href={'/about'}/>
         <NavButton name={'Blog'} href={'/blog'}/>
         <NavButton name={'Contact'} href={'/contact'}/>
