@@ -1,13 +1,13 @@
-import React from 'react'
+import React from 'react';
 import NavBar from '../standardUtils/NavBar';
-import styles from '@/app/page.module.css'
+import styles from '@/app/page.module.css';
 
 const Contact = () => {
-    return (
+  return (
     <div className={styles.main}>
-        <NavBar />
+      <NavBar />
     </div>
-    );
-}
+  );
+};
 
-export default Contact
+export default Contact;
