@@ -13,28 +13,28 @@ const HomeLinks = () => {
         target="_blank"
         rel="noopener noreferrer"
       >
-        <FaInstagram color="#4d96ff" size="1.5em" />
+        <FaInstagram className={homeStyles.homeLink} />
       </a>
       <a
         href="https://github.com/TJLSmith0831"
         target="_blank"
         rel="noopener noreferrer"
       >
-        <FaGithub color="#4d96ff" size="1.5em" />
+        <FaGithub className={homeStyles.homeLink} />
       </a>
       <a
         href="https://medium.com/@tjlsmith0831"
         target="_blank"
         rel="noopener noreferrer"
       >
-        <FaMedium color="#4d96ff" size="1.5em" />
+        <FaMedium className={homeStyles.homeLink} />
       </a>
       <a
         href="https://www.linkedin.com/in/tristan-smith-666614158"
         target="_blank"
         rel="noopener noreferrer"
       >
-        <FaLinkedin color="#4d96ff" size="1.5em" />
+        <FaLinkedin className={homeStyles.homeLink} />
       </a>
     </div>
   );
@@ -48,10 +48,8 @@ const Home = () => {
         <div className={homeStyles.homeRectangleInner}>
           <div className={homeStyles.homeBody}>
             <div className={homeStyles.callToAction}>
-              <p style={{ fontSize: '4.5rem', marginBottom: '5%' }}>
-                LEAD THE LEAGUE
-              </p>
-              <p style={{ fontSize: '2.5rem', marginBottom: '5%' }}>
+              <p className={homeStyles.callToActionLine1}>LEAD THE LEAGUE</p>
+              <p className={homeStyles.callToActionLine2}>
                 WITH FULL-STACK SOLUTIONS
               </p>
               <HomeLinks />
