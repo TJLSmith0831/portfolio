@@ -7,9 +7,21 @@
   min-height: 100vh;
   background: linear-gradient(
     153deg,
-    rgba(0, 0, 0, 1) 31%,
+    rgba(0, 0, 0, 1) 40%,
     rgba(77, 150, 255, 1) 82%
   );
+  animation: gradientAnimation 15s ease infinite;
+  background-size: 400% 400%;
+}
+
+@keyframes gradientAnimation {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
 }
 
 .code {
