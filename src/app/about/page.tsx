@@ -1,6 +1,6 @@
 'use client';
 import React, { useState, FC } from 'react';
-import { Steps, StepsProps } from 'antd';
+import { Card, Steps, StepsProps } from 'antd';
 import NavBar from '../standardUtils/NavBar';
 import styles from '@/app/page.module.css';
 import aboutStyles from '@/app/styles/About.module.css';
@@ -58,6 +58,15 @@ const About: FC = () => {
           <Step title={<span style={{ color: 'gray' }}>Education</span>} />
           <Step title={<span style={{ color: 'gray' }}>Personal Life</span>} />
         </Steps>
+      </div>
+      <div className={aboutStyles.aboutContent}>
+        <div className={aboutStyles.careerDeck}>
+          <Card className={aboutStyles.mediumCard} />
+          <Card className={aboutStyles.mediumCard} />
+          <Card className={aboutStyles.mediumCard} />
+          <Card className={aboutStyles.mediumCard} />
+        </div>
+        <div className={aboutStyles.cardDisplay}></div>
       </div>
     </div>
   );

@@ -4,7 +4,6 @@
   margin-top: 0;
   padding-top: 0;
   column-gap: 10%;
-  margin-bottom: 37rem; /* TODO: Adjust with content */
   max-width: var(--navbar-max-width);
   width: 70vw;
 }
@@ -32,4 +31,45 @@
   color: #23d18b !important; /* Or any other color for finished titles */
 }
 
+.aboutContent {
+  height: 37rem;
+  width: 70vw;
+  display: grid;
+  grid-template-columns: auto auto;
+  max-width: var(--navbar-max-width);
+  margin-top: 10rem;
+}
+
+.careerDeck {
+  position: relative; /* This makes the .careerDeck a positioning context for absolute children */
+}
+
+.mediumCard {
+  position: absolute;
+  width: 270px;
+  height: 180px;
+  border: 1px solid #ccc; /* Just for visibility, adjust as needed */
+  background-color: #fff; /* Adjust card background color as needed */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Individual adjustments to each card for the stacked appearance */
+.mediumCard:nth-child(1) {
+  z-index: 4;
+}
+
+.mediumCard:nth-child(2) {
+  z-index: 3;
+  top: 50px; /* Slightly offset from the top card */
+}
+
+.mediumCard:nth-child(3) {
+  z-index: 2;
+  top: 100px; /* More offset */
+}
+
+.mediumCard:nth-child(4) {
+  z-index: 1;
+  top: 150px; /* Even more offset */
+}
 /* TODO: Make media query to flex-box titlebar */
