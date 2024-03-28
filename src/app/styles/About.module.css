@@ -1,0 +1,28 @@
+.titleBar {
+  display: grid;
+  grid-template-columns: auto auto;
+  margin-top: 0;
+  padding-top: 0;
+  column-gap: 20%;
+  margin-bottom: 37rem; /* TODO: Adjust with content */
+  max-width: var(--navbar-max-width);
+  width: 70vw;
+}
+
+/* About.module.css */
+
+.customSteps .ant-steps-item-title {
+  color: white !important; /* Change to the color you want */
+}
+
+/* Add this if you also want to change the color for the active step title */
+.customSteps .ant-steps-item-active .ant-steps-item-title {
+  color: #23d18b !important; /* Or any other color for the active title */
+}
+
+/* Add this if you also want to change the color for the finished step titles */
+.customSteps .ant-steps-item-finish .ant-steps-item-title {
+  color: #23d18b !important; /* Or any other color for finished titles */
+}
+
+/* TODO: Make media query to flex-box titlebar */
