@@ -46,11 +46,12 @@ const About: FC = () => {
     <div className={styles.main}>
       <NavBar />
       <div className={aboutStyles.titleBar}>
-        <h1 style={{ color: 'white', marginLeft: '10%' }}>ABOUT</h1>
+        <h1 className={aboutStyles.titleHeader}>ABOUT</h1>
         <Steps
           current={progressMark}
           progressDot={customDot}
           className={aboutStyles.customSteps}
+          style={{ alignSelf: 'center', marginTop: '3%' }}
         >
           <Step title={<span style={{ color: 'white' }}>Career</span>} />
           <Step title={<span style={{ color: 'gray' }}>Projects</span>} />

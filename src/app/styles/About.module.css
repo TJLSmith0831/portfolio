@@ -3,10 +3,17 @@
   grid-template-columns: auto auto;
   margin-top: 0;
   padding-top: 0;
-  column-gap: 20%;
+  column-gap: 10%;
   margin-bottom: 37rem; /* TODO: Adjust with content */
   max-width: var(--navbar-max-width);
   width: 70vw;
+}
+
+.titleHeader {
+  color: white;
+  margin-left: 20%;
+  font-size: 60px;
+  font-family: 'JetBrains Mono';
 }
 
 /* About.module.css */
