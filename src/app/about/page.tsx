@@ -1,9 +1,11 @@
 'use client';
 import React, { useState, FC } from 'react';
-import { Card, Steps, StepsProps } from 'antd';
+import { Steps, StepsProps } from 'antd';
 import NavBar from '../standardUtils/NavBar';
 import styles from '@/app/page.module.css';
 import aboutStyles from '@/app/styles/About.module.css';
+import { JobCardInfo } from './career/JobUtils';
+import CareerDeck from './career/CareerDeck';
 
 const { Step } = Steps;
 
@@ -60,12 +62,7 @@ const About: FC = () => {
         </Steps>
       </div>
       <div className={aboutStyles.aboutContent}>
-        <div className={aboutStyles.careerDeck}>
-          <Card className={aboutStyles.mediumCard} />
-          <Card className={aboutStyles.mediumCard} />
-          <Card className={aboutStyles.mediumCard} />
-          <Card className={aboutStyles.mediumCard} />
-        </div>
+        <CareerDeck jobs={JobCardInfo} />
         <div className={aboutStyles.cardDisplay}></div>
       </div>
     </div>
