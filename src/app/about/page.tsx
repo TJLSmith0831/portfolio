@@ -64,6 +64,9 @@ const About: FC = () => {
           <Step title={<span style={{ color: 'gray' }}>Personal Life</span>} />
         </Steps>
       </div>
+      {/* TODO: Move the current aboutContent div to a new Career page.tsx */}
+      {/* TODO: Make a new aboutContent div focused solely on holding any content
+      at the same height and width */}
       <div className={aboutStyles.aboutContent}>
         <CareerDeck jobs={JobCardInfo} setSelectedJob={setSelectedJob} />
         <JobDisplay selectedJob={selectedJob} />
