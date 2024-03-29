@@ -6,11 +6,14 @@ import styles from '@/app/page.module.css';
 import aboutStyles from '@/app/styles/About.module.css';
 import { JobCardInfo } from './career/JobUtils';
 import CareerDeck from './career/CareerDeck';
+import JobDisplay from './career/JobDisplay';
+import { Job } from '../types/about';
 
 const { Step } = Steps;
 
 const About: FC = () => {
   const [progressMark, setProgressMark] = useState<number>(0);
+  const [selectedJob, setSelectedJob] = useState<Job | null>(JobCardInfo[0]);
 
   // Define the custom dot style type
   const customDot = (
@@ -62,8 +65,8 @@ const About: FC = () => {
         </Steps>
       </div>
       <div className={aboutStyles.aboutContent}>
-        <CareerDeck jobs={JobCardInfo} />
-        <div className={aboutStyles.cardDisplay}></div>
+        <CareerDeck jobs={JobCardInfo} setSelectedJob={setSelectedJob} />
+        <JobDisplay selectedJob={selectedJob} />
       </div>
     </div>
   );

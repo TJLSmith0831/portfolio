@@ -1,7 +1,7 @@
 import { CareerDeckProps, Job } from '@/app/types/about';
 import { Card } from 'antd';
 import Meta from 'antd/es/card/Meta';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import aboutStyles from '@/app/styles/About.module.css';
 
 const formatUrl = (url: string) => {
@@ -35,8 +35,8 @@ const CareerCard: React.FC<{ job: Job; onClick: () => void }> = ({
           <img
             src={job.imageUrl}
             style={{
-              maxHeight: '100%',
-              maxWidth: '100%',
+              maxHeight: '90%',
+              maxWidth: '90%',
               height: 'auto',
               width: 'auto',
             }}
@@ -63,13 +63,14 @@ const CareerCard: React.FC<{ job: Job; onClick: () => void }> = ({
   );
 };
 
-const CareerDeck: React.FC<CareerDeckProps> = ({ jobs }) => {
+const CareerDeck: React.FC<CareerDeckProps> = ({ jobs, setSelectedJob }) => {
   const [orderedJobs, setOrderedJobs] = useState<Job[]>(jobs);
 
   const handleClick = (index: number) => {
     setOrderedJobs((currentJobs) => {
       const newOrderedJobs = [...currentJobs];
       const [selectedJob] = newOrderedJobs.splice(index, 1);
+      setSelectedJob(selectedJob);
       newOrderedJobs.unshift(selectedJob);
       return newOrderedJobs;
     });

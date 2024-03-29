@@ -37,6 +37,7 @@
   width: 70vw;
   display: grid;
   grid-template-columns: auto auto;
+  column-gap: 25%;
   max-width: var(--navbar-max-width);
   margin-top: 7rem;
 }
@@ -50,6 +51,7 @@
   width: 270px;
   height: 250px;
   border: 1px solid #ccc; /* Just for visibility, adjust as needed */
+  border-radius: 4%;
   background-color: #fff; /* Adjust card background color as needed */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
