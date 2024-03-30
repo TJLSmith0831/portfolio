@@ -10,8 +10,9 @@
     rgba(0, 0, 0, 1) 31%,
     rgba(77, 150, 255, 1) 82%
   );
-  /* animation: gradientAnimation 15s ease infinite; */
-  /* background-size: 400% 400%; */
+  background-size: cover; /* Ensure background covers the entire element */
+  background-attachment: fixed; /* Fix background during scroll */
+  background-repeat: no-repeat; /* Prevent background from repeating */
 }
 
 @keyframes gradientAnimation {
