@@ -31,3 +31,35 @@ export interface Project {
   projectName: string;
   projectKey: string;
 }
+
+export interface Education {
+  educationKey: string;
+  title: string;
+  description: string;
+  imageUrl: string;
+  sections: string[];
+}
+
+// Define an interface for the style object
+export interface BubbleStyle {
+  top: string;
+  left: string;
+}
+
+// Define an interface for the Bubble component props
+export interface BubbleProps {
+  key: React.Key;
+  style: BubbleStyle;
+  imageUrl?: string; // Optional image URL
+  onBubbleClick: () => void;
+}
+
+// Define an interface for the bubble data and PersonalSection props
+export interface BubbleData {
+  id: number | string;
+  style: BubbleStyle;
+}
+
+export interface PersonalSectionProps {
+  bubblesData: BubbleData[];
+}
