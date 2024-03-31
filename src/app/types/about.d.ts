@@ -3,6 +3,10 @@ export interface CareerDeckProps {
   setSelectedJob: (job: Job | null) => void;
 }
 
+export interface ProjectGridProps {
+  projects: Project[];
+}
+
 export interface JobDisplayProps {
   selectedJob: job;
 }
@@ -20,4 +24,10 @@ export interface JobDescription {
   skills: string;
   description: string[];
   image: string;
+}
+
+export interface Project {
+  imageUrl: string;
+  projectName: string;
+  projectKey: string;
 }

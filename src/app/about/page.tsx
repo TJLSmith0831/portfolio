@@ -8,6 +8,8 @@ import { JobCardInfo } from './career/JobUtils';
 import CareerDeck from './career/CareerDeck';
 import JobDisplay from './career/JobDisplay';
 import { Job } from '../types/about';
+import ProjectGrid from './projects/ProjectGrid';
+import { ProjectCards } from './projects/ProjectUtils';
 
 const { Step } = Steps;
 
@@ -17,6 +19,7 @@ const About: FC = () => {
   const [headerOpacity, setHeaderOpacity] = useState(1);
 
   // Make header fade out on scroll
+  // TODO: Eventually replace with way to keep steps in view
   useEffect(() => {
     const onScroll = () => {
       const newOpacity = Math.max(0, 1 - window.scrollY / 300); // Adjust to control the fade speed
@@ -77,7 +80,7 @@ const About: FC = () => {
   const ProjectsSection = () => {
     return (
       <>
-        <div className={aboutStyles.projectsSection}></div>
+        <ProjectGrid projects={ProjectCards} />
       </>
     );
   };
@@ -85,7 +88,7 @@ const About: FC = () => {
   const EducationSection = () => {
     return (
       <>
-        <div className={aboutStyles.projectsSection}>EDUCATION</div>
+        <div className={aboutStyles.educationSection}>EDUCATION</div>
       </>
     );
   };
@@ -93,7 +96,7 @@ const About: FC = () => {
   const PersonalSection = () => {
     return (
       <>
-        <div className={aboutStyles.projectsSection}>PERSONAL LIFE</div>
+        <div className={aboutStyles.personalSection}>PERSONAL LIFE</div>
       </>
     );
   };

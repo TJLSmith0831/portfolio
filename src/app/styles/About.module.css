@@ -62,7 +62,12 @@
 .projectsSection {
   height: 37rem;
   width: 70vw;
-  margin-top: 7rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: auto auto;
+  gap: 5%;
+  max-width: var(--navbar-max-width);
+  justify-content: space-evenly;
 }
 
 .educationSection {
@@ -78,7 +83,7 @@
 }
 
 .careerDeck {
-  position: relative; /* This makes the .careerDeck a positioning context for absolute children */
+  position: relative;
 }
 
 .mediumCard {
