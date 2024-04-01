@@ -9,7 +9,7 @@ const Bubble: React.FC<BubbleProps> = ({ style, imageUrl, onBubbleClick }) => {
   useEffect(() => {
     if (bubbleRef.current) {
       gsap.to(bubbleRef.current, {
-        duration: 20,
+        duration: 10,
         ease: 'power1.inOut',
         y: gsap.utils.random(-100, 100),
         x: gsap.utils.random(-100, 100),
@@ -48,7 +48,7 @@ const PersonalLifeBubbles: React.FC<PersonalSectionProps> = ({
         <Bubble
           key={bubble.id}
           style={bubble.style}
-          //   imageUrl={bubble.imageUrl} TODO: Fix
+          imageUrl={bubble.imageUrl}
           onBubbleClick={handleBubbleClick}
         />
       ))}

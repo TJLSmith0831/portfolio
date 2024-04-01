@@ -57,6 +57,7 @@ export interface BubbleProps {
 // Define an interface for the bubble data and PersonalSection props
 export interface BubbleData {
   id: number | string;
+  imageUrl: string;
   style: BubbleStyle;
 }
 

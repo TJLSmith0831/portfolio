@@ -167,18 +167,15 @@ const About: FC = () => {
   const PersonalSection = () => {
     // Enhance PersonalLifeInfo with random positions
     const bubblesData: BubbleData[] = PersonalLifeInfo.map((info) => ({
-      ...info,
+      id: info.id,
+      imageUrl: info.imageUrl,
       style: {
         top: `${Math.random() * 80}%`,
         left: `${Math.random() * 80}%`,
       },
     }));
 
-    return (
-      <div className={aboutStyles.personalSection}>
-        <PersonalLifeBubbles bubblesData={bubblesData} />
-      </div>
-    );
+    return <PersonalLifeBubbles bubblesData={bubblesData} />;
   };
 
   return (
