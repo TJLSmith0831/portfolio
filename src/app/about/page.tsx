@@ -1,5 +1,5 @@
 'use client';
-import React, { useState, FC, useEffect } from 'react';
+import React, { useState, FC, useEffect, useRef } from 'react';
 import { List, Steps, StepsProps } from 'antd';
 import NavBar from '../standardUtils/NavBar';
 import styles from '@/app/page.module.css';
@@ -12,13 +12,23 @@ import ProjectGrid from './projects/ProjectGrid';
 import { ProjectCards } from './projects/ProjectUtils';
 import PersonalLifeBubbles from './personal/PersonalLifeBubbles';
 import { PersonalLifeInfo } from './personal/PersonalLifeUtils';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useGsapFadeInRight } from '../standardUtils/gsapUtils';
 
 const { Step } = Steps;
+
+gsap.registerPlugin(ScrollTrigger);
 
 const About: FC = () => {
   const [progressMark, setProgressMark] = useState<number>(0); // TODO: Track via scroll
   const [selectedJob, setSelectedJob] = useState<Job | null>(JobCardInfo[0]);
   const [headerOpacity, setHeaderOpacity] = useState(1);
+
+  const aboutMeRef = useRef(null);
+  useGsapFadeInRight(aboutMeRef); // Fade in on load
+
+  // TODO: Add animations on scrollTrigger for remaining components
 
   // Make header fade out on scroll
   // TODO: Eventually replace with way to keep steps in view
@@ -66,6 +76,56 @@ const About: FC = () => {
       />
     </span>
   );
+
+  const AboutMeSection = () => {
+    return (
+      <div
+        className={aboutStyles.introduction}
+        id="about-me"
+        style={{
+          willChange: 'transform, opacity',
+          display: 'flex',
+          alignItems: 'flex-start',
+        }}
+        ref={aboutMeRef}
+      >
+        <div style={{ flex: 1 }}>
+          <img
+            src="/hawaii.jpg" // TODO: Replace with more professional photo
+            alt="A relevant description"
+            style={{ width: '70%', height: '70%', objectFit: 'cover' }}
+          />
+        </div>
+        <div style={{ flex: 1 }}>
+          <p>
+            I am a developer based in Austin, TX, with a diverse skill set
+            cultivated over four years of experience in the tech industry. My
+            journey began in Data Science, where I developed a strong foundation
+            in analytical thinking and problem-solving. This background has been
+            invaluable as I transitioned into a hybrid role as a Front-end
+            Engineer at PILYTIX. This unique blend of skills allows me to
+            approach development projects with a holistic perspective, ensuring
+            that both the data-driven backend and the user-facing frontend work
+            seamlessly together to create intuitive and impactful digital
+            solutions.
+          </p>
+          <br />
+          <p>
+            My mission is to continually expand my expertise across the full
+            spectrum of development, aspiring to become a seasoned Full-stack
+            Developer. I am committed to bridging the gap between complex
+            data-driven algorithms and user-centric front-end design, aiming to
+            craft digital solutions that are not only innovative and efficient
+            but also accessible and meaningful to users. By embracing the
+            challenges of both backend and frontend development, I seek to play
+            a pivotal role in creating technology that positively impacts our
+            world, driving forward with the curiosity of a Data Scientist and
+            the creativity of a Front-end Engineer.
+          </p>
+        </div>
+      </div>
+    );
+  };
 
   // Displays CareerDeck and JobDisplay
   const CareerSection = () => {
@@ -203,6 +263,7 @@ const About: FC = () => {
         </div>
       </div>
       <div className={aboutStyles.scrollableContent}>
+        <AboutMeSection />
         <CareerSection />
         <ProjectsSection />
         <EducationSection />

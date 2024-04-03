@@ -48,6 +48,15 @@
   color: #23d18b !important; /* Or any other color for finished titles */
 }
 
+.introduction {
+  height: 35rem;
+  width: 70vw;
+  max-width: var(--navbar-max-width);
+  margin-top: 7rem;
+  font-family: 'JetBrains Mono';
+  font-size: 14px;
+}
+
 .careerSection {
   height: 37rem;
   width: 70vw;
