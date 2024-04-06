@@ -12,10 +12,22 @@ function randomNormal({ mean = 0, dev = 1 }) {
   return num;
 }
 
+interface Particle {
+  x: number;
+  y: number;
+  diameter: number;
+  duration: number;
+  amplitude: number;
+  offsetY: number;
+  arc: number;
+  startTime: number;
+  colour: string;
+}
+
 const ParticleCanvas: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const particlesRef = useRef([]);
-  let animationFrameId: number;
+  const particlesRef = useRef<Particle[]>([]);
+  const animationFrameId = useRef<number | null>(null);
 
   // Define the function to create a particle
   const createParticle = (canvas: HTMLCanvasElement) => {
@@ -39,7 +51,11 @@ const ParticleCanvas: React.FC = () => {
   };
 
   // Define the function to move a particle
-  const moveParticle = (particle, canvas, time) => {
+  const moveParticle = (
+    particle: Particle,
+    canvas: HTMLCanvasElement,
+    time: number
+  ) => {
     const progress =
       ((time - particle.startTime) % particle.duration) / particle.duration;
     return {
@@ -52,7 +68,11 @@ const ParticleCanvas: React.FC = () => {
   };
 
   // Define the function to draw a particle
-  const drawParticle = (particle, canvas, ctx) => {
+  const drawParticle = (
+    particle: Particle,
+    canvas: HTMLCanvasElement,
+    ctx: CanvasRenderingContext2D
+  ) => {
     const vh = canvas.height / 100;
     ctx.fillStyle = particle.colour;
     ctx.beginPath();
@@ -69,9 +89,9 @@ const ParticleCanvas: React.FC = () => {
   };
 
   // Animation function
-  const animate = (time) => {
+  const animate = (time: number) => {
     const canvas = canvasRef.current;
-    const ctx = canvas.getContext('2d');
+    const ctx = canvas.getContext('2d') as CanvasRenderingContext2D;
     if (!canvas || !ctx) return;
 
     // Your animation code here
@@ -86,7 +106,7 @@ const ParticleCanvas: React.FC = () => {
     });
 
     // Request next frame
-    animationFrameId = requestAnimationFrame(animate);
+    animationFrameId.current = requestAnimationFrame(animate);
   };
 
   useEffect(() => {
@@ -112,7 +132,7 @@ const ParticleCanvas: React.FC = () => {
 
     return () => {
       window.removeEventListener('resize', handleResize);
-      cancelAnimationFrame(animationFrameId);
+      cancelAnimationFrame(animationFrameId.current);
     };
   }, []);
 
