@@ -18,6 +18,7 @@ const HomeLinks = () => {
           <FaInstagram />
         </span>
         <span className={homeStyles.BG}></span>
+        <span className={homeStyles.tooltip}>Instagram</span>
       </a>
       <a
         href="https://github.com/TJLSmith0831"
@@ -29,6 +30,7 @@ const HomeLinks = () => {
           <FaGithub />
         </span>
         <span className={homeStyles.BG}></span>
+        <span className={homeStyles.tooltip}>GitHub</span>
       </a>
       <a
         href="https://medium.com/@tjlsmith0831"
@@ -40,6 +42,7 @@ const HomeLinks = () => {
           <FaMedium />
         </span>
         <span className={homeStyles.BG}></span>
+        <span className={homeStyles.tooltip}>Medium</span>
       </a>
       <a
         href="https://www.linkedin.com/in/tristan-smith-666614158"
@@ -51,6 +54,7 @@ const HomeLinks = () => {
           <FaLinkedin />
         </span>
         <span className={homeStyles.BG}></span>
+        <span className={homeStyles.tooltip}>LinkedIn</span>
       </a>
     </div>
   );

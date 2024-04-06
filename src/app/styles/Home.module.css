@@ -133,6 +133,26 @@
   background-color: rgba(156, 156, 156, 0.466);
 }
 
+.Btn:hover .tooltip {
+  visibility: visible;
+  opacity: 1;
+  transform: translateX(-50%) translateY(10px);
+}
+
+.tooltip {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%) translateY(15px);
+  white-space: nowrap;
+  visibility: hidden;
+  opacity: 0;
+  transition:
+    visibility 0s,
+    opacity 0.2s ease,
+    transform 0.2s ease;
+}
+
 @keyframes flipIn {
   0% {
     transform: rotateX(-180deg);
