@@ -96,7 +96,7 @@ const About: FC = () => {
             style={{ width: '70%', height: '70%', objectFit: 'cover' }}
           />
         </div>
-        <div style={{ flex: 1 }}>
+        <div style={{ flex: 1, color: 'white' }}>
           <p>
             I am a developer based in Austin, TX, with a diverse skill set
             cultivated over four years of experience in the tech industry. My

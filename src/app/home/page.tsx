@@ -4,6 +4,7 @@ import styles from '@/app/page.module.css';
 import homeStyles from '@/app/styles/Home.module.css';
 import { Avatar } from 'antd';
 import { FaInstagram, FaGithub, FaMedium, FaLinkedin } from 'react-icons/fa';
+import ParticleCanvas from '../standardUtils/ParticleCanvas';
 
 const HomeLinks = () => {
   return (

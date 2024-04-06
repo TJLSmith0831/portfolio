@@ -5,24 +5,9 @@
   align-items: center;
   padding: 6rem;
   min-height: 100vh;
-  background: linear-gradient(
-    153deg,
-    rgba(0, 0, 0, 1) 31%,
-    rgba(77, 150, 255, 1) 82%
-  );
   background-size: cover; /* Ensure background covers the entire element */
   background-attachment: fixed; /* Fix background during scroll */
   background-repeat: no-repeat; /* Prevent background from repeating */
-}
-
-@keyframes gradientAnimation {
-  0%,
-  100% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
 }
 
 .code {
@@ -197,31 +182,5 @@
       rgb(var(--background-end-rgb)) 40%
     );
     z-index: 1;
-  }
-}
-
-/* Tablet and Smaller Desktop */
-@media (min-width: 701px) and (max-width: 1120px) {
-  .grid {
-    grid-template-columns: repeat(2, 50%);
-  }
-}
-
-@media (prefers-color-scheme: dark) {
-  .vercelLogo {
-    filter: invert(1);
-  }
-
-  .logo {
-    filter: invert(1) drop-shadow(0 0 0.3rem #ffffff70);
-  }
-}
-
-@keyframes rotate {
-  from {
-    transform: rotate(360deg);
-  }
-  to {
-    transform: rotate(0deg);
   }
 }
