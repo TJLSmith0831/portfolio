@@ -4,7 +4,6 @@ import styles from '@/app/page.module.css';
 import homeStyles from '@/app/styles/Home.module.css';
 import { Avatar } from 'antd';
 import { FaInstagram, FaGithub, FaMedium, FaLinkedin } from 'react-icons/fa';
-import ParticleCanvas from '../standardUtils/ParticleCanvas';
 
 const HomeLinks = () => {
   return (
@@ -13,29 +12,45 @@ const HomeLinks = () => {
         href="https://www.instagram.com/tjlsmith0831"
         target="_blank"
         rel="noopener noreferrer"
+        className={homeStyles.Btn}
       >
-        <FaInstagram className={homeStyles.homeLink} />
+        <span className={homeStyles.svgContainer}>
+          <FaInstagram />
+        </span>
+        <span className={homeStyles.BG}></span>
       </a>
       <a
         href="https://github.com/TJLSmith0831"
         target="_blank"
         rel="noopener noreferrer"
+        className={homeStyles.Btn}
       >
-        <FaGithub className={homeStyles.homeLink} />
+        <span className={homeStyles.svgContainer}>
+          <FaGithub />
+        </span>
+        <span className={homeStyles.BG}></span>
       </a>
       <a
         href="https://medium.com/@tjlsmith0831"
         target="_blank"
         rel="noopener noreferrer"
+        className={homeStyles.Btn}
       >
-        <FaMedium className={homeStyles.homeLink} />
+        <span className={homeStyles.svgContainer}>
+          <FaMedium />
+        </span>
+        <span className={homeStyles.BG}></span>
       </a>
       <a
         href="https://www.linkedin.com/in/tristan-smith-666614158"
         target="_blank"
         rel="noopener noreferrer"
+        className={homeStyles.Btn}
       >
-        <FaLinkedin className={homeStyles.homeLink} />
+        <span className={homeStyles.svgContainer}>
+          <FaLinkedin />
+        </span>
+        <span className={homeStyles.BG}></span>
       </a>
     </div>
   );

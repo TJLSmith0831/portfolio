@@ -70,12 +70,64 @@
   display: flex;
   justify-self: flex-start;
   align-items: center;
-  gap: 20px; /* Adjust the gap as needed */
+  gap: 20px; /* Adjust spacing between links as needed */
+  align-items: center; /* Align links vertically */
 }
 
-.homeLink {
-  color: #4d96ff;
-  size: 1.5em;
+.Btn {
+  width: 45px;
+  height: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background-color: transparent;
+  position: relative;
+  border-radius: 7px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.svgContainer {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  backdrop-filter: blur(4px);
+  letter-spacing: 0.8px;
+  border-radius: 10px;
+  transition: all 0.3s;
+  border: 1px solid rgba(156, 156, 156, 0.466);
+}
+
+.BG {
+  position: absolute;
+  content: '';
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    45deg,
+    #4d96ff 0%,
+    #42a1f5 25%,
+    #33b5e5 50%,
+    #2ac4d6 75%,
+    #23d18b 100%
+  );
+  z-index: -1;
+  border-radius: 9px;
+  pointer-events: none;
+  transition: all 0.3s;
+}
+
+.Btn:hover .BG {
+  transform: rotate(35deg);
+  transform-origin: bottom;
+}
+
+.Btn:hover .svgContainer {
+  background-color: rgba(156, 156, 156, 0.466);
 }
 
 @media (max-width: 1100px) {
@@ -126,10 +178,5 @@
     align-items: center; /* Center-align the links */
     gap: 10px; /* Reduce the gap as needed */
     justify-self: center;
-  }
-
-  .homeLink {
-    color: #4d96ff;
-    size: 1.5rem;
   }
 }
