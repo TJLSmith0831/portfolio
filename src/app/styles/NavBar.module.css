@@ -7,9 +7,14 @@
   width: 70vw;
   z-index: 2;
   font-family: var(--font-mono);
-  border: 2px solid #4d96ff;
+  border: 2px solid rgba(77, 150, 255, 0.5); /* Adjust border color to fit the glassmorphic style */
   border-radius: 8px;
   padding: 0 1.5rem;
+
+  /* Glassmorphism specific styles */
+  background: rgba(255, 255, 255, 0.1); /* Semi-transparent white */
+  backdrop-filter: blur(10px); /* Blur the background */
+  -webkit-backdrop-filter: blur(10px); /* For Safari */
 }
 
 .title {
