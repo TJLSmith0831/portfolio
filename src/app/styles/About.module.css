@@ -79,6 +79,78 @@
   justify-content: space-evenly;
 }
 
+.cardContainer {
+  perspective: 1500px; /* Adjust as necessary for the flip effect */
+  position: relative;
+}
+
+.projectCard {
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+  cursor: pointer;
+  position: relative;
+  --base-transform: rotateY(0deg); /* Default state */
+  transform: var(--base-transform);
+}
+
+.projectCard.flipped {
+  --base-transform: rotateY(180deg); /* Flip state */
+}
+
+.projectCard.expanded {
+  z-index: 10;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 50vw;
+  height: 700px; /* This can stay as is if it's the desired height */
+  transform: translate(-50%, -50%) var(--base-transform);
+  transition:
+    width 0.6s,
+    height 0.6s,
+    transform 0.6s;
+}
+
+.cardFront {
+  height: 10rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cardBack {
+  background: white; /* Or any other color as per the design */
+  color: #333; /* Or any other color as per the design */
+  border-radius: 15px; /* Rounded corners */
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); /* Drop shadow for depth */
+  padding: 20px; /* Spacing inside the card */
+  height: 100%; /* Full height of the parent */
+  display: flex;
+  flex-direction: column; /* Organize content in a column */
+  transform: rotateY(-180deg);
+}
+
+.cardBack .closeButton {
+  align-self: flex-end; /* Position the close button at the end */
+  cursor: pointer;
+  /* Style the close button accordingly */
+}
+
+.cardBack .title {
+  font-size: 24px; /* Large text for the title */
+  margin-bottom: 20px; /* Spacing after the title */
+}
+
+.cardBack .content {
+  font-size: 16px; /* Standard text size */
+  line-height: 1.6; /* Line height for readability */
+}
+
+.cardBack .additionalSection {
+  margin-top: 20px;
+  /* Styles for any additional sections */
+}
+
 .educationSection {
   height: 25rem;
   width: 70vw;
