@@ -194,10 +194,16 @@ const About: FC = () => {
             <List.Item
               key={education.educationKey}
               style={{
-                backgroundColor: 'white',
+                backgroundColor: 'rgba(255, 255, 255, 0.95)',
+                backdropFilter: 'blur(10px)',
+                WebkitBackdropFilter: 'blur(10px)',
+                boxShadow: '0 8px 16px rgba(0, 0, 0, 0.2)', // Enhanced shadow for depth
+                border: '1px solid rgba(255, 255, 255, 0.18)',
                 width: '50vw',
                 marginBottom: '10px',
-                borderRadius: '1%',
+                borderRadius: '10px',
+                transform: 'translateZ(0) scale(1.05)', // Slight scale-up for 3D "pop"
+                transition: 'transform 0.3s ease-out', // Smooth transition for hover effect
               }}
               extra={<img width={272} alt="logo" src={education.imageUrl} />}
             >
@@ -263,10 +269,15 @@ const About: FC = () => {
         </div> */}
       </div>
       <div className={aboutStyles.scrollableContent}>
+        <h1 className={aboutStyles.titleHeader}>ABOUT</h1>
         <AboutMeSection />
+        <h1 className={aboutStyles.titleHeader}>CAREER</h1>
         <CareerSection />
+        <h1 className={aboutStyles.titleHeader}>PAST PROJECTS</h1>
         <ProjectsSection />
+        <h1 className={aboutStyles.titleHeader}>EDUCATION</h1>
         <EducationSection />
+        <h1 className={aboutStyles.titleHeader}>PERSONAL LIFE</h1>
         <PersonalSection />
       </div>
     </div>
