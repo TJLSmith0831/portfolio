@@ -245,7 +245,7 @@ const About: FC = () => {
         style={{ opacity: headerOpacity }}
       >
         <NavBar />
-        <div className={aboutStyles.titleBar}>
+        {/* <div className={aboutStyles.titleBar}>
           <h1 className={aboutStyles.titleHeader}>ABOUT</h1>
           <Steps
             current={progressMark}
@@ -260,7 +260,7 @@ const About: FC = () => {
               title={<span style={{ color: 'gray' }}>Personal Life</span>}
             />
           </Steps>
-        </div>
+        </div> */}
       </div>
       <div className={aboutStyles.scrollableContent}>
         <AboutMeSection />

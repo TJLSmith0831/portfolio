@@ -30,6 +30,9 @@ export interface Project {
   imageUrl: string;
   projectName: string;
   projectKey: string;
+  projectRole: string;
+  projectDate: string;
+  projectDescription: string;
 }
 
 export interface Education {

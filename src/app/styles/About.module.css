@@ -82,6 +82,9 @@
 .cardContainer {
   perspective: 1500px; /* Adjust as necessary for the flip effect */
   position: relative;
+  max-width: 350px;
+  height: fit-content;
+  word-wrap: break-word;
 }
 
 .projectCard {
@@ -103,7 +106,7 @@
   top: 50%;
   left: 50%;
   width: 50vw;
-  height: 700px; /* This can stay as is if it's the desired height */
+  height: auto; /* This can stay as is if it's the desired height */
   transform: translate(-50%, -50%) var(--base-transform);
   transition:
     width 0.6s,
@@ -114,6 +117,8 @@
 .cardFront {
   height: 10rem;
   display: flex;
+  flex-direction: column;
+  height: auto;
   justify-content: center;
   align-items: center;
 }
@@ -137,7 +142,7 @@
 }
 
 .cardBack .title {
-  font-size: 24px; /* Large text for the title */
+  font-size: 32px; /* Large text for the title */
   margin-bottom: 20px; /* Spacing after the title */
 }
 
