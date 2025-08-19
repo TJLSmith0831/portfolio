@@ -8,9 +8,26 @@ const RATE_LIMIT_KEY = 'email_rate_limit'
 const MAX_EMAILS_PER_IP = 3
 const RATE_LIMIT_WINDOW = 24 * 60 * 60 // 24 hours in seconds
 
+/**
+ * Checks if the given IP address has exceeded the rate limit for email notifications.
+ * Skips rate limiting for local development when KV environment variables are not properly configured.
+ * @param {string} ip - The client IP address to check
+ * @returns {Promise<{allowed: boolean; remaining: number}>} Object indicating if the request is allowed and remaining quota
+ */
 async function checkRateLimit(
   ip: string
 ): Promise<{ allowed: boolean; remaining: number }> {
+  // Skip KV for local development if environment variables are missing or contain placeholders
+  const kvUrl = process.env.KV_REST_API_URL
+  const kvToken = process.env.KV_REST_API_TOKEN
+  
+  if (!kvUrl || !kvToken || 
+      kvUrl.includes('your-database-name') || 
+      kvToken.includes('your-actual-token')) {
+    console.log('KV not configured, skipping rate limiting for local development')
+    return { allowed: true, remaining: MAX_EMAILS_PER_IP }
+  }
+
   try {
     const key = `${RATE_LIMIT_KEY}:${ip}`
     const current = ((await kv.get(key)) as number) || 0
@@ -26,7 +43,24 @@ async function checkRateLimit(
   }
 }
 
+/**
+ * Increments the rate limit counter for the given IP address.
+ * Skips increment for local development when KV environment variables are not properly configured.
+ * @param {string} ip - The client IP address to increment the counter for
+ * @returns {Promise<void>} Promise that resolves when the counter is incremented
+ */
 async function incrementRateLimit(ip: string): Promise<void> {
+  // Skip KV for local development if environment variables are missing or contain placeholders
+  const kvUrl = process.env.KV_REST_API_URL
+  const kvToken = process.env.KV_REST_API_TOKEN
+  
+  if (!kvUrl || !kvToken || 
+      kvUrl.includes('your-database-name') || 
+      kvToken.includes('your-actual-token')) {
+    console.log('KV not configured, skipping rate limit increment for local development')
+    return
+  }
+
   try {
     const key = `${RATE_LIMIT_KEY}:${ip}`
     const current = ((await kv.get(key)) as number) || 0
@@ -36,6 +70,12 @@ async function incrementRateLimit(ip: string): Promise<void> {
   }
 }
 
+/**
+ * Extracts the client IP address from the request headers.
+ * Checks x-forwarded-for and x-real-ip headers, fallback to localhost for local development.
+ * @param {Request} request - The HTTP request object
+ * @returns {string} The client IP address
+ */
 function getClientIP(request: Request): string {
   const forwarded = request.headers.get('x-forwarded-for')
   const realIP = request.headers.get('x-real-ip')
@@ -51,6 +91,12 @@ function getClientIP(request: Request): string {
   return '127.0.0.1'
 }
 
+/**
+ * Handles POST requests to validate chat messages and determine if they warrant email notifications.
+ * Uses AI to analyze conversation context and apply business rules for filtering legitimate inquiries.
+ * @param {Request} req - The HTTP request containing chat messages to validate
+ * @returns {Promise<Response>} JSON response with validation result and rate limit information
+ */
 export async function POST(req: Request) {
   try {
     const { messages } = await req.json()
@@ -116,7 +162,7 @@ Examples:
       model: openai('gpt-3.5-turbo'),
       prompt: validationPrompt,
       temperature: 0.1,
-      maxTokens: 100,
+      maxOutputTokens: 100,
     })
 
     const response = result.text.trim()

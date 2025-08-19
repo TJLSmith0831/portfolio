@@ -13,10 +13,10 @@ export function ContactSection() {
   return (
     <div className='container mx-auto px-6'>
       <div className='text-center mb-16'>
-        <h2 className='text-4xl md:text-5xl font-bold mb-6'>Let's Connect</h2>
+        <h2 className='text-4xl md:text-5xl font-bold mb-6'>Let&apos;s Connect</h2>
         <p className='text-xl text-muted-foreground max-w-2xl mx-auto'>
-          Ready to bring your ideas to life? I'm always excited to discuss new
-          projects and opportunities. Let's create something amazing together.
+          Ready to bring your ideas to life? I&apos;m always excited to discuss new
+          projects and opportunities. Let&apos;s create something amazing together.
         </p>
       </div>
 
@@ -29,7 +29,7 @@ export function ContactSection() {
             <h3 className='text-2xl font-semibold mb-4'>Get In Touch</h3>
             <p className='text-muted-foreground mb-8 max-w-md mx-auto'>
               Whether you have a project in mind, want to collaborate, or just
-              want to say hello, I'd love to hear from you.
+              want to say hello, I&apos;d love to hear from you.
             </p>
           </div>
 

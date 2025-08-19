@@ -104,12 +104,13 @@ export function ChatWindow({ isOpen, onClose }: ChatWindowProps) {
         const lines = chunk.split('\n')
 
         for (const line of lines) {
-          if (line.startsWith('0:')) {
+          if (line.startsWith('data:')) {
             try {
-              const jsonStr = line.slice(2)
+              const jsonStr = line.slice(5).trim()
+              if (jsonStr === '[DONE]') break
               const data = JSON.parse(jsonStr)
-              if (data.content) {
-                accumulatedContent += data.content
+              if (data.type === 'text-delta' && data.delta) {
+                accumulatedContent += data.delta
                 setMessages(prev =>
                   prev.map(msg =>
                     msg.id === assistantMessageId

@@ -8,66 +8,66 @@ import { X, ChevronLeft, ChevronRight } from 'lucide-react'
 const photos = [
   {
     id: 1,
-    src: '/hiking-mountain-landscape.png',
-    alt: 'Hiking in the mountains',
+    src: 'https://picsum.photos/400/300?random=10',
+    alt: 'Bernedoodle dad moments',
     description:
-      'Weekend hiking adventure in the Rocky Mountains. Nothing beats the fresh air and stunning views!',
+      'Life with my Bernedoodle - the best coding companion and walking buddy. Nothing beats those puppy eyes during debugging sessions!',
     size: 'large',
   },
   {
     id: 2,
-    src: '/coffee-shop-coding.png',
-    alt: 'Coding at a coffee shop',
+    src: 'https://picsum.photos/400/300?random=11',
+    alt: 'Austin Texas lifestyle',
     description:
-      'My favorite coding spot - a cozy coffee shop downtown where I work on personal projects.',
+      'Born and raised in Austin, TX - exploring the city that shaped me. From food trucks to tech meetups, this city has it all.',
     size: 'medium',
   },
   {
     id: 3,
-    src: '/city-skyline-travel.png',
-    alt: 'City skyline photography',
+    src: 'https://via.placeholder.com/400x300/8b5cf6/ffffff?text=Dresden+Files',
+    alt: 'Reading Dresden Files',
     description:
-      'Capturing the golden hour skyline during a recent trip to Seattle. Photography is my creative outlet.',
+      'Deep into another Dresden Files book by Jim Butcher. My favorite series - urban fantasy meets detective noir perfectly.',
     size: 'medium',
   },
   {
     id: 4,
-    src: '/homemade-pasta-cooking.png',
-    alt: 'Cooking homemade pasta',
+    src: 'https://via.placeholder.com/400x300/ef4444/ffffff?text=Sports+Fan',
+    alt: 'Sports fan life',
     description:
-      'Sunday pasta making session. Cooking helps me unwind and experiment with new flavors.',
+      'Game day ready! Cheering for the Texas Longhorns and Atlanta Falcons. Hook em Horns and Rise Up!',
     size: 'square',
   },
   {
     id: 5,
-    src: '/tech-conference-presentation.png',
-    alt: 'Speaking at tech conference',
+    src: 'https://via.placeholder.com/400x300/10b981/ffffff?text=Trinity+University',
+    alt: 'Trinity University graduation',
     description:
-      'Presenting at a local tech meetup about modern web development practices. Love sharing knowledge!',
+      'Trinity University Class of 2022 - Bachelor of Science in Business Analytics & Technology with a Sports Management minor.',
     size: 'wide',
   },
   {
     id: 6,
-    src: '/guitar-music-hobby.png',
-    alt: 'Playing guitar',
+    src: 'https://via.placeholder.com/400x300/ec4899/ffffff?text=Wedding+2023',
+    alt: 'Wedding celebration 2023',
     description:
-      'Evening music session. Playing guitar helps me relax and stay creative outside of coding.',
+      'Married in 2023 to my best friend and biggest supporter. The perfect partner for both adventures and quiet coding nights.',
     size: 'tall',
   },
   {
     id: 7,
-    src: '/placeholder-wwxy3.png',
-    alt: 'Beach sunset',
+    src: 'https://via.placeholder.com/400x300/3b82f6/ffffff?text=Sports+Analytics',
+    alt: 'Sports analytics work',
     description:
-      'Sunset at the beach during a much-needed vacation. Sometimes you need to disconnect to reconnect.',
+      'Combining my passion for sports with data science - working on NBA prediction models and sports analytics projects.',
     size: 'medium',
   },
   {
     id: 8,
-    src: '/placeholder-eb2gg.png',
-    alt: 'Rock climbing',
+    src: 'https://via.placeholder.com/400x300/6366f1/ffffff?text=Tech+Community',
+    alt: 'Austin tech community',
     description:
-      "Indoor rock climbing session. It's a great way to problem-solve with your body instead of code!",
+      'Part of the vibrant Austin tech scene - attending meetups, sharing knowledge, and building connections in the dev community.',
     size: 'square',
   },
 ]
@@ -121,9 +121,9 @@ export function PersonalSection() {
       <div className='text-center mb-16'>
         <h2 className='text-4xl md:text-5xl font-bold mb-6'>Beyond the Code</h2>
         <p className='text-xl text-muted-foreground max-w-2xl mx-auto'>
-          When I'm not building applications, you'll find me exploring the
-          outdoors, experimenting in the kitchen, or capturing moments through
-          photography.
+          When I&apos;m not building applications, you&apos;ll find me reading Dresden Files, 
+          cheering for the Longhorns and Falcons, or spending time with my Bernedoodle 
+          exploring Austin, TX.
         </p>
       </div>
 

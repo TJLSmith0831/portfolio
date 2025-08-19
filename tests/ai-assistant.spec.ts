@@ -3,7 +3,7 @@ import { test, expect } from '@playwright/test'
 test.describe('AI Assistant Chat Interface', () => {
   test.beforeEach(async ({ page }) => {
     // Navigate to the portfolio page
-    await page.goto('http://localhost:3000')
+    await page.goto('http://localhost:3001')
 
     // Wait for the page to load completely
     await page.waitForLoadState('networkidle')
@@ -115,10 +115,7 @@ test.describe('AI Assistant Chat Interface', () => {
     const messages = page
       .locator('[class*="space-y-2"] > *')
       .filter({ hasNotText: '' })
-    await expect(messages).toHaveCount(
-      { greaterThanOrEqual: 3 },
-      { timeout: 5000 }
-    )
+    await expect(messages.nth(2)).toBeVisible({ timeout: 5000 }) // Check that at least 3 messages exist
   })
 
   test('should be responsive on mobile viewport', async ({ page }) => {
