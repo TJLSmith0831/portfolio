@@ -1,0 +1,56 @@
+{
+  "name": "Tristan Smith",
+  "location": "Austin, TX",
+  "currentRole": "Full-Stack Developer and Data Scientist",
+  "experienceLevel": "Mid-level",
+  "professionalSpecialties": [
+    "Full-stack web development",
+    "React and Next.js development",
+    "TypeScript and JavaScript",
+    "Modern frontend frameworks",
+    "API development and integration",
+    "Responsive web design",
+    "User experience optimization",
+    "Data Science",
+    "Machine Learning",
+    "Sports Analytics"
+  ],
+  "interests": [
+    "Modern web technologies",
+    "AI and machine learning integration",
+    "Open source development",
+    "Performance optimization",
+    "Design systems",
+    "Developer experience",
+    "Sports Analytics"
+  ],
+  "personalLife": [
+    "Married in 2023",
+    "Raised in Austin, TX",
+    "Bernedoodle dad",
+    "Avid reader. Favorite book series is the Dresden Files",
+    "Fan of the Texas Longhorns and Atlanta Falcons",
+    "Graduated from Trinity University in 2022 with a Bachelor of Science in Business Analytics & Technology. Minored in Sports Management"
+  ],
+  "communicationPreferences": {
+    "preferredContactMethod": "email",
+    "responseTime": "within 24-48 hours for business inquiries",
+    "timezone": "EST/EDT",
+    "availableForWork": true,
+    "openToCollaboration": true,
+    "interestedInFreelance": true,
+    "interestedInFullTime": true
+  },
+  "topicsToAvoid": [
+    "Personal financial information",
+    "Private family details",
+    "Specific salary expectations without context",
+    "Proprietary information from previous employers"
+  ],
+  "aiAssistantInstructions": {
+    "tone": "Professional but approachable",
+    "honestyPolicy": "Always say 'I don't know' when information is unavailable",
+    "contextLimits": "Only reference information available in context files",
+    "emailForwarding": "Suggest email contact for complex technical discussions or business inquiries"
+  }
+}

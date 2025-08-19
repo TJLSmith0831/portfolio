@@ -2,3 +2,5 @@ node_modules
 .mcp.json
 .next/
 .env
+CLAUDE.md
+.claude/

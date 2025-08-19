@@ -1,0 +1,174 @@
+{
+  "featured": [
+    {
+      "id": "portfolio-website",
+      "name": "Personal Portfolio Website",
+      "description": "A modern, responsive portfolio website built with Next.js 15, featuring dark/light mode, smooth animations, and a clean design system. Showcases professional work and personal projects with optimized performance and accessibility.",
+      "technologies": [
+        "Next.js 15",
+        "React",
+        "TypeScript",
+        "Tailwind CSS",
+        "next-themes",
+        "Radix UI",
+        "Lucide React",
+        "Vercel"
+      ],
+      "features": [
+        "App Router architecture with Next.js 15",
+        "Dark/light mode with system preference detection",
+        "Responsive design with mobile-first approach",
+        "Smooth scrolling navigation",
+        "Animated background effects",
+        "Component-based architecture with shadcn/ui",
+        "TypeScript for type safety",
+        "Performance optimization with Turbopack"
+      ],
+      "status": "Active",
+      "repository": "Private",
+      "deployed": true,
+      "myContribution": "Solo developer - designed and implemented entire frontend architecture, UI/UX design, and deployment pipeline"
+    },
+    {
+      "id": "ai-assistant",
+      "name": "AI-Powered Portfolio Assistant",
+      "description": "An intelligent chat interface integrated into portfolio website that provides context-aware responses about professional background, validates important inquiries, and forwards business messages via email gateway.",
+      "technologies": [
+        "OpenAI GPT-3.5-turbo",
+        "Vercel AI SDK",
+        "Nodemailer",
+        "Gmail SMTP",
+        "Vercel KV",
+        "Next.js API Routes",
+        "TypeScript",
+        "React"
+      ],
+      "features": [
+        "Streaming AI responses with real-time typing effects",
+        "Context-aware answers from personal data files",
+        "Message validation and email forwarding system",
+        "Rate limiting with Vercel KV for abuse prevention",
+        "Professional styling matching portfolio design",
+        "Mobile-responsive chat interface",
+        "Session-based conversation history"
+      ],
+      "status": "In Development",
+      "repository": "Private",
+      "deployed": false,
+      "myContribution": "Solo developer - architected AI integration, designed chat interface, implemented email gateway with validation logic"
+    },
+    {
+      "id": "tenet-app",
+      "name": "Tenet App",
+      "description": "A mobile-first social opinion platform for structured, intentional discourse. Built to facilitate meaningful conversations with organized debate structure.",
+      "technologies": [
+        "React Native",
+        "Redux",
+        "Firebase",
+        "TypeScript",
+        "JavaScript"
+      ],
+      "features": [
+        "Mobile-first responsive design",
+        "Structured debate and discussion format",
+        "Real-time social interaction",
+        "Firebase backend integration",
+        "Redux state management",
+        "Cross-platform mobile support"
+      ],
+      "status": "Completed",
+      "repository": "https://github.com/TJLSmith0831/tenet-app",
+      "deployed": false,
+      "myContribution": "Full-stack development - architected mobile-first social platform, implemented Redux state management, integrated Firebase backend"
+    },
+    {
+      "id": "praetor-ai",
+      "name": "PraetorAI",
+      "description": "An AI-first project management and productivity platform designed to enhance team collaboration and project efficiency through intelligent automation.",
+      "technologies": [
+        "TypeScript",
+        "Python",
+        "AI/ML",
+        "Tailwind CSS",
+        "React"
+      ],
+      "features": [
+        "AI-powered project management",
+        "Intelligent task automation",
+        "Team collaboration tools",
+        "Productivity analytics",
+        "Modern responsive UI",
+        "Machine learning integration"
+      ],
+      "status": "Active Development",
+      "repository": "https://github.com/TJLSmith0831/praetor-ai",
+      "deployed": false,
+      "myContribution": "Lead developer - designed AI-first architecture, implemented ML features, built modern TypeScript/React frontend"
+    },
+    {
+      "id": "para-llama",
+      "name": "ParaLlama",
+      "description": "A TypeScript framework designed for parallel processing and distributed computing tasks, optimized for performance and scalability.",
+      "technologies": ["TypeScript", "Node.js", "Parallel Processing"],
+      "features": [
+        "Parallel processing framework",
+        "TypeScript-first design",
+        "Distributed computing support",
+        "Performance optimization",
+        "Scalable architecture",
+        "Developer-friendly API"
+      ],
+      "status": "Completed",
+      "repository": "https://github.com/TJLSmith0831/ParaLlama",
+      "deployed": true,
+      "myContribution": "Solo developer - created TypeScript parallel processing framework, designed scalable distributed computing architecture"
+    }
+  ],
+  "sideProjects": [
+    {
+      "id": "nba-prediction-models",
+      "name": "NBA Prediction Models",
+      "description": "A collection of machine learning projects for NBA analytics including salary valuation, game predictions, and championship forecasting using statistical modeling.",
+      "technologies": [
+        "Python",
+        "Jupyter Notebook",
+        "Machine Learning",
+        "pandas",
+        "scikit-learn",
+        "HTML"
+      ],
+      "status": "Completed",
+      "repository": "https://github.com/TJLSmith0831/NBA2020Prediction",
+      "myContribution": "Solo developer - designed ML models, performed statistical analysis, created prediction algorithms for NBA outcomes"
+    },
+    {
+      "id": "ai-agent-learning",
+      "name": "AI Agent Learning",
+      "description": "A learning repository focused on building AI agents, exploring modern AI/ML techniques and agent-based systems.",
+      "technologies": ["Python", "AI/ML", "Agent-based Systems"],
+      "status": "Active Learning",
+      "repository": "https://github.com/TJLSmith0831/ai-agent-learning",
+      "myContribution": "Personal learning project - exploring AI agent development, implementing various ML techniques and agent architectures"
+    }
+  ],
+  "openSource": [
+    {
+      "id": "typescript-contributions",
+      "name": "TypeScript Contributions",
+      "description": "Contributing to Microsoft's TypeScript compiler and ecosystem, helping improve the JavaScript superset that compiles to clean JavaScript output.",
+      "technologies": ["TypeScript", "JavaScript", "Compiler Design"],
+      "status": "Contributor",
+      "repository": "https://github.com/microsoft/TypeScript",
+      "myContribution": "Open source contributor - forked TypeScript repository, contributing to compiler improvements and ecosystem development"
+    },
+    {
+      "id": "supabase-contributions",
+      "name": "Supabase Platform",
+      "description": "Contributing to the open-source Postgres development platform that provides authentication, real-time subscriptions, and more.",
+      "technologies": ["TypeScript", "PostgreSQL", "React", "Next.js"],
+      "status": "Contributor",
+      "repository": "https://github.com/supabase/supabase",
+      "myContribution": "Open source contributor - forked Supabase repository, contributing to the Postgres development platform"
+    }
+  ]
+}

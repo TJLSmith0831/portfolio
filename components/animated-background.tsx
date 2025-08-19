@@ -1,6 +1,6 @@
-"use client"
+'use client'
 
-import { useEffect, useRef } from "react"
+import { useEffect, useRef } from 'react'
 
 export function AnimatedBackground() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
@@ -9,7 +9,7 @@ export function AnimatedBackground() {
     const canvas = canvasRef.current
     if (!canvas) return
 
-    const ctx = canvas.getContext("2d")
+    const ctx = canvas.getContext('2d')
     if (!ctx) return
 
     const resizeCanvas = () => {
@@ -18,7 +18,7 @@ export function AnimatedBackground() {
     }
 
     resizeCanvas()
-    window.addEventListener("resize", resizeCanvas)
+    window.addEventListener('resize', resizeCanvas)
 
     // Floating geometric shapes
     const shapes: Array<{
@@ -50,9 +50,9 @@ export function AnimatedBackground() {
       ctx.clearRect(0, 0, canvas.width, canvas.height)
 
       // Check if dark mode
-      const isDark = document.documentElement.classList.contains("dark")
+      const isDark = document.documentElement.classList.contains('dark')
 
-      shapes.forEach((shape) => {
+      shapes.forEach(shape => {
         // Update position
         shape.x += shape.dx
         shape.y += shape.dy
@@ -70,7 +70,7 @@ export function AnimatedBackground() {
         ctx.rotate(shape.rotation)
 
         // Set color based on theme
-        const color = isDark ? "255, 255, 255" : "45, 79, 124"
+        const color = isDark ? '255, 255, 255' : '45, 79, 124'
         ctx.fillStyle = `rgba(${color}, ${shape.opacity})`
         ctx.strokeStyle = `rgba(${color}, ${shape.opacity * 2})`
         ctx.lineWidth = 1
@@ -97,11 +97,15 @@ export function AnimatedBackground() {
     animate()
 
     return () => {
-      window.removeEventListener("resize", resizeCanvas)
+      window.removeEventListener('resize', resizeCanvas)
     }
   }, [])
 
   return (
-    <canvas ref={canvasRef} className="fixed inset-0 -z-10 pointer-events-none" style={{ background: "transparent" }} />
+    <canvas
+      ref={canvasRef}
+      className='fixed inset-0 -z-10 pointer-events-none'
+      style={{ background: 'transparent' }}
+    />
   )
 }

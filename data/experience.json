@@ -1,0 +1,169 @@
+{
+  "currentPosition": {
+    "title": "Full-Stack Engineer & Data Scientist",
+    "company": "PILYTIX",
+    "startDate": "2025",
+    "location": "Kyle, TX",
+    "description": "Full-stack development with modern web technologies and data science",
+    "responsibilities": [
+      "Building predictive models with robust ETL processes and advanced analytics",
+      "Developing full-stack solutions using React, Flask/Python, and modern web technologies",
+      "Implementing AI and ML solutions for sales pipeline forecasting",
+      "Utilizing TDD, CI/CD, and direct client collaboration for high data quality",
+      "Creating data-driven solutions across multiple sectors with rapid prototyping"
+    ],
+    "technologies": [
+      "React",
+      "Next.js",
+      "TypeScript",
+      "Python",
+      "Flask",
+      "Node.js",
+      "Tailwind CSS",
+      "Docker",
+      "PostgreSQL",
+      "MongoDB",
+      "AWS",
+      "Julia",
+      "R"
+    ]
+  },
+  "previousExperience": [
+    {
+      "title": "Frontend Engineer & Data Scientist",
+      "company": "PILYTIX",
+      "startDate": "2024",
+      "endDate": "2025",
+      "description": "Specialized in frontend development and user interface design and data science",
+      "keyAchievements": [
+        "Built responsive web applications with React and modern JavaScript",
+        "Implemented design systems and component libraries",
+        "Improved application performance by 40% through optimization",
+        "Collaborated with designers to create pixel-perfect implementations"
+      ]
+    },
+    {
+      "title": "Data Scientist",
+      "company": "PILYTIX",
+      "startDate": "2021",
+      "endDate": "2024",
+      "description": "Specialized in data science and data analysis",
+      "keyAchievements": [
+        "Developed data pipelines and ETL processes",
+        "Implemented machine learning models for predictive analytics",
+        "Collaborated with cross-functional teams on data-driven product development",
+        "Optimized data processing workflows for better performance and scalability"
+      ]
+    },
+    {
+      "title": "Data Analytics Intern",
+      "company": "Frost Bank",
+      "startDate": "2021",
+      "endDate": "2021",
+      "description": "Specialized in data analysis for the mobile app team",
+      "keyAchievements": [
+        "Developed Tableau dashboards for mobile app team",
+        "Created data visualizations for mobile app team",
+        "Collaborated with cross-functional teams on data-driven product development",
+        "Optimized data processing workflows for better performance and scalability"
+      ]
+    },
+    {
+      "title": "Data Analytics Intern",
+      "company": "KSAT 12",
+      "startDate": "2021",
+      "endDate": "2021",
+      "description": "Specialized in data analysis for the News team",
+      "keyAchievements": [
+        "Developed Tableau dashboards for news team",
+        "Created data visualizations for news team",
+        "Build Tableau dashboards for 3 articles",
+        "Perform live analytics and predictions on the San Antonio 2021 Mayoral Election"
+      ]
+    }
+  ],
+  "education": {
+    "degree": "Bachelor's in Business Analytics & Technology",
+    "minor": "Sports Management",
+    "institution": "Trinity University",
+    "graduationYear": "2022",
+    "relevantCoursework": [
+      "Data Structures and Algorithms",
+      "Database Systems",
+      "Computer Networks",
+      "Data Visualization",
+      "Data Analysis",
+      "Machine Learning",
+      "Sports Analytics"
+    ]
+  },
+  "skills": {
+    "programming": [
+      "JavaScript",
+      "TypeScript",
+      "Python",
+      "HTML/CSS",
+      "SQL",
+      "R",
+      "Julia"
+    ],
+    "frameworks": [
+      "React",
+      "Next.js",
+      "Node.js",
+      "Express.js",
+      "Flask",
+      "Tailwind CSS",
+      "Redux"
+    ],
+    "tools": [
+      "Git/GitHub",
+      "VS Code",
+      "Docker",
+      "AWS",
+      "Vercel",
+      "Figma",
+      "CI/CD"
+    ],
+    "databases": ["PostgreSQL", "MongoDB", "Redis", "Tableau"],
+    "datascience": [
+      "Machine Learning",
+      "ETL Processes",
+      "Predictive Modeling",
+      "Advanced Analytics",
+      "TDD"
+    ]
+  },
+  "certifications": [
+    {
+      "name": "Docker Foundations",
+      "issuer": "Docker",
+      "year": "2024"
+    },
+    {
+      "name": "Tableau Desktop Specialist",
+      "issuer": "Tableau",
+      "year": "2023"
+    },
+    {
+      "name": "Microsoft Excel Expert",
+      "issuer": "Microsoft",
+      "year": "2023"
+    },
+    {
+      "name": "Big Data SQL",
+      "issuer": "Coursera",
+      "year": "2022"
+    },
+    {
+      "name": "R Programming",
+      "issuer": "Coursera",
+      "year": "2022"
+    },
+    {
+      "name": "Julia Programming",
+      "issuer": "JuliaAcademy",
+      "year": "2022"
+    }
+  ]
+}

@@ -14,6 +14,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 This is a Next.js 15 portfolio application built with the App Router architecture using TypeScript and Tailwind CSS. The project follows a component-based structure with shadcn/ui components.
 
 ### Key Technologies
+
 - **Framework**: Next.js 15 with App Router
 - **Styling**: Tailwind CSS v4 with CSS variables for theming
 - **UI Components**: shadcn/ui with Radix UI primitives
@@ -23,6 +24,7 @@ This is a Next.js 15 portfolio application built with the App Router architectur
 - **Build Tool**: Turbopack (enabled by default in dev)
 
 ### Project Structure
+
 - `app/` - Next.js App Router pages and layouts
   - `layout.tsx` - Root layout with theme provider and font setup
   - `page.tsx` - Main portfolio page with section composition
@@ -38,6 +40,7 @@ This is a Next.js 15 portfolio application built with the App Router architectur
   - `icarusAI.ts` - AI personal assistant functionality
 
 ### Component Patterns
+
 - All components use TypeScript with explicit typing
 - shadcn/ui components follow the established file structure in `components/ui/`
 - Theme switching is handled via `next-themes` with system preference detection
@@ -45,11 +48,13 @@ This is a Next.js 15 portfolio application built with the App Router architectur
 - Components use `@/` path aliases for clean imports
 
 ### Configuration Files
+
 - `components.json` - shadcn/ui configuration with New York style
 - `tsconfig.json` - TypeScript configuration with `@/*` path mapping
 - Path aliases: `@/components`, `@/lib`, `@/ui`, `@/hooks`
 
 ### Development Notes
+
 - Default theme is dark mode with system preference support
 - Uses CSS variables for theming (configured in `components.json`)
 - Responsive design with mobile-first approach

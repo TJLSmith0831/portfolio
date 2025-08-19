@@ -1,14 +1,14 @@
-import type React from "react"
-import type { Metadata } from "next"
-import { GeistSans } from "geist/font/sans"
-import { GeistMono } from "geist/font/mono"
-import { ThemeProvider } from "@/components/theme-provider"
-import "./globals.css"
+import type React from 'react'
+import type { Metadata } from 'next'
+import { GeistSans } from 'geist/font/sans'
+import { GeistMono } from 'geist/font/mono'
+import { ThemeProvider } from '@/components/theme-provider'
+import './globals.css'
 
 export const metadata: Metadata = {
-  title: "Tristan Smith - Full-Stack Developer and Data Scientist",
+  title: 'Tristan Smith - Full-Stack Developer and Data Scientist',
   description:
-    "Portfolio of Tristan Smith, a passionate full-stack developer and data scientist crafting digital experiences with modern technologies.",
+    'Portfolio of Tristan Smith, a passionate full-stack developer and data scientist crafting digital experiences with modern technologies.',
 }
 
 export default function RootLayout({
@@ -17,7 +17,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang='en' suppressHydrationWarning>
       <head>
         <style>{`
           html {
@@ -28,7 +28,12 @@ export default function RootLayout({
         `}</style>
       </head>
       <body>
-        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
+        <ThemeProvider
+          attribute='class'
+          defaultTheme='dark'
+          enableSystem
+          disableTransitionOnChange
+        >
           {children}
         </ThemeProvider>
       </body>
