@@ -8,7 +8,7 @@ export function Navigation() {
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ['hero', 'work', 'personal', 'contact']
+      const sections = ['hero', 'work', 'personal']
       const scrollPosition = window.scrollY + 100
 
       for (const section of sections) {
@@ -43,7 +43,6 @@ export function Navigation() {
         {[
           { id: 'work', label: 'Work' },
           { id: 'personal', label: 'Personal' },
-          { id: 'contact', label: 'Contact' },
         ].map(({ id, label }) => (
           <Button
             key={id}

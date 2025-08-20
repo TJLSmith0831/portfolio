@@ -8,31 +8,31 @@ import { X, ChevronLeft, ChevronRight } from 'lucide-react'
 const photos = [
   {
     id: 1,
-    src: 'https://picsum.photos/400/300?random=10',
-    alt: 'Bernedoodle dad moments',
+    src: '/wedding.jpeg',
+    alt: 'Wedding celebration 2023',
     description:
-      'Life with my Bernedoodle - the best coding companion and walking buddy. Nothing beats those puppy eyes during debugging sessions!',
+      'Married in 2023 to my best friend and biggest supporter, Amelia. The perfect partner for both adventures and quiet coding nights.',
     size: 'large',
   },
   {
     id: 2,
-    src: 'https://picsum.photos/400/300?random=11',
-    alt: 'Austin Texas lifestyle',
+    src: '/swish_pic.jpeg',
+    alt: 'Bernedoodle dad moments',
     description:
-      'Born and raised in Austin, TX - exploring the city that shaped me. From food trucks to tech meetups, this city has it all.',
-    size: 'medium',
+      'This is my Bernedoodle, Swish, the best coding companion and walking buddy. Nothing beats those puppy eyes during debugging sessions!',
+    size: 'large',
   },
   {
     id: 3,
-    src: 'https://via.placeholder.com/400x300/8b5cf6/ffffff?text=Dresden+Files',
-    alt: 'Reading Dresden Files',
+    src: '/austin-skyline.webp',
+    alt: 'Austin Texas lifestyle',
     description:
-      'Deep into another Dresden Files book by Jim Butcher. My favorite series - urban fantasy meets detective noir perfectly.',
-    size: 'medium',
+      'Raised in Austin, TX - exploring the city that shaped me. From food trucks to tech meetups, this city has it all.',
+    size: 'square',
   },
   {
     id: 4,
-    src: 'https://via.placeholder.com/400x300/ef4444/ffffff?text=Sports+Fan',
+    src: '/longhorns.jpeg',
     alt: 'Sports fan life',
     description:
       'Game day ready! Cheering for the Texas Longhorns and Atlanta Falcons. Hook em Horns and Rise Up!',
@@ -40,34 +40,10 @@ const photos = [
   },
   {
     id: 5,
-    src: 'https://via.placeholder.com/400x300/10b981/ffffff?text=Trinity+University',
+    src: '/graduation.jpeg',
     alt: 'Trinity University graduation',
     description:
       'Trinity University Class of 2022 - Bachelor of Science in Business Analytics & Technology with a Sports Management minor.',
-    size: 'wide',
-  },
-  {
-    id: 6,
-    src: 'https://via.placeholder.com/400x300/ec4899/ffffff?text=Wedding+2023',
-    alt: 'Wedding celebration 2023',
-    description:
-      'Married in 2023 to my best friend and biggest supporter. The perfect partner for both adventures and quiet coding nights.',
-    size: 'tall',
-  },
-  {
-    id: 7,
-    src: 'https://via.placeholder.com/400x300/3b82f6/ffffff?text=Sports+Analytics',
-    alt: 'Sports analytics work',
-    description:
-      'Combining my passion for sports with data science - working on NBA prediction models and sports analytics projects.',
-    size: 'medium',
-  },
-  {
-    id: 8,
-    src: 'https://via.placeholder.com/400x300/6366f1/ffffff?text=Tech+Community',
-    alt: 'Austin tech community',
-    description:
-      'Part of the vibrant Austin tech scene - attending meetups, sharing knowledge, and building connections in the dev community.',
     size: 'square',
   },
 ]
@@ -121,9 +97,8 @@ export function PersonalSection() {
       <div className='text-center mb-16'>
         <h2 className='text-4xl md:text-5xl font-bold mb-6'>Beyond the Code</h2>
         <p className='text-xl text-muted-foreground max-w-2xl mx-auto'>
-          When I&apos;m not building applications, you&apos;ll find me reading Dresden Files, 
-          cheering for the Longhorns and Falcons, or spending time with my Bernedoodle 
-          exploring Austin, TX.
+          When I&apos;m not coding, you&apos;ll find me cheering for 
+          the Longhorns and Falcons, or spending time with my wife and bernedoodle.
         </p>
       </div>
 

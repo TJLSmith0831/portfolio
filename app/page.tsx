@@ -26,10 +26,6 @@ export default function Home() {
         <PersonalSection />
       </section>
 
-      <section id='contact' className='py-20'>
-        <ContactSection />
-      </section>
-
       <AIAssistant />
     </main>
   )
