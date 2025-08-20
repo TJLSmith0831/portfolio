@@ -1,7 +1,8 @@
 'use client'
 
 import { Button } from '@/components/ui/button'
-import { ArrowDown, Github, Linkedin, Notebook } from 'lucide-react'
+import { ArrowDown, Github, Linkedin } from 'lucide-react'
+import { MediumIcon } from '@/components/icons/medium-icon'
 
 export function HeroSection() {
   const scrollToWork = () => {
@@ -57,7 +58,7 @@ export function HeroSection() {
             rel='noopener noreferrer'
             aria-label='Medium Profile'
           >
-            <Notebook className='h-5 w-5' />
+            <MediumIcon className='h-5 w-5' />
           </a>
         </Button>
       </div>
