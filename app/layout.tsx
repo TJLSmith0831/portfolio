@@ -6,9 +6,9 @@ import { ThemeProvider } from '@/components/theme-provider'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'Tristan Smith - Full-Stack Developer and Data Scientist',
+  title: 'Tristan Smith - Full-Stack Engineer and Data Scientist',
   description:
-    'Portfolio of Tristan Smith, a passionate full-stack developer and data scientist crafting digital experiences with modern technologies.',
+    'Portfolio of Tristan Smith, a passionate full-stack engineer and data scientist crafting digital experiences with modern technologies.',
 }
 
 export default function RootLayout({

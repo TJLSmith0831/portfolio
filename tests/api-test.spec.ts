@@ -14,10 +14,8 @@ test.describe('API Direct Testing', () => {
         'Content-Type': 'application/json',
       },
       data: {
-        messages: [
-          { role: 'user', content: 'Tell me about Tristan' }
-        ]
-      }
+        messages: [{ role: 'user', content: 'Tell me about Tristan' }],
+      },
     })
 
     console.log(`API Status: ${response.status()}`)
@@ -28,11 +26,11 @@ test.describe('API Direct Testing', () => {
       const responseText = await response.text()
       console.log(`Response length: ${responseText.length}`)
       console.log(`First 500 characters: ${responseText.substring(0, 500)}`)
-      
+
       // Check if it's the expected streaming format
       const lines = responseText.split('\n')
       console.log(`Number of lines in response: ${lines.length}`)
-      
+
       let contentFound = false
       for (const line of lines) {
         if (line.startsWith('0:')) {
@@ -49,7 +47,7 @@ test.describe('API Direct Testing', () => {
           }
         }
       }
-      
+
       if (!contentFound) {
         console.log('⚠️ No content found in streaming response!')
       }
@@ -63,7 +61,7 @@ test.describe('API Direct Testing', () => {
     console.log('=== TESTING BROWSER STREAMING ===')
 
     // Enable console logging
-    page.on('console', (msg) => {
+    page.on('console', msg => {
       console.log(`BROWSER [${msg.type()}]:`, msg.text())
     })
 
@@ -116,13 +114,13 @@ test.describe('API Direct Testing', () => {
           
           return result;
         };
-      `
+      `,
     })
 
     // Send message
     const messageInput = page.locator('textarea[placeholder*="Ask about"]')
     await messageInput.fill('Tell me about Tristan')
-    
+
     const sendButton = page.locator('button[type="submit"]')
     await sendButton.click()
 
@@ -130,7 +128,9 @@ test.describe('API Direct Testing', () => {
     await page.waitForTimeout(10000)
 
     // Check final state
-    const messages = page.locator('[class*="space-y-2"] > *').filter({ hasNotText: '' })
+    const messages = page
+      .locator('[class*="space-y-2"] > *')
+      .filter({ hasNotText: '' })
     const messageCount = await messages.count()
     console.log(`Final message count: ${messageCount}`)
 

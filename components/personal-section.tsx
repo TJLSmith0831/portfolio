@@ -97,8 +97,8 @@ export function PersonalSection() {
       <div className='text-center mb-16'>
         <h2 className='text-4xl md:text-5xl font-bold mb-6'>Beyond the Code</h2>
         <p className='text-xl text-muted-foreground max-w-2xl mx-auto'>
-          When I&apos;m not coding, you&apos;ll find me cheering for 
-          the Longhorns and Falcons, or spending time with my wife and bernedoodle.
+          When I&apos;m not coding, you&apos;ll find me spending time with my wife and dog, or cheering for the
+          Longhorns and Falcons.
         </p>
       </div>
 

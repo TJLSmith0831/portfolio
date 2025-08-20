@@ -12,7 +12,12 @@ interface EmailInputProps {
   className?: string
 }
 
-export function EmailInput({ onSubmit, onSkip, isLoading = false, className }: EmailInputProps) {
+export function EmailInput({
+  onSubmit,
+  onSkip,
+  isLoading = false,
+  className,
+}: EmailInputProps) {
   const [email, setEmail] = useState('')
   const [isValidEmail, setIsValidEmail] = useState(false)
 
@@ -48,17 +53,20 @@ export function EmailInput({ onSubmit, onSkip, isLoading = false, className }: E
   }
 
   return (
-    <div className={cn(
-      'p-4 bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 rounded-lg space-y-3',
-      className
-    )}>
+    <div
+      className={cn(
+        'p-4 bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 rounded-lg space-y-3',
+        className
+      )}
+    >
       <div className='flex items-center gap-2 text-blue-700 dark:text-blue-300'>
         <Mail className='h-4 w-4' />
         <span className='text-sm font-medium'>Email Collection</span>
       </div>
-      
+
       <p className='text-xs text-blue-600 dark:text-blue-400'>
-        To forward your message, please provide your email address. This helps me send you updates and allows for follow-up discussions.
+        To forward your message, please provide your email address. This helps
+        me send you updates and allows for follow-up discussions.
       </p>
 
       <form onSubmit={handleSubmit} className='space-y-3'>
@@ -76,14 +84,16 @@ export function EmailInput({ onSubmit, onSkip, isLoading = false, className }: E
               isValidEmail
                 ? 'border-green-300 dark:border-green-600'
                 : email.length > 0
-                ? 'border-red-300 dark:border-red-600'
-                : 'border-gray-300 dark:border-gray-600'
+                  ? 'border-red-300 dark:border-red-600'
+                  : 'border-gray-300 dark:border-gray-600'
             )}
             disabled={isLoading}
             autoFocus
           />
           {email.length > 0 && !isValidEmail && (
-            <p className='text-xs text-red-500 mt-1'>Please enter a valid email address</p>
+            <p className='text-xs text-red-500 mt-1'>
+              Please enter a valid email address
+            </p>
           )}
         </div>
 
@@ -103,7 +113,7 @@ export function EmailInput({ onSubmit, onSkip, isLoading = false, className }: E
               </>
             )}
           </Button>
-          
+
           <Button
             type='button'
             variant='outline'
@@ -117,8 +127,8 @@ export function EmailInput({ onSubmit, onSkip, isLoading = false, className }: E
       </form>
 
       <p className='text-xs text-gray-500 dark:text-gray-400'>
-        Your email will only be used to send you a copy of this conversation and any follow-up responses. 
-        It will not be shared with third parties.
+        Your email will only be used to send you a copy of this conversation and
+        any follow-up responses. It will not be shared with third parties.
       </p>
     </div>
   )

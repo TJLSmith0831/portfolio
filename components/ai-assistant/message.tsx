@@ -14,14 +14,14 @@ interface MessageProps {
   isEmailLoading?: boolean
 }
 
-export function Message({ 
-  role, 
-  content, 
-  isStreaming = false, 
+export function Message({
+  role,
+  content,
+  isStreaming = false,
   type = 'text',
   onEmailSubmit,
   onEmailSkip,
-  isEmailLoading = false
+  isEmailLoading = false,
 }: MessageProps) {
   const isUser = role === 'user'
 
@@ -63,7 +63,7 @@ export function Message({
                 {content}
               </p>
             </div>
-            
+
             {onEmailSubmit && onEmailSkip && (
               <EmailInput
                 onSubmit={onEmailSubmit}

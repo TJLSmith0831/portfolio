@@ -13,10 +13,13 @@ export function ContactSection() {
   return (
     <div className='container mx-auto px-6'>
       <div className='text-center mb-16'>
-        <h2 className='text-4xl md:text-5xl font-bold mb-6'>Let&apos;s Connect</h2>
+        <h2 className='text-4xl md:text-5xl font-bold mb-6'>
+          Let&apos;s Connect
+        </h2>
         <p className='text-xl text-muted-foreground max-w-2xl mx-auto'>
-          Ready to bring your ideas to life? I&apos;m always excited to discuss new
-          projects and opportunities. Let&apos;s create something amazing together.
+          Ready to bring your ideas to life? I&apos;m always excited to discuss
+          new projects and opportunities. Let&apos;s create something amazing
+          together.
         </p>
       </div>
 

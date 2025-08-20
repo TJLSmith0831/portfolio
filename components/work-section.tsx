@@ -10,7 +10,8 @@ const projects = [
   {
     id: 1,
     name: 'Personal Portfolio Website',
-    image: 'https://via.placeholder.com/600x400/3b82f6/ffffff?text=Portfolio+Website',
+    image:
+      'https://via.placeholder.com/600x400/3b82f6/ffffff?text=Portfolio+Website',
     description:
       'A modern, responsive portfolio website built with Next.js 15, featuring dark/light mode, smooth animations, and a clean design system.',
     technologies: ['Next.js 15', 'React', 'TypeScript', 'Tailwind CSS'],
@@ -28,10 +29,16 @@ const projects = [
   {
     id: 2,
     name: 'AI-Powered Portfolio Assistant',
-    image: 'https://via.placeholder.com/600x400/10b981/ffffff?text=AI+Assistant',
+    image:
+      'https://via.placeholder.com/600x400/10b981/ffffff?text=AI+Assistant',
     description:
       'An intelligent chat interface integrated into portfolio website that provides context-aware responses about professional background.',
-    technologies: ['OpenAI GPT-3.5-turbo', 'Vercel AI SDK', 'Nodemailer', 'Next.js'],
+    technologies: [
+      'OpenAI GPT-3.5-turbo',
+      'Vercel AI SDK',
+      'Nodemailer',
+      'Next.js',
+    ],
     features: [
       'Streaming AI responses',
       'Context-aware answers',
@@ -100,10 +107,16 @@ const projects = [
   {
     id: 6,
     name: 'NBA Prediction Models',
-    image: 'https://via.placeholder.com/600x400/ef4444/ffffff?text=NBA+Prediction',
+    image:
+      'https://via.placeholder.com/600x400/ef4444/ffffff?text=NBA+Prediction',
     description:
       'A collection of machine learning projects for NBA analytics including salary valuation, game predictions, and championship forecasting.',
-    technologies: ['Python', 'Jupyter Notebook', 'Machine Learning', 'scikit-learn'],
+    technologies: [
+      'Python',
+      'Jupyter Notebook',
+      'Machine Learning',
+      'scikit-learn',
+    ],
     features: [
       'Salary valuation models',
       'Game predictions',

@@ -3,6 +3,8 @@
     {
       "id": "portfolio-with-ai",
       "name": "Portfolio Website with Swishter AI",
+      "date": "2025-01-01",
+      "image": "/portfolio-img.png",
       "description": "A modern, responsive portfolio website built with Next.js 15 featuring an intelligent AI assistant named Swishter. Combines clean design with context-aware AI chat for professional inquiries and business communication.",
       "technologies": [
         "Next.js 15",
@@ -33,6 +35,7 @@
     {
       "id": "ai-agent-learning",
       "name": "AI Agent Learning",
+      "date": "2024-12-01",
       "description": "A learning repository focused on building AI agents, exploring modern AI/ML techniques and agent-based systems.",
       "technologies": ["Python", "AI/ML", "Agent-based Systems"],
       "status": "Active Learning",
@@ -44,6 +47,8 @@
     {
       "id": "nba-predictions-article",
       "name": "NBA Opening Week Predictions: Applying Julia's Machine Learning to Sports",
+      "date": "2020-12-15",
+      "image": "/opening-week.jpg",
       "description": "Technical article exploring NBA game predictions using Julia programming language and machine learning. Applied logistic regression to predict outcomes for 25 games in the 2020-2021 NBA opening week.",
       "technologies": [
         "Julia",
@@ -68,12 +73,110 @@
       "publication": "The Startup on Medium",
       "type": "Technical Article",
       "myContribution": "Solo author - designed prediction methodology, implemented Julia ML models, analyzed NBA statistical data, and authored comprehensive technical article"
+    },
+    {
+      "id": "nba-salary-evaluation",
+      "name": "The Most Bang for Your Buck: NBA Salary Evaluations",
+      "date": "2020-03-15",
+      "image": "/contract-negotiations.jpg",
+      "description": "Data science analysis using Python and machine learning to evaluate NBA player salaries against performance metrics. Applied statistical modeling to identify undervalued and overvalued players in the 2019-2020 season.",
+      "technologies": [
+        "Python",
+        "Pandas",
+        "Scikit-Learn",
+        "NumPy",
+        "Matplotlib",
+        "NBA Stats API",
+        "Machine Learning",
+        "Statistical Analysis"
+      ],
+      "features": [
+        "Comprehensive salary vs performance analysis",
+        "Machine learning player evaluation models",
+        "Statistical correlation analysis",
+        "Data visualization of player values",
+        "Performance metrics normalization",
+        "Predictive salary modeling"
+      ],
+      "status": "Published",
+      "repository": "Available on request",
+      "deployed": true,
+      "liveUrl": "https://tjlsmith0831.medium.com/the-most-bang-for-your-buck-4d546167906a",
+      "publication": "Medium",
+      "type": "Technical Article",
+      "myContribution": "Solo author - designed evaluation methodology, implemented Python ML models, analyzed NBA salary and performance data, created data visualizations"
+    },
+    {
+      "id": "nba-championship-prediction",
+      "name": "And the 2020 NBA Champion is...",
+      "date": "2020-08-01",
+      "image": "/basketball-championship.webp",
+      "description": "Machine learning analysis using linear regression to predict the 2020 NBA Championship winner. Applied statistical modeling to playoff performance data and team metrics for championship probability assessment.",
+      "technologies": [
+        "Python",
+        "Linear Regression",
+        "Scikit-Learn",
+        "Pandas",
+        "NumPy",
+        "NBA Stats API",
+        "Statistical Modeling",
+        "Data Analysis"
+      ],
+      "features": [
+        "Championship prediction modeling",
+        "Linear regression analysis",
+        "Playoff performance metrics",
+        "Team statistical comparisons",
+        "Predictive analytics approach",
+        "Sports data science methodology"
+      ],
+      "status": "Published",
+      "repository": "Available on request",
+      "deployed": true,
+      "liveUrl": "https://tjlsmith0831.medium.com/and-the-2020-nba-champion-is-7fa1a60c7fae",
+      "publication": "Medium",
+      "type": "Technical Article",
+      "myContribution": "Solo author - developed championship prediction model, implemented linear regression analysis, analyzed team performance data, authored technical article"
+    },
+    {
+      "id": "a11y-unit",
+      "name": "a11yUnit",
+      "date": "2024-06-01",
+      "image": "/a11y-unit.png",
+      "description": "AI-powered accessibility compliance scanner and NPM package for automated WCAG testing. Provides comprehensive accessibility audits with actionable recommendations for web developers and teams.",
+      "technologies": [
+        "TypeScript",
+        "Node.js",
+        "AI/ML",
+        "WCAG Guidelines",
+        "Web Accessibility",
+        "NPM Package",
+        "Automated Testing",
+        "DevOps Tools"
+      ],
+      "features": [
+        "AI-powered accessibility scanning",
+        "WCAG 2.1 compliance checking",
+        "Automated testing integration",
+        "Actionable accessibility recommendations",
+        "NPM package distribution",
+        "Developer-friendly CLI tool",
+        "Comprehensive audit reporting",
+        "Continuous integration support"
+      ],
+      "status": "Active",
+      "repository": "https://github.com/a11y-unit",
+      "deployed": true,
+      "liveUrl": "https://a11y-unit.dev",
+      "myContribution": "Lead developer - architected AI accessibility scanner, implemented WCAG compliance algorithms, created NPM package and CLI tool"
     }
   ],
   "sideProjects": [
     {
       "id": "tenet-app",
       "name": "Tenet",
+      "date": "2023-09-01",
+      "image": "/social-media.jpg",
       "description": "A mobile-first social opinion platform for structured, intentional discourse. Built to facilitate meaningful conversations with organized debate structure.",
       "technologies": [
         "React Native",
@@ -98,6 +201,8 @@
     {
       "id": "praetor-ai",
       "name": "PraetorAI",
+      "date": "2024-03-01",
+      "image": "/praetor-ai.jpg",
       "description": "An AI-first project management and productivity platform designed to enhance team collaboration and project efficiency through intelligent automation.",
       "technologies": [
         "TypeScript",
@@ -122,6 +227,8 @@
     {
       "id": "para-llama",
       "name": "ParaLlama",
+      "date": "2023-01-01",
+      "image": "/parallama.jpg",
       "description": "A TypeScript framework designed for parallel processing and distributed computing tasks, optimized for performance and scalability.",
       "technologies": ["TypeScript", "Node.js", "Parallel Processing"],
       "features": [
@@ -142,6 +249,8 @@
     {
       "id": "supabase-contributions",
       "name": "Supabase Platform",
+      "date": "2024-01-01",
+      "image": "/supabase.jpg",
       "description": "Contributing to the open-source Postgres development platform that provides authentication, real-time subscriptions, and more.",
       "technologies": ["TypeScript", "PostgreSQL", "React", "Next.js"],
       "status": "Contributor",

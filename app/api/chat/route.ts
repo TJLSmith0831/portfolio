@@ -105,9 +105,11 @@ const handleChatRequest = async (req: Request) => {
     // Try direct message format without convertToCoreMessages
     const result = await streamText({
       model: openai('gpt-3.5-turbo'),
-      messages: messagesToConvert as Parameters<typeof streamText>[0]['messages'],
+      messages: messagesToConvert as Parameters<
+        typeof streamText
+      >[0]['messages'],
       temperature: 0.3,
-      maxOutputTokens: 500,
+      maxOutputTokens: 300,
     })
 
     return result.toUIMessageStreamResponse()

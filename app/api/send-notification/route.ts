@@ -17,7 +17,8 @@ function createEmailContent(data: NotificationRequest): {
   text: string
   visitorEmail?: string
 } {
-  const { messages, visitorIP, timestamp, validationReason, visitorEmail } = data
+  const { messages, visitorIP, timestamp, validationReason, visitorEmail } =
+    data
 
   const conversationHtml = messages
     .map(
@@ -32,8 +33,7 @@ function createEmailContent(data: NotificationRequest): {
 
   const conversationText = messages
     .map(
-      msg =>
-        `${msg.role === 'user' ? 'Visitor' : 'Swishter'}: ${msg.content}`
+      msg => `${msg.role === 'user' ? 'Visitor' : 'Swishter'}: ${msg.content}`
     )
     .join('\n\n')
 
@@ -219,4 +219,7 @@ Tristan's Portfolio
   }
 }
 
-export const POST = withMonitoring(handleNotificationRequest, '/api/send-notification')
+export const POST = withMonitoring(
+  handleNotificationRequest,
+  '/api/send-notification'
+)

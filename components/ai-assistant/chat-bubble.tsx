@@ -30,11 +30,7 @@ export function ChatBubble({
           <div className='absolute -top-1 -right-1 h-3 w-3 bg-destructive rounded-full animate-pulse' />
         )}
 
-        {isOpen ? (
-          <X className='h-6 w-6' />
-        ) : (
-          <Sparkles className='h-6 w-6' />
-        )}
+        {isOpen ? <X className='h-6 w-6' /> : <Sparkles className='h-6 w-6' />}
       </Button>
 
       {!isOpen && (

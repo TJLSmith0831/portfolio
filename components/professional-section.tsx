@@ -18,10 +18,10 @@ interface Experience {
   technologies?: string[]
 }
 
-
 export function ProfessionalSection() {
-  const [activeTab, setActiveTab] = useState<'experience' | 'education' | 'skills' | 'certifications'>('experience')
-
+  const [activeTab, setActiveTab] = useState<
+    'experience' | 'education' | 'skills' | 'certifications'
+  >('experience')
 
   const formatDateRange = (startDate: string, endDate?: string) => {
     if (endDate) {
@@ -34,7 +34,9 @@ export function ProfessionalSection() {
     <Card className='p-6 hover:shadow-lg transition-shadow'>
       <div className='flex flex-col md:flex-row md:items-start md:justify-between mb-4'>
         <div>
-          <h3 className='text-xl font-semibold text-foreground mb-1'>{experience.title}</h3>
+          <h3 className='text-xl font-semibold text-foreground mb-1'>
+            {experience.title}
+          </h3>
           <div className='flex items-center gap-2 text-primary mb-2'>
             <Building className='h-4 w-4' />
             <span className='font-medium'>{experience.company}</span>
@@ -43,7 +45,9 @@ export function ProfessionalSection() {
         <div className='flex flex-col gap-1 text-sm text-muted-foreground'>
           <div className='flex items-center gap-1'>
             <Calendar className='h-4 w-4' />
-            <span>{formatDateRange(experience.startDate, experience.endDate)}</span>
+            <span>
+              {formatDateRange(experience.startDate, experience.endDate)}
+            </span>
           </div>
           {experience.location && (
             <div className='flex items-center gap-1'>
@@ -54,7 +58,9 @@ export function ProfessionalSection() {
         </div>
       </div>
 
-      <p className='text-muted-foreground mb-4 leading-relaxed'>{experience.description}</p>
+      <p className='text-muted-foreground mb-4 leading-relaxed'>
+        {experience.description}
+      </p>
 
       {experience.responsibilities && (
         <div className='mb-4'>
@@ -94,7 +100,7 @@ export function ProfessionalSection() {
         <div>
           <h4 className='text-sm font-semibold mb-2'>Technologies Used</h4>
           <div className='flex flex-wrap gap-2'>
-            {experience.technologies.map((tech) => (
+            {experience.technologies.map(tech => (
               <Badge key={tech} variant='secondary' className='text-xs'>
                 {tech}
               </Badge>
@@ -108,9 +114,12 @@ export function ProfessionalSection() {
   return (
     <div className='container mx-auto px-6'>
       <div className='text-center mb-16'>
-        <h2 className='text-4xl md:text-5xl font-bold mb-6'>Professional Experience</h2>
+        <h2 className='text-4xl md:text-5xl font-bold mb-6'>
+          Professional Experience
+        </h2>
         <p className='text-xl text-muted-foreground max-w-2xl mx-auto'>
-          Building data-driven solutions and modern web applications with expertise in full-stack development and data science.
+          Building data-driven solutions and modern web applications with
+          expertise in full-stack development and data science.
         </p>
       </div>
 
@@ -143,14 +152,18 @@ export function ProfessionalSection() {
           <div className='space-y-8'>
             {/* Current Position */}
             <div>
-              <h3 className='text-2xl font-semibold mb-6 text-primary'>Current Role</h3>
+              <h3 className='text-2xl font-semibold mb-6 text-primary'>
+                Current Role
+              </h3>
               <ExperienceCard experience={experienceData.currentPosition} />
             </div>
 
             {/* Previous Experience */}
             {experienceData.previousExperience.length > 0 && (
               <div>
-                <h3 className='text-2xl font-semibold mb-6 text-primary'>Previous Experience</h3>
+                <h3 className='text-2xl font-semibold mb-6 text-primary'>
+                  Previous Experience
+                </h3>
                 <div className='space-y-6'>
                   {experienceData.previousExperience.map((exp, index) => (
                     <ExperienceCard key={index} experience={exp} />
@@ -167,17 +180,25 @@ export function ProfessionalSection() {
               <h3 className='text-2xl font-semibold text-foreground mb-2'>
                 {experienceData.education.degree}
               </h3>
-              <p className='text-lg text-primary mb-1'>Minor: {experienceData.education.minor}</p>
+              <p className='text-lg text-primary mb-1'>
+                Minor: {experienceData.education.minor}
+              </p>
               <p className='text-muted-foreground'>
-                {experienceData.education.institution} • Class of {experienceData.education.graduationYear} • {experienceData.education.gpa} GPA
+                {experienceData.education.institution} • Class of{' '}
+                {experienceData.education.graduationYear} •{' '}
+                {experienceData.education.gpa} GPA
               </p>
             </div>
 
             <div>
               <h4 className='font-semibold mb-4'>Relevant Coursework</h4>
               <div className='grid grid-cols-2 md:grid-cols-3 gap-2'>
-                {experienceData.education.relevantCoursework.map((course) => (
-                  <Badge key={course} variant='outline' className='justify-center py-2'>
+                {experienceData.education.relevantCoursework.map(course => (
+                  <Badge
+                    key={course}
+                    variant='outline'
+                    className='justify-center py-2'
+                  >
                     {course}
                   </Badge>
                 ))}
@@ -194,7 +215,7 @@ export function ProfessionalSection() {
                   {category === 'datascience' ? 'Data Science' : category}
                 </h3>
                 <div className='flex flex-wrap gap-2'>
-                  {skills.map((skill) => (
+                  {skills.map(skill => (
                     <Badge key={skill} variant='secondary'>
                       {skill}
                     </Badge>
@@ -208,9 +229,14 @@ export function ProfessionalSection() {
         {activeTab === 'certifications' && (
           <div className='grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto'>
             {experienceData.certifications.map((cert, index) => (
-              <Card key={index} className='p-6 text-center hover:shadow-lg transition-shadow'>
+              <Card
+                key={index}
+                className='p-6 text-center hover:shadow-lg transition-shadow'
+              >
                 <Award className='h-8 w-8 text-primary mx-auto mb-3' />
-                <h3 className='font-semibold text-foreground mb-2'>{cert.name}</h3>
+                <h3 className='font-semibold text-foreground mb-2'>
+                  {cert.name}
+                </h3>
                 <p className='text-sm text-primary mb-1'>{cert.issuer}</p>
                 <p className='text-xs text-muted-foreground'>{cert.year}</p>
               </Card>

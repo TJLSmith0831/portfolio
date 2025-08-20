@@ -21,11 +21,16 @@ async function checkRateLimit(
   // Skip KV for local development if environment variables are missing or contain placeholders
   const kvUrl = process.env.KV_REST_API_URL
   const kvToken = process.env.KV_REST_API_TOKEN
-  
-  if (!kvUrl || !kvToken || 
-      kvUrl.includes('your-database-name') || 
-      kvToken.includes('your-actual-token')) {
-    console.log('KV not configured, skipping rate limiting for local development')
+
+  if (
+    !kvUrl ||
+    !kvToken ||
+    kvUrl.includes('your-database-name') ||
+    kvToken.includes('your-actual-token')
+  ) {
+    console.log(
+      'KV not configured, skipping rate limiting for local development'
+    )
     return { allowed: true, remaining: MAX_EMAILS_PER_IP }
   }
 
@@ -54,11 +59,16 @@ async function incrementRateLimit(ip: string): Promise<void> {
   // Skip KV for local development if environment variables are missing or contain placeholders
   const kvUrl = process.env.KV_REST_API_URL
   const kvToken = process.env.KV_REST_API_TOKEN
-  
-  if (!kvUrl || !kvToken || 
-      kvUrl.includes('your-database-name') || 
-      kvToken.includes('your-actual-token')) {
-    console.log('KV not configured, skipping rate limit increment for local development')
+
+  if (
+    !kvUrl ||
+    !kvToken ||
+    kvUrl.includes('your-database-name') ||
+    kvToken.includes('your-actual-token')
+  ) {
+    console.log(
+      'KV not configured, skipping rate limit increment for local development'
+    )
     return
   }
 
@@ -196,4 +206,7 @@ Examples:
   }
 }
 
-export const POST = withMonitoring(handleValidationRequest, '/api/validate-message')
+export const POST = withMonitoring(
+  handleValidationRequest,
+  '/api/validate-message'
+)
