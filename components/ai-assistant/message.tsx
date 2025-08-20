@@ -2,14 +2,27 @@
 
 import { cn } from '@/lib/utils'
 import { Bot, User } from 'lucide-react'
+import { EmailInput } from './email-input'
 
 interface MessageProps {
   role: 'user' | 'assistant'
   content: string
   isStreaming?: boolean
+  type?: 'text' | 'email-request'
+  onEmailSubmit?: (email: string) => void
+  onEmailSkip?: () => void
+  isEmailLoading?: boolean
 }
 
-export function Message({ role, content, isStreaming = false }: MessageProps) {
+export function Message({ 
+  role, 
+  content, 
+  isStreaming = false, 
+  type = 'text',
+  onEmailSubmit,
+  onEmailSkip,
+  isEmailLoading = false
+}: MessageProps) {
   const isUser = role === 'user'
 
   return (
@@ -33,27 +46,51 @@ export function Message({ role, content, isStreaming = false }: MessageProps) {
       <div className='flex-1 space-y-2'>
         <div className='flex items-center gap-2'>
           <span className='text-sm font-medium text-muted-foreground'>
-            {isUser ? 'You' : 'AI Assistant'}
+            {isUser ? 'You' : 'Swishter'}
           </span>
         </div>
 
-        <div
-          className={cn(
-            'prose prose-sm max-w-none',
-            'prose-p:leading-relaxed prose-p:my-2',
-            'prose-headings:my-2',
-            'prose-ul:my-2 prose-ol:my-2',
-            'prose-li:my-0',
-            'dark:prose-invert'
-          )}
-        >
-          <p className='whitespace-pre-wrap text-sm text-foreground'>
-            {content}
-            {isStreaming && (
-              <span className='inline-block w-2 h-4 bg-primary/60 ml-1 animate-pulse' />
+        {type === 'email-request' && !isUser ? (
+          <div className='space-y-3'>
+            <div
+              className={cn(
+                'prose prose-sm max-w-none',
+                'prose-p:leading-relaxed prose-p:my-2',
+                'dark:prose-invert'
+              )}
+            >
+              <p className='whitespace-pre-wrap text-sm text-foreground'>
+                {content}
+              </p>
+            </div>
+            
+            {onEmailSubmit && onEmailSkip && (
+              <EmailInput
+                onSubmit={onEmailSubmit}
+                onSkip={onEmailSkip}
+                isLoading={isEmailLoading}
+              />
             )}
-          </p>
-        </div>
+          </div>
+        ) : (
+          <div
+            className={cn(
+              'prose prose-sm max-w-none',
+              'prose-p:leading-relaxed prose-p:my-2',
+              'prose-headings:my-2',
+              'prose-ul:my-2 prose-ol:my-2',
+              'prose-li:my-0',
+              'dark:prose-invert'
+            )}
+          >
+            <p className='whitespace-pre-wrap text-sm text-foreground'>
+              {content}
+              {isStreaming && (
+                <span className='inline-block w-2 h-4 bg-primary/60 ml-1 animate-pulse' />
+              )}
+            </p>
+          </div>
+        )}
       </div>
     </div>
   )

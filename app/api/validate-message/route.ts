@@ -1,6 +1,7 @@
 import { openai } from '@ai-sdk/openai'
 import { generateText } from 'ai'
 import { kv } from '@vercel/kv'
+import { withMonitoring } from '@/lib/monitoring'
 
 export const runtime = 'nodejs'
 
@@ -97,7 +98,7 @@ function getClientIP(request: Request): string {
  * @param {Request} req - The HTTP request containing chat messages to validate
  * @returns {Promise<Response>} JSON response with validation result and rate limit information
  */
-export async function POST(req: Request) {
+const handleValidationRequest = async (req: Request) => {
   try {
     const { messages } = await req.json()
     const ip = getClientIP(req)
@@ -194,3 +195,5 @@ Examples:
     )
   }
 }
+
+export const POST = withMonitoring(handleValidationRequest, '/api/validate-message')

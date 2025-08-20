@@ -6,7 +6,7 @@ async function testAIAssistant() {
   const page = await context.newPage()
 
   try {
-    console.log('🚀 Starting AI Assistant test...')
+    console.log('🚀 Starting Swishter test...')
 
     // Navigate to the portfolio page
     await page.goto('http://localhost:3000')
@@ -25,7 +25,7 @@ async function testAIAssistant() {
     console.log('✅ Clicked chat bubble')
 
     // Check if chat window opens
-    await page.waitForSelector('text=AI Assistant', { timeout: 5000 })
+    await page.waitForSelector('text=Swishter', { timeout: 5000 })
     console.log('✅ Chat window opened')
 
     // Check if the initial greeting message is present
@@ -63,7 +63,7 @@ async function testAIAssistant() {
     await page.setViewportSize({ width: 1024, height: 768 })
     console.log('✅ Switched to desktop viewport')
 
-    console.log('🎉 All tests passed! AI Assistant is working correctly.')
+    console.log('🎉 All tests passed! Swishter is working correctly.')
   } catch (error) {
     console.error('❌ Test failed:', error.message)
   } finally {

@@ -34,7 +34,7 @@ test('Chat Response Detail Check', async ({ page }) => {
   }
 
   // Look specifically for AI assistant responses
-  const aiResponses = page.locator('div:has(span:text("AI Assistant")) + div, p:has(span:text("AI Assistant")) + p')
+  const aiResponses = page.locator('div:has(span:text("Swishter")) + div, p:has(span:text("Swishter")) + p')
   const aiResponseCount = await aiResponses.count()
   console.log(`\nAI response containers: ${aiResponseCount}`)
   

@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test'
 
-test.describe('AI Assistant Chat Interface', () => {
+test.describe('Swishter Chat Interface', () => {
   test.beforeEach(async ({ page }) => {
     // Navigate to the portfolio page
     await page.goto('http://localhost:3001')
@@ -37,8 +37,8 @@ test.describe('AI Assistant Chat Interface', () => {
     const chatBubble = page.locator('button[aria-label="Open chat assistant"]')
     await chatBubble.click()
 
-    // Look for chat window - it should contain "AI Assistant" heading
-    const chatWindow = page.locator('text="AI Assistant"').locator('..')
+    // Look for chat window - it should contain "Swishter" heading
+    const chatWindow = page.locator('text="Swishter"').locator('..')
     await expect(chatWindow).toBeVisible({ timeout: 5000 })
 
     // Verify chat window has the expected class structure
@@ -132,7 +132,7 @@ test.describe('AI Assistant Chat Interface', () => {
     await chatBubble.click()
 
     // Chat window should adapt to mobile - check if it's visible
-    const chatWindow = page.locator('text="AI Assistant"')
+    const chatWindow = page.locator('text="Swishter"')
     await expect(chatWindow).toBeVisible({ timeout: 5000 })
 
     // On mobile, chat window might be adjusted but should still be functional
@@ -151,7 +151,7 @@ test.describe('AI Assistant Chat Interface', () => {
 
     await chatBubble.click()
 
-    const chatWindow = page.locator('text="AI Assistant"')
+    const chatWindow = page.locator('text="Swishter"')
     await expect(chatWindow).toBeVisible({ timeout: 5000 })
   })
 
@@ -161,7 +161,7 @@ test.describe('AI Assistant Chat Interface', () => {
     await chatBubble.click()
 
     // Wait for chat window to be visible
-    const chatWindow = page.locator('text="AI Assistant"')
+    const chatWindow = page.locator('text="Swishter"')
     await expect(chatWindow).toBeVisible({ timeout: 5000 })
 
     // Find close button - it's the × button in the header
@@ -226,7 +226,7 @@ test.describe('AI Assistant Chat Interface', () => {
       )
       await chatBubble.click()
 
-      const chatWindow = page.locator('text="AI Assistant"')
+      const chatWindow = page.locator('text="Swishter"')
       await expect(chatWindow).toBeVisible({ timeout: 5000 })
 
       // Chat should be visible regardless of theme
@@ -238,7 +238,7 @@ test.describe('AI Assistant Chat Interface', () => {
       )
       await chatBubble.click()
 
-      const chatWindow = page.locator('text="AI Assistant"')
+      const chatWindow = page.locator('text="Swishter"')
       await expect(chatWindow).toBeVisible({ timeout: 5000 })
     }
   })

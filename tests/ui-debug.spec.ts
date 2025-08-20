@@ -73,8 +73,8 @@ test.describe('UI Debug', () => {
     console.log('Page title:', pageTitle)
 
     const bodyText = await page.locator('body').textContent()
-    const hasAIAssistant = bodyText?.includes('AI Assistant')
-    console.log('Page contains "AI Assistant":', hasAIAssistant)
+    const hasSwishter = bodyText?.includes('Swishter')
+    console.log('Page contains "Swishter":', hasSwishter)
 
     expect(chatBubbleExists).toBe(true)
   })

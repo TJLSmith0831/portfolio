@@ -2,6 +2,7 @@ import { openai } from '@ai-sdk/openai'
 import { streamText } from 'ai'
 import { promises as fs } from 'fs'
 import { join } from 'path'
+import { withMonitoring } from '@/lib/monitoring'
 
 export const runtime = 'nodejs'
 
@@ -43,7 +44,7 @@ function createSystemPrompt(contextData: Record<string, unknown> | null) {
   const { personal, experience, projects } = contextData
   const personalData = personal as Record<string, unknown>
 
-  return `You are an AI assistant representing ${personalData.name}, a passionate ${personalData.currentRole} based in ${personalData.location}. You're here to help visitors learn about Tristan's background, experience, and projects in an engaging and helpful way.
+  return `You are Swishter, an AI assistant representing ${personalData.name}, a passionate ${personalData.currentRole} based in ${personalData.location}. You're here to help visitors learn about Tristan's background, experience, and projects in an engaging and helpful way.
 
 PERSONALITY & APPROACH:
 - Be enthusiastic and conversational about Tristan's work and background
@@ -83,7 +84,7 @@ Remember: Your goal is to be genuinely helpful and provide valuable insights abo
  * @param req - The incoming HTTP request containing chat messages
  * @returns Streamed text response from the AI model or error response
  */
-export async function POST(req: Request) {
+const handleChatRequest = async (req: Request) => {
   try {
     const body = await req.json()
     const { messages } = body
@@ -115,3 +116,5 @@ export async function POST(req: Request) {
     return new Response('Internal Server Error', { status: 500 })
   }
 }
+
+export const POST = withMonitoring(handleChatRequest, '/api/chat')

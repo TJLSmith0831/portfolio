@@ -74,7 +74,7 @@ test.describe('Comprehensive Portfolio Diagnosis', () => {
       console.log('✓ Clicked chat bubble')
       
       // Wait for chat window to appear
-      const chatWindow = page.locator('text="AI Assistant"')
+      const chatWindow = page.locator('text="Swishter"')
       await expect(chatWindow).toBeVisible({ timeout: 5000 })
       console.log('✓ Chat window opened successfully')
       
@@ -127,7 +127,7 @@ test.describe('Comprehensive Portfolio Diagnosis', () => {
       console.log(`Total messages in chat: ${messageCount}`)
       
       // Check for AI response content
-      const aiMessages = page.locator('text="AI Assistant"').locator('..').locator('p')
+      const aiMessages = page.locator('text="Swishter"').locator('..').locator('p')
       const aiMessageCount = await aiMessages.count()
       console.log(`AI messages found: ${aiMessageCount}`)
       

@@ -11,6 +11,8 @@ interface ChatMessage {
   id: string
   role: 'user' | 'assistant'
   content: string
+  type?: 'text' | 'email-request'
+  requiresEmail?: boolean
 }
 
 interface ChatWindowProps {
@@ -24,7 +26,7 @@ export function ChatWindow({ isOpen, onClose }: ChatWindowProps) {
       id: '1',
       role: 'assistant',
       content:
-        "Hi! I'm here to help answer questions about Tristan's background, experience, and projects. Feel free to ask about his skills, work history, or anything else you'd like to know!",
+        "Hi! I'm Swishter, and I'm here to help answer questions about Tristan's background, experience, and projects. Feel free to ask about his skills, work history, or anything else you'd like to know!"
     },
   ])
   const [input, setInput] = useState('')
@@ -32,6 +34,11 @@ export function ChatWindow({ isOpen, onClose }: ChatWindowProps) {
   const [streamingMessageId, setStreamingMessageId] = useState<string | null>(
     null
   )
+  const [pendingNotification, setPendingNotification] = useState<{
+    messages: ChatMessage[]
+    reason: string
+  } | null>(null)
+  const [isEmailLoading, setIsEmailLoading] = useState(false)
 
   const messagesEndRef = useRef<HTMLDivElement>(null)
   const textareaRef = useRef<HTMLTextAreaElement>(null)
@@ -165,23 +172,89 @@ export function ChatWindow({ isOpen, onClose }: ChatWindowProps) {
       const validation = await validationResponse.json()
 
       if (validation.shouldNotify) {
-        await fetch('/api/send-notification', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            messages: conversationMessages.map(({ role, content }) => ({
-              role,
-              content,
-            })),
-            visitorIP: 'Unknown',
-            timestamp: new Date().toISOString(),
-            validationReason: validation.reason,
-          }),
+        // Set up email collection flow
+        setPendingNotification({
+          messages: conversationMessages,
+          reason: validation.reason
         })
+
+        // Add email request message
+        const emailRequestId = (Date.now() + 2).toString()
+        const emailRequestMessage: ChatMessage = {
+          id: emailRequestId,
+          role: 'assistant',
+          content: "Great question! I'd like to forward your message to Tristan. To do this, could you please provide your email address? This will allow him to respond directly and keep you updated on any developments.",
+          type: 'email-request',
+          requiresEmail: true
+        }
+
+        setMessages(prev => [...prev, emailRequestMessage])
       }
     } catch (error) {
       console.error('Message validation error:', error)
     }
+  }
+
+  const handleEmailSubmit = async (email: string) => {
+    if (!pendingNotification) return
+
+    setIsEmailLoading(true)
+
+    try {
+      // Send notification with email
+      await fetch('/api/send-notification', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          messages: pendingNotification.messages.map(({ role, content }) => ({
+            role,
+            content,
+          })),
+          visitorEmail: email,
+          visitorIP: 'Unknown',
+          timestamp: new Date().toISOString(),
+          validationReason: pendingNotification.reason,
+        }),
+      })
+
+      // Add confirmation message
+      const confirmationId = (Date.now() + 3).toString()
+      const confirmationMessage: ChatMessage = {
+        id: confirmationId,
+        role: 'assistant',
+        content: `Perfect! I've forwarded your message to Tristan at ${email}. He typically responds within 24-48 hours for business inquiries. You'll receive a copy of this conversation and any follow-up responses at that email address.`
+      }
+
+      setMessages(prev => [...prev, confirmationMessage])
+      setPendingNotification(null)
+    } catch (error) {
+      console.error('Email submission error:', error)
+      
+      // Add error message
+      const errorId = (Date.now() + 3).toString()
+      const errorMessage: ChatMessage = {
+        id: errorId,
+        role: 'assistant',
+        content: 'I apologize, but there was an issue forwarding your message. Please try again or contact Tristan directly via the contact section of this portfolio.'
+      }
+
+      setMessages(prev => [...prev, errorMessage])
+    } finally {
+      setIsEmailLoading(false)
+    }
+  }
+
+  const handleEmailSkip = () => {
+    // Add skip confirmation message
+    const skipId = (Date.now() + 3).toString()
+    const skipMessage: ChatMessage = {
+      id: skipId,
+      role: 'assistant',
+      content: 'No problem! Your message has been noted. If you change your mind and would like Tristan to follow up directly, feel free to ask again or reach out through the contact section.'
+    }
+
+    setMessages(prev => [...prev, skipMessage])
+    setPendingNotification(null)
   }
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
@@ -204,7 +277,7 @@ export function ChatWindow({ isOpen, onClose }: ChatWindowProps) {
         <div className='p-4 border-b'>
           <div className='flex items-center justify-between'>
             <div>
-              <h3 className='font-semibold text-foreground'>AI Assistant</h3>
+              <h3 className='font-semibold text-foreground'>Swishter</h3>
               <p className='text-xs text-muted-foreground'>
                 Ask me about Tristan&apos;s experience
               </p>
@@ -227,6 +300,10 @@ export function ChatWindow({ isOpen, onClose }: ChatWindowProps) {
               role={message.role}
               content={message.content}
               isStreaming={streamingMessageId === message.id}
+              type={message.type}
+              onEmailSubmit={message.type === 'email-request' ? handleEmailSubmit : undefined}
+              onEmailSkip={message.type === 'email-request' ? handleEmailSkip : undefined}
+              isEmailLoading={isEmailLoading}
             />
           ))}
           <div ref={messagesEndRef} />

@@ -30,7 +30,7 @@ test.describe('Final Diagnosis Summary', () => {
     console.log('✅ Chat bubble is visible')
 
     await chatBubble.click()
-    const chatWindow = page.locator('h3:has-text("AI Assistant")')
+    const chatWindow = page.locator('h3:has-text("Swishter")')
     await expect(chatWindow).toBeVisible()
     console.log('✅ Chat window opens successfully')
 
@@ -49,7 +49,7 @@ test.describe('Final Diagnosis Summary', () => {
     console.log(`📊 Total UI elements in chat area: ${messageCount}`)
 
     // Check specifically for AI response content
-    const aiResponseContent = page.locator('div:has-text("AI Assistant"):not(:has-text("Hi! I\'m here"))').locator('p, div').filter({ hasText: /[A-Za-z]{10,}/ })
+    const aiResponseContent = page.locator('div:has-text("Swishter"):not(:has-text("Hi! I\'m here"))').locator('p, div').filter({ hasText: /[A-Za-z]{10,}/ })
     const hasAiResponse = await aiResponseContent.count() > 0
     
     if (hasAiResponse) {
