@@ -1,6 +1,6 @@
 'use client'
 
-import { MessageCircle, X } from 'lucide-react'
+import { MessageCircle, X, Sparkles } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 
 interface ChatBubbleProps {
@@ -33,7 +33,7 @@ export function ChatBubble({
         {isOpen ? (
           <X className='h-6 w-6' />
         ) : (
-          <MessageCircle className='h-6 w-6' />
+          <Sparkles className='h-6 w-6' />
         )}
       </Button>
 

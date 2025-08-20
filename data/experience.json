@@ -88,6 +88,7 @@
     "minor": "Sports Management",
     "institution": "Trinity University",
     "graduationYear": "2022",
+    "gpa": "3.94",
     "relevantCoursework": [
       "Data Structures and Algorithms",
       "Database Systems",
@@ -154,17 +155,12 @@
     {
       "name": "Big Data SQL",
       "issuer": "Coursera",
-      "year": "2021"
-    },
-    {
-      "name": "R Programming",
-      "issuer": "Coursera",
-      "year": "2021"
+      "year": "2020"
     },
     {
       "name": "Julia Programming",
       "issuer": "Coursera",
-      "year": "2021"
+      "year": "2020"
     }
   ]
 }

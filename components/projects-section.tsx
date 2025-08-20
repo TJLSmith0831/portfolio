@@ -15,6 +15,7 @@ interface Project {
   features?: string[]
   status: string
   repository: string
+  image?: string,
   deployed?: boolean
   liveUrl?: string
   publication?: string
@@ -89,7 +90,7 @@ export function ProjectsSection() {
       </div>
 
       <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16'>
-        {allProjects.map((project, index) => (
+        {allProjects.map((project: Project, index) => (
           <div key={project.id} className='relative group'>
             <div
               className={`relative w-full h-80 cursor-pointer transition-transform duration-600 preserve-3d ${
@@ -101,7 +102,7 @@ export function ProjectsSection() {
               <Card className='absolute inset-0 backface-hidden overflow-hidden group-hover:-translate-y-2 transition-transform duration-300'>
                 <div className='relative h-48 overflow-hidden'>
                   <img
-                    src={getProjectImage(project, index)}
+                    src={project.image || getProjectImage(project, index)}
                     alt={project.name}
                     className='w-full h-full object-cover transition-transform duration-300 group-hover:scale-110'
                   />
@@ -145,7 +146,7 @@ export function ProjectsSection() {
               </Card>
 
               {/* Back of card */}
-              <Card className='absolute inset-0 backface-hidden rotate-y-180 p-6 flex flex-col'>
+              <Card className='absolute inset-0 backface-hidden rotate-y-180 p-4 flex flex-col'>
                 <div className='flex items-start justify-between mb-3'>
                   <h3 className='font-semibold text-lg leading-tight flex-1'>{project.name}</h3>
                   <Badge variant={getStatusBadgeVariant(project.status)} className='text-xs ml-2'>
@@ -153,16 +154,12 @@ export function ProjectsSection() {
                   </Badge>
                 </div>
                 
-                {'publication' in project && (project as any).publication && (
-                  <p className='text-xs text-primary mb-2 font-medium'>{(project as any).publication}</p>
-                )}
-                
-                <div className='flex-1 overflow-y-auto mb-4'>
-                  <p className='text-sm text-muted-foreground mb-4 leading-relaxed'>
+                <div className='flex-1 overflow-y-auto mb-3 min-h-0'>
+                  <p className='text-sm text-muted-foreground mb-3 leading-relaxed'>
                     {project.description}
                   </p>
                   {project.features && (
-                    <div className='space-y-2'>
+                    <div className='space-y-1.5'>
                       {project.features.map(feature => (
                         <div
                           key={feature}
@@ -175,7 +172,7 @@ export function ProjectsSection() {
                     </div>
                   )}
                 </div>
-                <div className='space-y-2'>
+                <div className='flex-shrink-0 space-y-2'>
                   <div className='flex gap-2'>
                     <Button size='sm' className='flex-1' asChild>
                       <a

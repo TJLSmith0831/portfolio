@@ -169,7 +169,7 @@ export function ProfessionalSection() {
               </h3>
               <p className='text-lg text-primary mb-1'>Minor: {experienceData.education.minor}</p>
               <p className='text-muted-foreground'>
-                {experienceData.education.institution} • Class of {experienceData.education.graduationYear}
+                {experienceData.education.institution} • Class of {experienceData.education.graduationYear} • {experienceData.education.gpa} GPA
               </p>
             </div>
 

@@ -36,6 +36,8 @@
       "description": "A learning repository focused on building AI agents, exploring modern AI/ML techniques and agent-based systems.",
       "technologies": ["Python", "AI/ML", "Agent-based Systems"],
       "status": "Active Learning",
+      "type": "Technical Article",
+      "image": "/ai_agent_image.webp",
       "repository": "https://github.com/TJLSmith0831/ai-agent-learning",
       "myContribution": "Personal learning project - exploring AI agent development, implementing various ML techniques and agent architectures"
     },
