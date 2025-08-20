@@ -1,7 +1,7 @@
 import { HeroSection } from '@/components/hero-section'
-import { WorkSection } from '@/components/work-section'
+import { ProfessionalSection } from '@/components/professional-section'
+import { ProjectsSection } from '@/components/projects-section'
 import { PersonalSection } from '@/components/personal-section'
-import { ContactSection } from '@/components/contact-section'
 import { Navigation } from '@/components/navigation'
 import { ThemeToggle } from '@/components/theme-toggle'
 import { AnimatedBackground } from '@/components/animated-background'
@@ -18,8 +18,12 @@ export default function Home() {
         <HeroSection />
       </section>
 
-      <section id='work' className='py-20'>
-        <WorkSection />
+      <section id='experience' className='py-20'>
+        <ProfessionalSection />
+      </section>
+
+      <section id='projects' className='py-20'>
+        <ProjectsSection />
       </section>
 
       <section id='personal' className='py-20'>

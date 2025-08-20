@@ -1,16 +1,17 @@
 {
   "currentPosition": {
-    "title": "Full-Stack Engineer & Data Scientist",
+    "title": "Data Scientist & Full-Stack Engineer",
     "company": "PILYTIX",
     "startDate": "2025",
     "location": "Kyle, TX",
-    "description": "Full-stack development with modern web technologies and data science",
+    "description": "Building predictive models with robust ETL processes and advanced analytics, delivering data-driven solutions across sectors through sophisticated AI and ML implementation",
     "responsibilities": [
       "Building predictive models with robust ETL processes and advanced analytics",
       "Developing full-stack solutions using React, Flask/Python, and modern web technologies",
-      "Implementing AI and ML solutions for sales pipeline forecasting",
-      "Utilizing TDD, CI/CD, and direct client collaboration for high data quality",
-      "Creating data-driven solutions across multiple sectors with rapid prototyping"
+      "Implementing AI and ML solutions for sales pipeline forecasting and revenue generation insights",
+      "Integrating data from diverse APIs to deliver forward-looking predictions and retrospective insights",
+      "Utilizing TDD, CI/CD, and direct client collaboration to ensure high data quality",
+      "Leveraging rapid prototyping for web application development and data platform improvements"
     ],
     "technologies": [
       "React",
@@ -143,27 +144,27 @@
     {
       "name": "Tableau Desktop Specialist",
       "issuer": "Tableau",
-      "year": "2023"
+      "year": "2020"
     },
     {
       "name": "Microsoft Excel Expert",
       "issuer": "Microsoft",
-      "year": "2023"
+      "year": "2020"
     },
     {
       "name": "Big Data SQL",
       "issuer": "Coursera",
-      "year": "2022"
+      "year": "2021"
     },
     {
       "name": "R Programming",
       "issuer": "Coursera",
-      "year": "2022"
+      "year": "2021"
     },
     {
       "name": "Julia Programming",
-      "issuer": "JuliaAcademy",
-      "year": "2022"
+      "issuer": "Coursera",
+      "year": "2021"
     }
   ]
 }

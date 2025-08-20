@@ -1,18 +1,67 @@
 'use client'
 
 import { Button } from '@/components/ui/button'
-import { ArrowDown } from 'lucide-react'
+import { ArrowDown, Github, Linkedin, Notebook } from 'lucide-react'
 
 export function HeroSection() {
   const scrollToWork = () => {
-    const workSection = document.getElementById('work')
-    if (workSection) {
-      workSection.scrollIntoView({ behavior: 'smooth' })
+    const experienceSection = document.getElementById('experience')
+    if (experienceSection) {
+      experienceSection.scrollIntoView({ behavior: 'smooth' })
     }
   }
 
   return (
-    <div className='min-h-screen flex items-center justify-center px-6'>
+    <div className='min-h-screen flex items-center justify-center px-6 relative'>
+      {/* Social Media Icons - Top Left */}
+      <div className='fixed top-8 left-8 z-30 flex gap-3'>
+        <Button
+          variant='ghost'
+          size='icon'
+          className='rounded-full bg-background/80 backdrop-blur-sm hover:bg-background border'
+          asChild
+        >
+          <a
+            href='https://github.com/TJLSmith0831'
+            target='_blank'
+            rel='noopener noreferrer'
+            aria-label='GitHub Profile'
+          >
+            <Github className='h-5 w-5' />
+          </a>
+        </Button>
+        <Button
+          variant='ghost'
+          size='icon'
+          className='rounded-full bg-background/80 backdrop-blur-sm hover:bg-background border'
+          asChild
+        >
+          <a
+            href='https://www.linkedin.com/in/tjlsmith0831/'
+            target='_blank'
+            rel='noopener noreferrer'
+            aria-label='LinkedIn Profile'
+          >
+            <Linkedin className='h-5 w-5' />
+          </a>
+        </Button>
+        <Button
+          variant='ghost'
+          size='icon'
+          className='rounded-full bg-background/80 backdrop-blur-sm hover:bg-background border'
+          asChild
+        >
+          <a
+            href='https://medium.com/@tjlsmith0831'
+            target='_blank'
+            rel='noopener noreferrer'
+            aria-label='Medium Profile'
+          >
+            <Notebook className='h-5 w-5' />
+          </a>
+        </Button>
+      </div>
+
       <div className='text-center max-w-4xl mx-auto'>
         <div className='animate-fade-in-up'>
           <h1 className='text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-foreground to-muted-foreground bg-clip-text text-transparent'>

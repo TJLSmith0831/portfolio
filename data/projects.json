@@ -1,65 +1,77 @@
 {
   "featured": [
     {
-      "id": "portfolio-website",
-      "name": "Personal Portfolio Website",
-      "description": "A modern, responsive portfolio website built with Next.js 15, featuring dark/light mode, smooth animations, and a clean design system. Showcases professional work and personal projects with optimized performance and accessibility.",
+      "id": "portfolio-with-ai",
+      "name": "Portfolio Website with Swishter AI",
+      "description": "A modern, responsive portfolio website built with Next.js 15 featuring an intelligent AI assistant named Swishter. Combines clean design with context-aware AI chat for professional inquiries and business communication.",
       "technologies": [
         "Next.js 15",
         "React",
         "TypeScript",
         "Tailwind CSS",
-        "next-themes",
-        "Radix UI",
-        "Lucide React",
-        "Vercel"
+        "OpenAI GPT-3.5-turbo",
+        "Vercel AI SDK",
+        "Nodemailer",
+        "Vercel KV",
+        "shadcn/ui"
       ],
       "features": [
         "App Router architecture with Next.js 15",
         "Dark/light mode with system preference detection",
+        "Swishter AI assistant with streaming responses",
+        "Context-aware answers from personal data files",
+        "Message validation and email forwarding system",
+        "Rate limiting with Vercel KV for abuse prevention",
         "Responsive design with mobile-first approach",
-        "Smooth scrolling navigation",
-        "Animated background effects",
-        "Component-based architecture with shadcn/ui",
-        "TypeScript for type safety",
         "Performance optimization with Turbopack"
       ],
       "status": "Active",
       "repository": "Private",
       "deployed": true,
-      "myContribution": "Solo developer - designed and implemented entire frontend architecture, UI/UX design, and deployment pipeline"
+      "myContribution": "Solo developer - designed and implemented entire full-stack architecture, AI integration, UI/UX design, and deployment pipeline"
     },
     {
-      "id": "ai-assistant",
-      "name": "AI-Powered Portfolio Assistant",
-      "description": "An intelligent chat interface integrated into portfolio website that provides context-aware responses about professional background, validates important inquiries, and forwards business messages via email gateway.",
+      "id": "ai-agent-learning",
+      "name": "AI Agent Learning",
+      "description": "A learning repository focused on building AI agents, exploring modern AI/ML techniques and agent-based systems.",
+      "technologies": ["Python", "AI/ML", "Agent-based Systems"],
+      "status": "Active Learning",
+      "repository": "https://github.com/TJLSmith0831/ai-agent-learning",
+      "myContribution": "Personal learning project - exploring AI agent development, implementing various ML techniques and agent architectures"
+    },
+    {
+      "id": "nba-predictions-article",
+      "name": "NBA Opening Week Predictions: Applying Julia's Machine Learning to Sports",
+      "description": "Technical article exploring NBA game predictions using Julia programming language and machine learning. Applied logistic regression to predict outcomes for 25 games in the 2020-2021 NBA opening week.",
       "technologies": [
-        "OpenAI GPT-3.5-turbo",
-        "Vercel AI SDK",
-        "Nodemailer",
-        "Gmail SMTP",
-        "Vercel KV",
-        "Next.js API Routes",
-        "TypeScript",
-        "React"
+        "Julia",
+        "Machine Learning",
+        "Scikit-Learn",
+        "NBA Stats API",
+        "Logistic Regression",
+        "Statistical Modeling"
       ],
       "features": [
-        "Streaming AI responses with real-time typing effects",
-        "Context-aware answers from personal data files",
-        "Message validation and email forwarding system",
-        "Rate limiting with Vercel KV for abuse prevention",
-        "Professional styling matching portfolio design",
-        "Mobile-responsive chat interface",
-        "Session-based conversation history"
+        "Sports analytics methodology",
+        "Julia programming showcase",
+        "Statistical modeling approach",
+        "Performance prediction algorithms",
+        "Alternative to Python ML",
+        "Data visualization insights"
       ],
-      "status": "In Development",
-      "repository": "Private",
-      "deployed": false,
-      "myContribution": "Solo developer - architected AI integration, designed chat interface, implemented email gateway with validation logic"
-    },
+      "status": "Published",
+      "repository": "https://github.com/TJLSmith0831/NBA2020Prediction",
+      "deployed": true,
+      "liveUrl": "https://medium.com/swlh/nba-opening-week-2020-predictions-applying-julias-machine-learning-to-sports-c93146fde150",
+      "publication": "The Startup on Medium",
+      "type": "Technical Article",
+      "myContribution": "Solo author - designed prediction methodology, implemented Julia ML models, analyzed NBA statistical data, and authored comprehensive technical article"
+    }
+  ],
+  "sideProjects": [
     {
       "id": "tenet-app",
-      "name": "Tenet App",
+      "name": "Tenet",
       "description": "A mobile-first social opinion platform for structured, intentional discourse. Built to facilitate meaningful conversations with organized debate structure.",
       "technologies": [
         "React Native",
@@ -76,7 +88,7 @@
         "Redux state management",
         "Cross-platform mobile support"
       ],
-      "status": "Completed",
+      "status": "In Progress",
       "repository": "https://github.com/TJLSmith0831/tenet-app",
       "deployed": false,
       "myContribution": "Full-stack development - architected mobile-first social platform, implemented Redux state management, integrated Firebase backend"
@@ -100,7 +112,7 @@
         "Modern responsive UI",
         "Machine learning integration"
       ],
-      "status": "Active Development",
+      "status": "In Progress",
       "repository": "https://github.com/TJLSmith0831/praetor-ai",
       "deployed": false,
       "myContribution": "Lead developer - designed AI-first architecture, implemented ML features, built modern TypeScript/React frontend"
@@ -118,49 +130,13 @@
         "Scalable architecture",
         "Developer-friendly API"
       ],
-      "status": "Completed",
+      "status": "Archived",
       "repository": "https://github.com/TJLSmith0831/ParaLlama",
       "deployed": true,
       "myContribution": "Solo developer - created TypeScript parallel processing framework, designed scalable distributed computing architecture"
     }
   ],
-  "sideProjects": [
-    {
-      "id": "nba-prediction-models",
-      "name": "NBA Prediction Models",
-      "description": "A collection of machine learning projects for NBA analytics including salary valuation, game predictions, and championship forecasting using statistical modeling.",
-      "technologies": [
-        "Python",
-        "Jupyter Notebook",
-        "Machine Learning",
-        "pandas",
-        "scikit-learn",
-        "HTML"
-      ],
-      "status": "Completed",
-      "repository": "https://github.com/TJLSmith0831/NBA2020Prediction",
-      "myContribution": "Solo developer - designed ML models, performed statistical analysis, created prediction algorithms for NBA outcomes"
-    },
-    {
-      "id": "ai-agent-learning",
-      "name": "AI Agent Learning",
-      "description": "A learning repository focused on building AI agents, exploring modern AI/ML techniques and agent-based systems.",
-      "technologies": ["Python", "AI/ML", "Agent-based Systems"],
-      "status": "Active Learning",
-      "repository": "https://github.com/TJLSmith0831/ai-agent-learning",
-      "myContribution": "Personal learning project - exploring AI agent development, implementing various ML techniques and agent architectures"
-    }
-  ],
   "openSource": [
-    {
-      "id": "typescript-contributions",
-      "name": "TypeScript Contributions",
-      "description": "Contributing to Microsoft's TypeScript compiler and ecosystem, helping improve the JavaScript superset that compiles to clean JavaScript output.",
-      "technologies": ["TypeScript", "JavaScript", "Compiler Design"],
-      "status": "Contributor",
-      "repository": "https://github.com/microsoft/TypeScript",
-      "myContribution": "Open source contributor - forked TypeScript repository, contributing to compiler improvements and ecosystem development"
-    },
     {
       "id": "supabase-contributions",
       "name": "Supabase Platform",

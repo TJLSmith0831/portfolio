@@ -8,7 +8,7 @@ export function Navigation() {
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ['hero', 'work', 'personal']
+      const sections = ['hero', 'experience', 'projects', 'personal']
       const scrollPosition = window.scrollY + 100
 
       for (const section of sections) {
@@ -41,7 +41,8 @@ export function Navigation() {
     <nav className='fixed top-6 left-1/2 transform -translate-x-1/2 z-40 bg-background/80 backdrop-blur-sm border border-border rounded-full px-6 py-3'>
       <div className='flex space-x-1'>
         {[
-          { id: 'work', label: 'Work' },
+          { id: 'experience', label: 'Experience' },
+          { id: 'projects', label: 'Projects' },
           { id: 'personal', label: 'Personal' },
         ].map(({ id, label }) => (
           <Button
