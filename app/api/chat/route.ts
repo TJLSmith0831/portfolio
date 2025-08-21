@@ -74,6 +74,7 @@ CONTEXT DATA:
 Personal: ${JSON.stringify(personal, null, 2)}
 Experience: ${JSON.stringify(experience, null, 2)}
 Projects: ${JSON.stringify(projects, null, 2)}
+Email: ${process.env.NOTIFICATION_EMAIL}
 
 Remember: Your goal is to be genuinely helpful and provide valuable insights about Tristan's background and expertise while maintaining accuracy and professionalism.`
 }
