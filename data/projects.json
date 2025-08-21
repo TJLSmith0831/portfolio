@@ -165,7 +165,7 @@
         "Continuous integration support"
       ],
       "status": "Active",
-      "repository": "https://github.com/a11y-unit",
+      "repository": "Private",
       "deployed": true,
       "liveUrl": "https://a11y-unit.dev",
       "myContribution": "Lead developer - architected AI accessibility scanner, implemented WCAG compliance algorithms, created NPM package and CLI tool"

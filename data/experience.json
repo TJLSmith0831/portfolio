@@ -22,10 +22,9 @@
       "Tailwind CSS",
       "Docker",
       "PostgreSQL",
-      "MongoDB",
+      "R",
       "AWS",
-      "Julia",
-      "R"
+      "GCP"
     ]
   },
   "previousExperience": [
@@ -138,29 +137,102 @@
   },
   "certifications": [
     {
-      "name": "Docker Foundations",
-      "issuer": "Docker",
-      "year": "2024"
+      "name": "Learn RAG",
+      "issuer": "Scrimba",
+      "year": "2025",
+      "month": "Jul",
+      "logo": "scrimba",
+      "skills": ["Retrieval-Augmented Generation (RAG)"],
+      "description": "Completed formal training in Retrieval-Augmented Generation for AI applications"
+    },
+    {
+      "name": "MongoDB Data Modeling Path",
+      "issuer": "MongoDB",
+      "year": "2025",
+      "month": "Jun",
+      "logo": "mongodb",
+      "credentialId": "MDBp96vdgvt5e",
+      "skills": ["MongoDB", "Data Modeling"],
+      "description": "Advanced data modeling techniques and best practices for MongoDB"
+    },
+    {
+      "name": "Fundamentals of Data Transformation",
+      "issuer": "MongoDB",
+      "year": "2025",
+      "month": "May",
+      "logo": "mongodb",
+      "credentialId": "MDBnnsqlb3xl6",
+      "skills": ["MongoDB", "Data Transformation"],
+      "description": "Core principles of data transformation and aggregation in MongoDB"
+    },
+    {
+      "name": "MongoDB Python Developer Path",
+      "issuer": "MongoDB",
+      "year": "2025",
+      "month": "May",
+      "logo": "mongodb",
+      "credentialId": "MDB01w10ps3jh",
+      "skills": ["MongoDB", "Python"],
+      "description": "Complete Python development path for MongoDB applications"
+    },
+    {
+      "name": "AWS Cloud Practitioner Essentials",
+      "issuer": "Amazon Web Services (AWS)",
+      "year": "2025",
+      "month": "Mar",
+      "logo": "aws",
+      "skills": ["Distributed Systems", "Cloud Computing"],
+      "description": "Foundational AWS cloud computing concepts and services"
+    },
+    {
+      "name": "Docker Foundations Professional Certificate",
+      "issuer": "Docker, Inc",
+      "year": "2025",
+      "month": "Mar",
+      "logo": "docker",
+      "skills": ["Containerization", "Docker"],
+      "description": "Professional-level Docker containerization and deployment skills"
+    },
+    {
+      "name": "Learn TypeScript",
+      "issuer": "Scrimba",
+      "year": "2025",
+      "month": "Mar",
+      "logo": "scrimba",
+      "skills": ["TypeScript"],
+      "description": "Comprehensive TypeScript programming language certification"
     },
     {
       "name": "Tableau Desktop Specialist",
       "issuer": "Tableau",
-      "year": "2020"
+      "year": "2020",
+      "logo": "tableau",
+      "skills": ["Data Visualization", "Business Intelligence"],
+      "description": "Data visualization and dashboard creation with Tableau"
     },
     {
       "name": "Microsoft Excel Expert",
       "issuer": "Microsoft",
-      "year": "2020"
+      "year": "2020",
+      "logo": "microsoft",
+      "skills": ["Data Analysis", "Spreadsheet Management"],
+      "description": "Advanced Excel functions, formulas, and data analysis techniques"
     },
     {
       "name": "Big Data SQL",
       "issuer": "Coursera",
-      "year": "2020"
+      "year": "2020",
+      "logo": "coursera",
+      "skills": ["SQL", "Big Data"],
+      "description": "SQL querying and analysis for large-scale data systems"
     },
     {
       "name": "Julia Programming",
       "issuer": "Coursera",
-      "year": "2020"
+      "year": "2020",
+      "logo": "coursera",
+      "skills": ["Julia", "Scientific Computing"],
+      "description": "High-performance scientific computing with Julia language"
     }
   ]
 }

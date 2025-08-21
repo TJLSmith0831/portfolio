@@ -3,8 +3,10 @@
 import { useState } from 'react'
 import { Card } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
-import { Calendar, MapPin, Building, Award, Users, Target } from 'lucide-react'
+import { Button } from '@/components/ui/button'
+import { Calendar, MapPin, Building, Award, Users, Target, ChevronLeft, ChevronRight } from 'lucide-react'
 import experienceData from '../data/experience.json'
+import Image from 'next/image'
 
 interface Experience {
   title: string
@@ -18,16 +20,79 @@ interface Experience {
   technologies?: string[]
 }
 
+interface Certification {
+  name: string
+  issuer: string
+  year: string
+  month?: string
+  logo: string
+  credentialId?: string
+  skills?: string[]
+  description?: string
+}
+
 export function ProfessionalSection() {
   const [activeTab, setActiveTab] = useState<
     'experience' | 'education' | 'skills' | 'certifications'
   >('experience')
+  const [certificationPage, setCertificationPage] = useState(1)
+  const certificationsPerPage = 6
 
   const formatDateRange = (startDate: string, endDate?: string) => {
     if (endDate) {
       return `${startDate} - ${endDate}`
     }
     return `${startDate} - Present`
+  }
+
+  const getCertificationLogo = (logo: string) => {
+    const logoMap: Record<string, string> = {
+      'mongodb': '/mongodb-icon-1.svg',
+      'aws': '/aws-logo.png',
+      'docker': '/docker-logo.png',
+      'scrimba': '/scrimba-icon.png',
+      'tableau': '/tableau-logo.svg',
+      'microsoft': '/microsoft-logo.svg',
+      'coursera': '/coursera-logo.png'
+    }
+
+    const logoSrc = logoMap[logo]
+    
+    if (logoSrc) {
+      return (
+        <Image
+          src={logoSrc}
+          alt={`${logo} logo`}
+          width={32}
+          height={32}
+          className='h-8 w-8 object-contain'
+        />
+      )
+    }
+    
+    return <Award className='h-8 w-8 text-primary' />
+  }
+
+  const certifications = experienceData.certifications as Certification[]
+  const totalCertificationPages = Math.ceil(certifications.length / certificationsPerPage)
+  const certificationStartIndex = (certificationPage - 1) * certificationsPerPage
+  const certificationEndIndex = certificationStartIndex + certificationsPerPage
+  const currentCertifications = certifications.slice(certificationStartIndex, certificationEndIndex)
+
+  const goToCertificationPage = (page: number) => {
+    setCertificationPage(page)
+  }
+
+  const goToPrevCertificationPage = () => {
+    if (certificationPage > 1) {
+      goToCertificationPage(certificationPage - 1)
+    }
+  }
+
+  const goToNextCertificationPage = () => {
+    if (certificationPage < totalCertificationPages) {
+      goToCertificationPage(certificationPage + 1)
+    }
   }
 
   const ExperienceCard = ({ experience }: { experience: Experience }) => (
@@ -227,20 +292,104 @@ export function ProfessionalSection() {
         )}
 
         {activeTab === 'certifications' && (
-          <div className='grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto'>
-            {experienceData.certifications.map((cert, index) => (
-              <Card
-                key={index}
-                className='p-6 text-center hover:shadow-lg transition-shadow'
-              >
-                <Award className='h-8 w-8 text-primary mx-auto mb-3' />
-                <h3 className='font-semibold text-foreground mb-2'>
-                  {cert.name}
-                </h3>
-                <p className='text-sm text-primary mb-1'>{cert.issuer}</p>
-                <p className='text-xs text-muted-foreground'>{cert.year}</p>
-              </Card>
-            ))}
+          <div className='space-y-8'>
+            {/* Pagination Controls */}
+            {totalCertificationPages > 1 && (
+              <div className='flex items-center justify-center gap-4 mb-8'>
+                <Button
+                  variant='outline'
+                  onClick={goToPrevCertificationPage}
+                  disabled={certificationPage === 1}
+                  className='flex items-center gap-2'
+                >
+                  <ChevronLeft className='h-4 w-4' />
+                  Previous
+                </Button>
+
+                <div className='flex items-center gap-2 px-4 py-2 bg-muted/30 rounded-md'>
+                  <span className='text-sm font-medium'>
+                    Page {certificationPage} of {totalCertificationPages}
+                  </span>
+                </div>
+
+                <Button
+                  variant='outline'
+                  onClick={goToNextCertificationPage}
+                  disabled={certificationPage === totalCertificationPages}
+                  className='flex items-center gap-2'
+                >
+                  Next
+                  <ChevronRight className='h-4 w-4' />
+                </Button>
+              </div>
+            )}
+
+            {/* Certifications Grid */}
+            <div className='grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto'>
+              {currentCertifications.map((cert, index) => (
+                <Card
+                  key={index}
+                  className='p-6 hover:shadow-lg transition-all duration-300 hover:scale-105'
+                >
+                  <div className='flex flex-col items-center text-center space-y-4'>
+                    {/* Logo */}
+                    <div className='flex items-center justify-center'>
+                      {getCertificationLogo(cert.logo)}
+                    </div>
+
+                    {/* Certification Info */}
+                    <div className='space-y-2'>
+                      <h3 className='font-semibold text-foreground text-sm leading-tight'>
+                        {cert.name}
+                      </h3>
+                      <p className='text-sm text-primary font-medium'>{cert.issuer}</p>
+                      <p className='text-xs text-muted-foreground'>
+                        {cert.month ? `${cert.month} ${cert.year}` : cert.year}
+                      </p>
+                      {cert.credentialId && (
+                        <p className='text-xs text-muted-foreground font-mono'>
+                          ID: {cert.credentialId}
+                        </p>
+                      )}
+                    </div>
+
+                    {/* Skills */}
+                    {cert.skills && cert.skills.length > 0 && (
+                      <div className='flex flex-wrap gap-1 justify-center'>
+                        {cert.skills.slice(0, 2).map((skill) => (
+                          <Badge key={skill} variant='secondary' className='text-xs px-2 py-1'>
+                            {skill}
+                          </Badge>
+                        ))}
+                        {cert.skills.length > 2 && (
+                          <Badge variant='outline' className='text-xs px-2 py-1'>
+                            +{cert.skills.length - 2}
+                          </Badge>
+                        )}
+                      </div>
+                    )}
+
+                    {/* Description */}
+                    {cert.description && (
+                      <p className='text-xs text-muted-foreground leading-relaxed line-clamp-2'>
+                        {cert.description}
+                      </p>
+                    )}
+                  </div>
+                </Card>
+              ))}
+            </div>
+
+            {/* Bottom pagination info */}
+            {totalCertificationPages > 1 && (
+              <div className='text-center'>
+                <p className='text-sm text-muted-foreground'>
+                  Page {certificationPage} of {totalCertificationPages} • Showing{' '}
+                  {certificationStartIndex + 1}-{Math.min(certificationEndIndex, certifications.length)} of{' '}
+                  {certifications.length} certifications
+                </p>
+              </div>
+            )}
           </div>
         )}
       </div>

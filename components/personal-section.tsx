@@ -35,7 +35,7 @@ const photos = [
     src: '/longhorns.jpeg',
     alt: 'Sports fan life',
     description:
-      'My heart gets torn in two every fall - Texas Longhorns for college, Atlanta Falcons for NFL. Yes, I chose pain with the Falcons, but loyalty runs deep. Hook \'em Horns and Rise Up, always!',
+      'Football season is the best season for me - Texas Longhorns for college, Atlanta Falcons for NFL. Yes, I chose pain with the Falcons, but loyalty runs deep. Hook \'em Horns and Rise Up, always!',
     size: 'square',
   },
   {

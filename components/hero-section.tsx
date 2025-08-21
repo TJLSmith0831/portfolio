@@ -2,9 +2,12 @@
 
 import { Button } from '@/components/ui/button'
 import { ArrowDown, Github, Linkedin } from 'lucide-react'
-import { MediumIcon } from '@/components/icons/medium-icon'
+import Image from 'next/image'
+import { useTheme } from 'next-themes'
 
 export function HeroSection() {
+  const { theme } = useTheme()
+  
   const scrollToWork = () => {
     const experienceSection = document.getElementById('experience')
     if (experienceSection) {
@@ -58,7 +61,12 @@ export function HeroSection() {
             rel='noopener noreferrer'
             aria-label='Medium Profile'
           >
-            <MediumIcon className='h-5 w-5' />
+            <Image
+              src={theme === 'dark' ? '/medium-logo-white.png' : '/medium-logo-black.png'}
+              alt='Medium Icon'
+              width={24}
+              height={24}
+            />
           </a>
         </Button>
       </div>
