@@ -217,10 +217,6 @@ This project is private and proprietary.
 
 Built by **Tristan Smith** - Full-Stack Engineer and Data Scientist
 
-- Website: [Your Portfolio URL]
-- LinkedIn: [Your LinkedIn]
-- Email: [Your Email]
-
 ---
 
 *This portfolio demonstrates modern web development practices, AI integration, and professional presentation in a single cohesive application.*
