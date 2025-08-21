@@ -145,29 +145,35 @@ CONVERSATION:
 ${conversationContext}
 
 CRITERIA FOR EMAIL NOTIFICATION:
-✅ Send email for:
-- Genuine business inquiries or collaboration opportunities
-- Job/interview opportunities
-- Technical questions requiring detailed discussion
-- Project partnership proposals
-- Speaking engagement invitations
-- Consulting inquiries
+✅ Send email for EXPLICIT business intent:
+- Direct hiring requests: "I want to hire you", "I'd like to hire Tristan"
+- Interview opportunities: "I want to interview you for", "interested in interviewing you"
+- Specific project proposals: "I have a project for you", "We need someone for"
+- Meeting/call requests: "Can we schedule a call", "Let's set up a meeting"
+- Consulting inquiries: "We need consulting help", "Can you consult on"
+- Speaking invitations: "Would you speak at", "We'd like you to present"
+- Collaboration proposals: "Want to collaborate on", "Partnership opportunity"
 
-❌ DO NOT send email for:
-- Casual greetings ("Hi", "Hello", "How are you?")
-- Test messages or random questions
-- Questions already fully answered in the conversation
-- Spam or irrelevant content
-- Simple informational questions about publicly available info
-- Generic compliments without specific business intent
+❌ DO NOT send email for informational questions (even if business-adjacent):
+- General background questions: "Tell me about Tristan", "What's your experience?"
+- Technology questions: "What technologies do you use?", "How do you approach"
+- Portfolio inquiries: "What projects have you worked on?", "Can you explain"
+- Casual greetings: "Hi", "Hello", "How are you?"
+- Generic compliments: "Nice portfolio", "Great work"
+- Educational questions: "How did you learn", "What's the best way to"
+- Already answered questions where AI provided complete information
+
+KEY RULE: Look for explicit ACTION requests (hire, interview, schedule, collaborate) vs INFORMATION requests (tell me, what is, how do you).
 
 Respond with only "YES" or "NO" followed by a brief reason (max 20 words).
 
 Examples:
-- "Hi there!" → NO - casual greeting
-- "I'd like to hire you for a project" → YES - business inquiry
-- "What technologies do you use?" → NO - general question already answered
-- "Can we schedule a call to discuss a collaboration?" → YES - business meeting request`
+- "Tell me about Tristan" → NO - informational question
+- "I want to hire Tristan for a React project" → YES - direct hiring request
+- "What technologies does he use?" → NO - general information request
+- "Can we schedule a call to discuss a collaboration?" → YES - explicit meeting request
+- "How did you learn data science?" → NO - educational question
+- "I'm interested in interviewing you for a position at Google" → YES - interview opportunity`
 
     const result = await generateText({
       model: openai('gpt-3.5-turbo'),

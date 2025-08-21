@@ -1,6 +1,6 @@
 'use client'
 
-import { MessageCircle, X, Sparkles } from 'lucide-react'
+import { X, Sparkles } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 
 interface ChatBubbleProps {

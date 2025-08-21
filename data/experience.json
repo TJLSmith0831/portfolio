@@ -1,17 +1,16 @@
 {
   "currentPosition": {
-    "title": "Data Scientist & Full-Stack Engineer",
+    "title": "Full-Stack Engineer & Data Scientist",
     "company": "PILYTIX",
-    "startDate": "2025",
-    "location": "Kyle, TX",
+    "startDate": "Jan 2025",
+    "location": "Austin, Texas Metropolitan Area",
     "description": "Building predictive models with robust ETL processes and advanced analytics, delivering data-driven solutions across sectors through sophisticated AI and ML implementation",
     "responsibilities": [
-      "Building predictive models with robust ETL processes and advanced analytics",
-      "Developing full-stack solutions using React, Flask/Python, and modern web technologies",
-      "Implementing AI and ML solutions for sales pipeline forecasting and revenue generation insights",
-      "Integrating data from diverse APIs to deliver forward-looking predictions and retrospective insights",
-      "Utilizing TDD, CI/CD, and direct client collaboration to ensure high data quality",
-      "Leveraging rapid prototyping for web application development and data platform improvements"
+      "Maintained 10+ client-specific data pipelines using Airflow, Python, and SQL, ensuring accurate delivery of millions of records per week across diverse SaaS environments",
+      "Investigated and resolved data integrity issues across 100K+ client records, integrating clean datasets into AI and CDP systems to support model accuracy and downstream reporting",
+      "Deployed 20+ machine learning models using a Python-based JSON workflow engine, supporting scalable inference and rapid experimentation",
+      "Enhanced the ReactJS frontend by fixing 30+ UI bugs and delivering 10+ new features, improving usability and reducing support tickets by an estimated 25%",
+      "Expanded backend functionality by adding 15+ Flask API endpoints and optimizing database schemas for 3+ key modules, cutting response times by up to 200ms and enabling new product features"
     ],
     "technologies": [
       "React",
@@ -31,55 +30,56 @@
   },
   "previousExperience": [
     {
-      "title": "Frontend Engineer & Data Scientist",
+      "title": "Data Scientist & Front-End Engineer",
       "company": "PILYTIX",
-      "startDate": "2024",
-      "endDate": "2025",
+      "startDate": "Jan 2024",
+      "endDate": "Jan 2025",
       "description": "Specialized in frontend development and user interface design and data science",
       "keyAchievements": [
-        "Built responsive web applications with React and modern JavaScript",
-        "Implemented design systems and component libraries",
-        "Improved application performance by 40% through optimization",
-        "Collaborated with designers to create pixel-perfect implementations"
+        "Developed client-specific predictive models using R and PostgreSQL, enabling personalized insights and supporting key GTM workflows across enterprise accounts",
+        "Improved and designed new features for internal CDP and AI platforms, contributing to faster model iteration cycles and supporting 5+ live client deployments",
+        "Implemented test-driven development (TDD) practices to validate critical backend processes for the web application, increasing test coverage and reducing post-deploy bugs by 30%"
       ]
     },
     {
       "title": "Data Scientist",
       "company": "PILYTIX",
-      "startDate": "2021",
-      "endDate": "2024",
+      "startDate": "Dec 2021",
+      "endDate": "Jan 2024",
       "description": "Specialized in data science and data analysis",
       "keyAchievements": [
-        "Developed data pipelines and ETL processes",
-        "Implemented machine learning models for predictive analytics",
-        "Collaborated with cross-functional teams on data-driven product development",
-        "Optimized data processing workflows for better performance and scalability"
+        "Developed and maintained 3 in-house R packages to standardize modeling workflows and accelerate internal analytics development",
+        "Led the development of a Shiny application to streamline predictive modeling and provide transparent visibility into model performance and historical changes",
+        "Built and deployed 4 client-facing predictive models using R, PostgreSQL, and Java, for the Pipeline Accelerator product",
+        "Contributed to the backend architecture of the CDP platform, supporting integration of modeling outputs and client data pipelines",
+        "Applied test-driven development (TDD) to major R package upgrades, reducing release-related bugs and increasing deployment stability",
+        "Enhanced feature evaluation techniques using ggplot and advanced statistical analysis in R, resulting in more accurate model selection and improved predictive performance"
       ]
     },
     {
       "title": "Data Analytics Intern",
       "company": "Frost Bank",
-      "startDate": "2021",
-      "endDate": "2021",
+      "startDate": "May 2021",
+      "endDate": "Dec 2021",
       "description": "Specialized in data analysis for the mobile app team",
       "keyAchievements": [
-        "Developed Tableau dashboards for mobile app team",
-        "Created data visualizations for mobile app team",
-        "Collaborated with cross-functional teams on data-driven product development",
-        "Optimized data processing workflows for better performance and scalability"
+        "Queried and analyzed large datasets using SQL to generate insights for product and marketing stakeholders",
+        "Created live, detailed Tableau dashboards for Frost product owners, enabling real-time monitoring of feature adoption and usage across thousands of users",
+        "Developed custom Splunk dashboards to surface consumer trends and behavioral patterns on the Frost Bank mobile app, informing roadmap decisions and UX improvements"
       ]
     },
     {
       "title": "Data Analytics Intern",
       "company": "KSAT 12",
-      "startDate": "2021",
-      "endDate": "2021",
+      "startDate": "Jan 2021",
+      "endDate": "May 2021",
       "description": "Specialized in data analysis for the News team",
       "keyAchievements": [
-        "Developed Tableau dashboards for news team",
-        "Created data visualizations for news team",
-        "Build Tableau dashboards for 3 articles",
-        "Perform live analytics and predictions on the San Antonio 2021 Mayoral Election"
+        "Created Tableau visualizations for digital publications",
+        "Used Python to develop regressions and neural networks to optimize company performance",
+        "Provided feedback on news reports and general system operations",
+        "Scraped and formatted political contribution data from the Texas Ethics Commission for digital publications",
+        "Utilized Dash, Flask, HTML, and Python to develop an adaptable dashboard application"
       ]
     }
   ],

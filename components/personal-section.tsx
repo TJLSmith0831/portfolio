@@ -11,7 +11,7 @@ const photos = [
     src: '/wedding.jpeg',
     alt: 'Wedding celebration 2023',
     description:
-      'Married in 2023 to my best friend and biggest supporter, Amelia. The perfect partner for both adventures and quiet coding nights.',
+      'Best day ever! Marrying Amelia in 2023 was just the beginning of our adventure together. She somehow manages to put up with my coding marathons and still brings me coffee at 2 AM.',
     size: 'large',
   },
   {
@@ -19,7 +19,7 @@ const photos = [
     src: '/swish_pic.jpeg',
     alt: 'Bernedoodle dad moments',
     description:
-      'This is my Bernedoodle, Swish, the best coding companion and walking buddy. Nothing beats those puppy eyes during debugging sessions!',
+      'Meet Swish, my Bernedoodle and self-appointed Chief Debugging Officer. He has zero coding skills but somehow always knows when I need a walk break. Those puppy eyes are dangerously effective at ending late-night coding sessions.',
     size: 'large',
   },
   {
@@ -27,7 +27,7 @@ const photos = [
     src: '/austin-skyline.webp',
     alt: 'Austin Texas lifestyle',
     description:
-      'Raised in Austin, TX - exploring the city that shaped me. From food trucks to tech meetups, this city has it all.',
+      'Born and raised in Austin, where breakfast tacos are a food group and "Keep Austin Weird" isn\'t just a slogan. This city taught me that the best solutions often come from the most unexpected places.',
     size: 'square',
   },
   {
@@ -35,7 +35,7 @@ const photos = [
     src: '/longhorns.jpeg',
     alt: 'Sports fan life',
     description:
-      'Game day ready! Cheering for the Texas Longhorns and Atlanta Falcons. Hook em Horns and Rise Up!',
+      'My heart gets torn in two every fall - Texas Longhorns for college, Atlanta Falcons for NFL. Yes, I chose pain with the Falcons, but loyalty runs deep. Hook \'em Horns and Rise Up, always!',
     size: 'square',
   },
   {
@@ -43,7 +43,7 @@ const photos = [
     src: '/graduation.jpeg',
     alt: 'Trinity University graduation',
     description:
-      'Trinity University Class of 2022 - Bachelor of Science in Business Analytics & Technology with a Sports Management minor.',
+      'Trinity University, Class of 2022. Four years of discovering that data tells stories, technology solves problems, and sometimes the best insights come from combining business and sports analytics in unexpected ways.',
     size: 'square',
   },
 ]
@@ -97,8 +97,7 @@ export function PersonalSection() {
       <div className='text-center mb-16'>
         <h2 className='text-4xl md:text-5xl font-bold mb-6'>Beyond the Code</h2>
         <p className='text-xl text-muted-foreground max-w-2xl mx-auto'>
-          When I&apos;m not coding, you&apos;ll find me spending time with my wife and dog, or cheering for the
-          Longhorns and Falcons.
+          Life&apos;s best moments happen away from the screen. Here&apos;s a glimpse into the people, places, and passions that keep me grounded and inspired.
         </p>
       </div>
 
