@@ -63,9 +63,9 @@ export function HeroSection() {
           >
             <Image
               src={
-                theme === 'dark'
-                  ? '/medium-logo-white.png'
-                  : '/medium-logo-black.png'
+                theme === 'light'
+                  ? '/medium-logo-black.png'
+                  : '/medium-logo-white.png'
               }
               alt='Medium Icon'
               width={24}
