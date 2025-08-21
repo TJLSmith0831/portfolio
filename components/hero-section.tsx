@@ -7,7 +7,7 @@ import { useTheme } from 'next-themes'
 
 export function HeroSection() {
   const { theme } = useTheme()
-  
+
   const scrollToWork = () => {
     const experienceSection = document.getElementById('experience')
     if (experienceSection) {
@@ -62,7 +62,11 @@ export function HeroSection() {
             aria-label='Medium Profile'
           >
             <Image
-              src={theme === 'dark' ? '/medium-logo-white.png' : '/medium-logo-black.png'}
+              src={
+                theme === 'dark'
+                  ? '/medium-logo-white.png'
+                  : '/medium-logo-black.png'
+              }
               alt='Medium Icon'
               width={24}
               height={24}

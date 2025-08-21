@@ -35,7 +35,7 @@ const photos = [
     src: '/longhorns.jpeg',
     alt: 'Sports fan life',
     description:
-      'Football season is the best season for me - Texas Longhorns for college, Atlanta Falcons for NFL. Yes, I chose pain with the Falcons, but loyalty runs deep. Hook \'em Horns and Rise Up, always!',
+      "Football season is the best season for me - Texas Longhorns for college, Atlanta Falcons for NFL. Yes, I chose pain with the Falcons, but loyalty runs deep. Hook 'em Horns and Rise Up, always!",
     size: 'square',
   },
   {
@@ -97,7 +97,9 @@ export function PersonalSection() {
       <div className='text-center mb-16'>
         <h2 className='text-4xl md:text-5xl font-bold mb-6'>Beyond the Code</h2>
         <p className='text-xl text-muted-foreground max-w-2xl mx-auto'>
-          Life&apos;s best moments happen away from the screen. Here&apos;s a glimpse into the people, places, and passions that keep me grounded and inspired.
+          Life&apos;s best moments happen away from the screen. Here&apos;s a
+          glimpse into the people, places, and passions that keep me grounded
+          and inspired.
         </p>
       </div>
 

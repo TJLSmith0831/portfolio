@@ -4,7 +4,16 @@ import { useState } from 'react'
 import { Card } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
-import { Calendar, MapPin, Building, Award, Users, Target, ChevronLeft, ChevronRight } from 'lucide-react'
+import {
+  Calendar,
+  MapPin,
+  Building,
+  Award,
+  Users,
+  Target,
+  ChevronLeft,
+  ChevronRight,
+} from 'lucide-react'
 import experienceData from '../data/experience.json'
 import Image from 'next/image'
 
@@ -47,17 +56,17 @@ export function ProfessionalSection() {
 
   const getCertificationLogo = (logo: string) => {
     const logoMap: Record<string, string> = {
-      'mongodb': '/mongodb-icon-1.svg',
-      'aws': '/aws-logo.png',
-      'docker': '/docker-logo.png',
-      'scrimba': '/scrimba-icon.png',
-      'tableau': '/tableau-logo.svg',
-      'microsoft': '/microsoft-logo.svg',
-      'coursera': '/coursera-logo.png'
+      mongodb: '/mongodb-icon-1.svg',
+      aws: '/aws-logo.png',
+      docker: '/docker-logo.png',
+      scrimba: '/scrimba-icon.png',
+      tableau: '/tableau-logo.svg',
+      microsoft: '/microsoft-logo.svg',
+      coursera: '/coursera-logo.png',
     }
 
     const logoSrc = logoMap[logo]
-    
+
     if (logoSrc) {
       return (
         <Image
@@ -69,15 +78,21 @@ export function ProfessionalSection() {
         />
       )
     }
-    
+
     return <Award className='h-8 w-8 text-primary' />
   }
 
   const certifications = experienceData.certifications as Certification[]
-  const totalCertificationPages = Math.ceil(certifications.length / certificationsPerPage)
-  const certificationStartIndex = (certificationPage - 1) * certificationsPerPage
+  const totalCertificationPages = Math.ceil(
+    certifications.length / certificationsPerPage
+  )
+  const certificationStartIndex =
+    (certificationPage - 1) * certificationsPerPage
   const certificationEndIndex = certificationStartIndex + certificationsPerPage
-  const currentCertifications = certifications.slice(certificationStartIndex, certificationEndIndex)
+  const currentCertifications = certifications.slice(
+    certificationStartIndex,
+    certificationEndIndex
+  )
 
   const goToCertificationPage = (page: number) => {
     setCertificationPage(page)
@@ -342,7 +357,9 @@ export function ProfessionalSection() {
                       <h3 className='font-semibold text-foreground text-sm leading-tight'>
                         {cert.name}
                       </h3>
-                      <p className='text-sm text-primary font-medium'>{cert.issuer}</p>
+                      <p className='text-sm text-primary font-medium'>
+                        {cert.issuer}
+                      </p>
                       <p className='text-xs text-muted-foreground'>
                         {cert.month ? `${cert.month} ${cert.year}` : cert.year}
                       </p>
@@ -356,13 +373,20 @@ export function ProfessionalSection() {
                     {/* Skills */}
                     {cert.skills && cert.skills.length > 0 && (
                       <div className='flex flex-wrap gap-1 justify-center'>
-                        {cert.skills.slice(0, 2).map((skill) => (
-                          <Badge key={skill} variant='secondary' className='text-xs px-2 py-1'>
+                        {cert.skills.slice(0, 2).map(skill => (
+                          <Badge
+                            key={skill}
+                            variant='secondary'
+                            className='text-xs px-2 py-1'
+                          >
                             {skill}
                           </Badge>
                         ))}
                         {cert.skills.length > 2 && (
-                          <Badge variant='outline' className='text-xs px-2 py-1'>
+                          <Badge
+                            variant='outline'
+                            className='text-xs px-2 py-1'
+                          >
                             +{cert.skills.length - 2}
                           </Badge>
                         )}
@@ -384,8 +408,9 @@ export function ProfessionalSection() {
             {totalCertificationPages > 1 && (
               <div className='text-center'>
                 <p className='text-sm text-muted-foreground'>
-                  Page {certificationPage} of {totalCertificationPages} • Showing{' '}
-                  {certificationStartIndex + 1}-{Math.min(certificationEndIndex, certifications.length)} of{' '}
+                  Page {certificationPage} of {totalCertificationPages} •
+                  Showing {certificationStartIndex + 1}-
+                  {Math.min(certificationEndIndex, certifications.length)} of{' '}
                   {certifications.length} certifications
                 </p>
               </div>
