@@ -39,6 +39,7 @@ export function ChatWindow({ isOpen, onClose }: ChatWindowProps) {
     reason: string
   } | null>(null)
   const [isEmailLoading, setIsEmailLoading] = useState(false)
+  const [hasEmailBeenSent, setHasEmailBeenSent] = useState(false)
 
   const messagesEndRef = useRef<HTMLDivElement>(null)
   const textareaRef = useRef<HTMLTextAreaElement>(null)
@@ -171,7 +172,7 @@ export function ChatWindow({ isOpen, onClose }: ChatWindowProps) {
 
       const validation = await validationResponse.json()
 
-      if (validation.shouldNotify) {
+      if (validation.shouldNotify && !hasEmailBeenSent) {
         // Set up email collection flow
         setPendingNotification({
           messages: conversationMessages,
@@ -190,6 +191,17 @@ export function ChatWindow({ isOpen, onClose }: ChatWindowProps) {
         }
 
         setMessages(prev => [...prev, emailRequestMessage])
+      } else if (validation.shouldNotify && hasEmailBeenSent) {
+        // Business inquiry but email already sent this session
+        const alreadySentId = (Date.now() + 2).toString()
+        const alreadySentMessage: ChatMessage = {
+          id: alreadySentId,
+          role: 'assistant',
+          content:
+            "I've already forwarded your previous message to Tristan in this conversation. He'll receive this entire chat history when he responds, so no need to send another email notification.",
+        }
+
+        setMessages(prev => [...prev, alreadySentMessage])
       }
     } catch (error) {
       console.error('Message validation error:', error)
@@ -228,6 +240,7 @@ export function ChatWindow({ isOpen, onClose }: ChatWindowProps) {
 
       setMessages(prev => [...prev, confirmationMessage])
       setPendingNotification(null)
+      setHasEmailBeenSent(true)
     } catch (error) {
       console.error('Email submission error:', error)
 

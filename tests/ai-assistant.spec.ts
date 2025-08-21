@@ -3,7 +3,7 @@ import { test, expect } from '@playwright/test'
 test.describe('Swishter Chat Interface', () => {
   test.beforeEach(async ({ page }) => {
     // Navigate to the portfolio page
-    await page.goto('http://localhost:3001')
+    await page.goto('http://localhost:3000')
 
     // Wait for the page to load completely
     await page.waitForLoadState('networkidle')

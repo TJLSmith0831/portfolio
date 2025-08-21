@@ -81,7 +81,7 @@ export function HeroSection() {
             Tristan Smith
           </h1>
           <p className='text-xl md:text-2xl text-muted-foreground mb-4'>
-            Full-Stack Developer and Data Scientist
+            Full-stack Engineer and Data Scientist
           </p>
           <p className='text-lg text-muted-foreground mb-12 max-w-2xl mx-auto leading-relaxed'>
             Crafting digital experiences with modern technologies. Passionate
