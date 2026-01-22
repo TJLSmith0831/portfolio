@@ -81,12 +81,10 @@ export function ProjectsSection() {
   const getAllProjects = () => {
     const allProjects = [
       ...projectData.featured,
-      ...(projectData.sideProjects || []),
       ...(projectData.openSource || []),
+      ...(projectData.sideProjects || []),
     ]
-    return allProjects.toSorted(
-      (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
-    )
+    return allProjects
   }
 
   const allProjects: Project[] = getAllProjects()

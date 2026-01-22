@@ -193,7 +193,7 @@
         "Redux state management",
         "Cross-platform mobile support"
       ],
-      "status": "In Progress",
+      "status": "Archived",
       "repository": "https://github.com/TJLSmith0831/tenet-app",
       "deployed": false,
       "myContribution": "Full-stack development - architected mobile-first social platform, implemented Redux state management, integrated Firebase backend"
@@ -219,7 +219,7 @@
         "Modern responsive UI",
         "Machine learning integration"
       ],
-      "status": "In Progress",
+      "status": "Archived",
       "repository": "https://github.com/TJLSmith0831/praetor-ai",
       "deployed": false,
       "myContribution": "Lead developer - designed AI-first architecture, implemented ML features, built modern TypeScript/React frontend"
