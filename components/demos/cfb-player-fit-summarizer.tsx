@@ -81,8 +81,12 @@ export function CfbPlayerFitSummarizerDemo() {
       const data = await res.json()
       setResult(data.summary)
       setRequestState('success')
-    } catch (err: any) {
-      setErrorCode(err.message ?? 'NETWORK_ERROR')
+    } catch (err) {
+      if (err instanceof Error) {
+        setErrorCode(err.message)
+      } else {
+        setErrorCode('NETWORK_ERROR')
+      }
       setRequestState('error')
     }
   }
