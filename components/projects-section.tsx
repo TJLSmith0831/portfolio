@@ -11,6 +11,7 @@ import {
   FileText,
   ChevronLeft,
   ChevronRight,
+  Play,
 } from 'lucide-react'
 import projectData from '../data/projects.json'
 
@@ -21,9 +22,10 @@ interface Project {
   technologies: string[]
   features?: string[]
   status: string
-  repository: string
+  repository?: string
   image?: string
   deployed?: boolean
+  hasDemo?: boolean
   liveUrl?: string
   publication?: string
   type?: string
@@ -262,26 +264,36 @@ export function ProjectsSection() {
                   </div>
                   <div className='flex-shrink-0 space-y-2'>
                     <div className='flex gap-2'>
-                      <Button size='sm' className='flex-1' asChild>
-                        <a
-                          href={project.liveUrl || project.repository}
-                          target='_blank'
-                          rel='noopener noreferrer'
-                        >
-                          {'type' in project &&
-                          project.type === 'Technical Article' ? (
-                            <>
-                              <FileText className='w-3 h-3 mr-1' />
-                              Read
-                            </>
-                          ) : (
-                            <>
-                              <ExternalLink className='w-3 h-3 mr-1' />
-                              Live
-                            </>
-                          )}
-                        </a>
-                      </Button>
+                      {project.liveUrl && (
+                        <Button size='sm' className='flex-1' asChild>
+                          <a
+                            href={project.liveUrl}
+                            target='_blank'
+                            rel='noopener noreferrer'
+                          >
+                            {'type' in project &&
+                              project.type === 'Technical Article' && (
+                                <>
+                                  <FileText className='w-3 h-3 mr-1' />
+                                  Read
+                                </>
+                              )}
+                          </a>
+                        </Button>
+                      )}
+                      {project.hasDemo && (
+                        <Button size='sm' className='flex-1' asChild>
+                          <a href={'#demos'}>
+                            {'hasDemo' in project && project.hasDemo && (
+                              <>
+                                <Play className='w-3 h-3 mr-1' />
+                                See Demo
+                              </>
+                            )}
+                          </a>
+                        </Button>
+                      )}
+
                       {project.repository !== 'Private' && (
                         <Button
                           size='sm'
@@ -419,26 +431,37 @@ export function ProjectsSection() {
               </div>
 
               <div className='flex gap-4 mt-6'>
-                <Button className='flex-1' asChild>
-                  <a
-                    href={expandedProject.liveUrl || expandedProject.repository}
-                    target='_blank'
-                    rel='noopener noreferrer'
-                  >
-                    {'type' in expandedProject &&
-                    expandedProject.type === 'Technical Article' ? (
-                      <>
-                        <FileText className='w-4 h-4 mr-2' />
-                        Read Article
-                      </>
-                    ) : (
-                      <>
-                        <ExternalLink className='w-4 h-4 mr-2' />
-                        View Live Project
-                      </>
-                    )}
-                  </a>
-                </Button>
+                {expandedProject.liveUrl && (
+                  <Button className='flex-1' asChild>
+                    <a href={expandedProject.liveUrl}>
+                      {'type' in expandedProject &&
+                        expandedProject.type === 'Technical Article' && (
+                          <>
+                            <FileText className='w-4 h-4 mr-2' />
+                            Read Article
+                          </>
+                        )}
+                    </a>
+                  </Button>
+                )}
+                {expandedProject.hasDemo && (
+                  <Button className='flex-1' asChild onClick={closeExpanded}>
+                    <a href={'#demos'}>
+                      {'type' in expandedProject &&
+                      expandedProject.type === 'Technical Article' ? (
+                        <>
+                          <FileText className='w-4 h-4 mr-2' />
+                          Read Article
+                        </>
+                      ) : (
+                        <>
+                          <ExternalLink className='w-4 h-4 mr-2' />
+                          View Live Project
+                        </>
+                      )}
+                    </a>
+                  </Button>
+                )}
                 {expandedProject.repository !== 'Private' && (
                   <Button
                     variant='outline'

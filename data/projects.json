@@ -1,6 +1,37 @@
 {
   "featured": [
     {
+      "id": "player-fit-summarizer",
+      "name": "College Football Player Fit Summarizer",
+      "date": "2026-01-29",
+      "image": "/player-fit-summarizer.png",
+      "description": "An AI-powered backend service that analyzes college football players and evaluates their schematic and roster fit for specific programs using scraped recruiting data and local LLMs.",
+      "technologies": [
+        "OpenAI SDK",
+        "DigitalOcean",
+        "Selenium",
+        "Python",
+        "FastAPI",
+        "Ollama",
+        "Pydantic"
+      ],
+      "features": [
+        "Automated scraping of 247Sports player profiles",
+        "Structured player identity, rankings, and background extraction",
+        "LLM-driven player-to-team fit analysis",
+        "Strict JSON schema enforcement with retry and repair logic",
+        "Local-first AI inference via Ollama models",
+        "Resilient prompt repair and parsing safeguards for OSS models",
+        "Detailed application logging with retry visibility",
+        "REST API endpoints for chat and player fit summarization"
+      ],
+      "status": "Active",
+      "repository": "Private",
+      "deployed": true,
+      "hasDemo": true,
+      "myContribution": "Solo developer - Architected the FastAPI service, scraping pipeline, LLM prompt architecture, JSON validation and retry mechanisms, logging strategy, and deployment workflow"
+    },
+    {
       "id": "portfolio-with-ai",
       "name": "Portfolio Website with Swishter AI",
       "date": "2025-01-01",
@@ -27,8 +58,8 @@
         "Responsive design with mobile-first approach",
         "Performance optimization with Turbopack"
       ],
+      "repository": "https://github.com/TJLSmith0831/portfolio",
       "status": "Active",
-      "repository": "Private",
       "deployed": true,
       "myContribution": "Solo developer - designed and implemented entire full-stack architecture, AI integration, UI/UX design, and deployment pipeline"
     },
@@ -223,26 +254,6 @@
       "repository": "https://github.com/TJLSmith0831/praetor-ai",
       "deployed": false,
       "myContribution": "Lead developer - designed AI-first architecture, implemented ML features, built modern TypeScript/React frontend"
-    },
-    {
-      "id": "para-llama",
-      "name": "ParaLlama",
-      "date": "2023-01-01",
-      "image": "/parallama.jpg",
-      "description": "A TypeScript framework designed for parallel processing and distributed computing tasks, optimized for performance and scalability.",
-      "technologies": ["TypeScript", "Node.js", "Parallel Processing"],
-      "features": [
-        "Parallel processing framework",
-        "TypeScript-first design",
-        "Distributed computing support",
-        "Performance optimization",
-        "Scalable architecture",
-        "Developer-friendly API"
-      ],
-      "status": "Archived",
-      "repository": "https://github.com/TJLSmith0831/ParaLlama",
-      "deployed": true,
-      "myContribution": "Solo developer - created TypeScript parallel processing framework, designed scalable distributed computing architecture"
     }
   ],
   "openSource": [
