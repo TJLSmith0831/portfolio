@@ -14,6 +14,7 @@ interface DemoConfig {
   key: DemoKey
   label: string
   description: string
+  version: string
   icon: React.ReactNode
   component: React.ReactNode
 }
@@ -22,6 +23,7 @@ const DEMOS: DemoConfig[] = [
   {
     key: 'cfb-player-fit-summarizer',
     label: 'College Football Player Fit Summarizer',
+    version: 'v0.1.0',
     description:
       'Evaluate how a college football player fits a specific FBS program using AI.',
     icon: <Icon iconNode={football} />,
@@ -88,7 +90,7 @@ export function DemosSection() {
               <h3 className='text-2xl font-semibold'>
                 {DEMOS.find(d => d.key === activeDemo)?.label}
               </h3>
-              <Badge variant='outline'>Demo</Badge>
+              <Badge variant='outline'>{activeDemoConfig?.version}</Badge>
             </div>
 
             <p className='text-muted-foreground mb-6 max-w-xl'>
