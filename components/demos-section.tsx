@@ -98,7 +98,7 @@ export function DemosSection() {
             </p>
 
             {/* Placeholder Content */}
-            <Card className='border-dashed h-full'>
+            <Card className='border-dashed py-0'>
               <div className='w-full h-full'>{activeDemoConfig?.component}</div>
             </Card>
           </main>

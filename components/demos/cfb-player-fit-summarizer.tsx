@@ -49,7 +49,7 @@ interface JobStatusResponse {
 }
 
 const POLL_INTERVAL_MS = 5000
-const MAX_POLL_TIME_MS = 120_000
+const MAX_POLL_TIME_MS = 240_000
 
 export function CfbPlayerFitSummarizerDemo() {
   const [playerName, setPlayerName] = useState('')
