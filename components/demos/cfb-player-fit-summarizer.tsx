@@ -25,7 +25,7 @@ import { LOADING_VERBS } from '@/data/loading-verbs'
 
 const FBS_TEAMS: string[] = cfb_teams.FBS.flatMap(
   conference => conference.teams
-).sort((a, b) => a.localeCompare(b))
+).sort((a, b) => a.localeCompare(b, 'en-US'))
 
 type RequestState = 'idle' | 'loading' | 'success' | 'error'
 
@@ -195,6 +195,7 @@ export function CfbPlayerFitSummarizerDemo() {
             variant='outline'
             role='combobox'
             className='flex-1 justify-between'
+            disabled={requestState === 'loading'}
           >
             {team ?? 'Select FBS team'}
             <ChevronsUpDown className='ml-2 h-4 w-4 shrink-0 opacity-50' />
@@ -269,7 +270,7 @@ export function CfbPlayerFitSummarizerDemo() {
   }
 
   return (
-    <Card className='h-full flex flex-col'>
+    <Card className='flex flex-col'>
       <div className='flex-1 p-6 overflow-y-auto'>
         {requestState === 'loading' ? (
           <div className='space-y-6'>
@@ -366,7 +367,7 @@ export function CfbPlayerFitSummarizerDemo() {
             </div>
             <hr />
             <p className='text-sm text-muted-foreground'>
-              Compiled in {formatElapsed(elapsedMs)}
+              Compiled in {formatElapsed(elapsedMs)} seconds
             </p>
           </div>
         )}
@@ -377,6 +378,7 @@ export function CfbPlayerFitSummarizerDemo() {
           <Input
             value={playerName}
             onChange={e => setPlayerName(e.target.value)}
+            disabled={requestState === 'loading'}
           />
           <TeamCombobox />
           <Button
