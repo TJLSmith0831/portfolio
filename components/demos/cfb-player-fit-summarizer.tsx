@@ -194,7 +194,7 @@ export function CfbPlayerFitSummarizerDemo() {
           <Button
             variant='outline'
             role='combobox'
-            className='flex-1 justify-between'
+            className='w-full md:flex-1 justify-between'
             disabled={requestState === 'loading'}
           >
             {team ?? 'Select FBS team'}
@@ -270,8 +270,8 @@ export function CfbPlayerFitSummarizerDemo() {
   }
 
   return (
-    <Card className='flex flex-col'>
-      <div className='flex-1 p-6 overflow-y-auto'>
+    <Card className='flex flex-col max-h-[85vh] md:max-h-none'>
+      <div className='flex-1 p-4 md:p-6 overflow-y-auto'>
         {requestState === 'loading' ? (
           <div className='space-y-6'>
             <div className='text-center'>
@@ -285,7 +285,7 @@ export function CfbPlayerFitSummarizerDemo() {
             <PlayerFitSkeleton />
           </div>
         ) : !result ? (
-          <div className='h-full flex items-center justify-center text-center'>
+          <div className='min-h-[40vh] flex items-center justify-center text-center px-2'>
             <div className='max-w-md space-y-4'>
               <h4 className='text-xl font-semibold'>
                 College Player Fit Evaluation
@@ -302,7 +302,7 @@ export function CfbPlayerFitSummarizerDemo() {
         ) : (
           <div className='space-y-6'>
             {/* Header */}
-            <div className='flex items-start justify-between gap-4'>
+            <div className='flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3'>
               <div>
                 <h4 className='text-xl font-semibold'>{result.player}</h4>
                 <p className='text-sm text-muted-foreground'>
@@ -310,7 +310,7 @@ export function CfbPlayerFitSummarizerDemo() {
                 </p>
               </div>
 
-              <div className='text-right'>
+              <div className='sm:text-right'>
                 <div className='text-3xl font-bold'>{result.fit_score}</div>
                 <div className='text-xs text-muted-foreground'>Fit Score</div>
               </div>
@@ -374,14 +374,16 @@ export function CfbPlayerFitSummarizerDemo() {
       </div>
 
       <div className='border-t bg-muted/30 p-4'>
-        <div className='flex gap-3'>
+        <div className='flex flex-col md:flex-row gap-3'>
           <Input
+            className='w-full'
             value={playerName}
             onChange={e => setPlayerName(e.target.value)}
             disabled={requestState === 'loading'}
           />
           <TeamCombobox />
           <Button
+            className='w-full md:w-auto'
             disabled={!playerName || !team || requestState === 'loading'}
             onClick={handleSubmit}
           >

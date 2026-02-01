@@ -5,31 +5,31 @@
       "name": "College Football Player Fit Summarizer",
       "date": "2026-01-29",
       "image": "/player-fit-summarizer.png",
-      "description": "An AI-powered backend service that analyzes college football players and evaluates their schematic and roster fit for specific programs using scraped recruiting data and local LLMs.",
+      "description": "A full-stack AI system that ingests scraped recruiting data and evaluates player-to-program fit using local LLM inference and structured schemas.",
       "technologies": [
-        "OpenAI SDK",
-        "DigitalOcean",
-        "Selenium",
         "Python",
         "FastAPI",
+        "Playwright",
+        "Pydantic",
         "Ollama",
-        "Pydantic"
+        "OpenAI SDK",
+        "DigitalOcean"
       ],
       "features": [
         "Automated scraping of 247Sports player profiles",
-        "Structured player identity, rankings, and background extraction",
-        "LLM-driven player-to-team fit analysis",
-        "Strict JSON schema enforcement with retry and repair logic",
-        "Local-first AI inference via Ollama models",
-        "Resilient prompt repair and parsing safeguards for OSS models",
-        "Detailed application logging with retry visibility",
-        "REST API endpoints for chat and player fit summarization"
+        "Structured extraction of player identity, rankings, and background data",
+        "Model-driven player-to-program fit evaluation",
+        "Strict JSON schema enforcement with automated retry and repair",
+        "Local-first LLM inference via Ollama",
+        "Resilient prompt parsing and validation safeguards for OSS models",
+        "Detailed application logging with retry and failure visibility",
+        "REST API endpoints for player fit summarization and chat-style queries"
       ],
       "status": "Active",
-      "repository": "Private",
+      "repository": "https://github.com/TJLSmith0831/portfolio-api",
       "deployed": true,
       "hasDemo": true,
-      "myContribution": "Solo developer - Architected the FastAPI service, scraping pipeline, LLM prompt architecture, JSON validation and retry mechanisms, logging strategy, and deployment workflow"
+      "myContribution": "Solo developer - owned the full-stack architecture, Llama 3.2 integration, FastAPI services, and DigitalOcean deployment"
     },
     {
       "id": "portfolio-with-ai",

@@ -25,7 +25,8 @@ const DEMOS: DemoConfig[] = [
     label: 'College Football Player Fit Summarizer',
     version: 'v0.1.0',
     description: `
-      Evaluate how a college football player fits a specific FBS program using AI.
+      Full-stack system that scrapes recruiting data and performs model-driven
+      player-to-program fit evaluation through an interactive UI.
       (Runs on a 4 GB CPU-only instance; evaluations may take ~2–3 minutes)
     `,
     icon: <Icon iconNode={football} />,
@@ -48,17 +49,17 @@ export function DemosSection() {
           Interactive Demos
         </h2>
         <p className='text-xl text-muted-foreground max-w-2xl mx-auto'>
-          Experimental interfaces and prototype dashboards showcasing agentic
-          workflows, tooling, and UI concepts.
+          End-to-end prototypes combining data pipelines, model inference, and
+          production-style UIs.
         </p>
       </div>
 
       {/* Dashboard Shell */}
       <Card className='overflow-hidden'>
-        <div className='grid grid-cols-1 md:grid-cols-[260px_1fr] min-h-[720px]'>
+        <div className='grid grid-cols-1 md:grid-cols-[260px_1fr] md:min-h-[720px]'>
           {/* Left Navigation */}
           <aside className='border-b md:border-b-0 md:border-r bg-muted/30'>
-            <div className='p-4 space-y-2'>
+            <div className='p-2 md:p-4 flex md:block gap-2 overflow-x-auto md:overflow-visible'>
               {DEMOS.map(demo => {
                 const isActive = activeDemo === demo.key
                 return (
@@ -68,12 +69,14 @@ export function DemosSection() {
                     onClick={() => setActiveDemo(demo.key)}
                     className='
                       w-full
+                      md:w-full
                       h-auto
                       justify-start
                       gap-3
                       items-start
-                      py-3
+                      py-2 md:py-3
                       text-left
+                      whitespace-normal
                     '
                   >
                     {demo.icon}
@@ -87,7 +90,7 @@ export function DemosSection() {
           </aside>
 
           {/* Main Panel */}
-          <main className='p-6'>
+          <main className='p-4 md:p-6'>
             <div className='mb-4 flex items-center gap-2'>
               <h3 className='text-2xl font-semibold'>
                 {DEMOS.find(d => d.key === activeDemo)?.label}

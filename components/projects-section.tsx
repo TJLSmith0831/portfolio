@@ -354,8 +354,14 @@ export function ProjectsSection() {
 
       {/* Expanded card modal */}
       {expandedCard && expandedProject && (
-        <div className='fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4'>
-          <Card className='max-w-2xl w-full max-h-[80vh] overflow-y-auto'>
+        <div
+          className='fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4'
+          onClick={closeExpanded}
+        >
+          <Card
+            className='max-w-2xl w-full max-h-[80vh] overflow-y-auto'
+            onClick={e => e.stopPropagation()}
+          >
             <div className='p-6'>
               <div className='flex justify-between items-start mb-4'>
                 <div>
