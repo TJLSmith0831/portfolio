@@ -4,9 +4,17 @@ import { Button } from '@/components/ui/button'
 import { ArrowDown, Github, Linkedin } from 'lucide-react'
 import Image from 'next/image'
 import { useTheme } from 'next-themes'
+import { useEffect, useState } from 'react'
 
 export function HeroSection() {
-  const { theme } = useTheme()
+  const { resolvedTheme } = useTheme()
+  const [mounted, setMounted] = useState(false)
+  
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  if (!mounted) return null
 
   const scrollToWork = () => {
     const experienceSection = document.getElementById('experience')
@@ -63,7 +71,7 @@ export function HeroSection() {
           >
             <Image
               src={
-                theme === 'light'
+                resolvedTheme === 'light'
                   ? '/medium-logo-black.png'
                   : '/medium-logo-white.png'
               }
