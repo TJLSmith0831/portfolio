@@ -6,6 +6,7 @@ import { Navigation } from '@/components/navigation'
 import { ThemeToggle } from '@/components/theme-toggle'
 import { AnimatedBackground } from '@/components/animated-background'
 import { AIAssistant } from '@/components/ai-assistant/ai-assistant'
+import { DemosSection } from '@/components/demos-section'
 
 export default function Home() {
   return (
@@ -24,6 +25,10 @@ export default function Home() {
 
       <section id='projects' className='py-20'>
         <ProjectsSection />
+      </section>
+
+      <section id='demos' className='py-20'>
+        <DemosSection />
       </section>
 
       <section id='personal' className='py-20'>
