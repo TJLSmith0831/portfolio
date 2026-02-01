@@ -24,8 +24,10 @@ const DEMOS: DemoConfig[] = [
     key: 'cfb-player-fit-summarizer',
     label: 'College Football Player Fit Summarizer',
     version: 'v0.1.0',
-    description:
-      'Evaluate how a college football player fits a specific FBS program using AI.',
+    description: `
+      Evaluate how a college football player fits a specific FBS program using AI.
+      (Runs on a 4 GB CPU-only instance; evaluations may take ~2–3 minutes)
+    `,
     icon: <Icon iconNode={football} />,
     component: <CfbPlayerFitSummarizerDemo />,
   },
