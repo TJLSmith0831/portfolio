@@ -48,7 +48,7 @@ interface JobStatusResponse {
   error?: string | null
 }
 
-const POLL_INTERVAL_MS = 10000
+const POLL_INTERVAL_MS = 5000
 const MAX_POLL_TIME_MS = 240_000
 
 export function CfbPlayerFitSummarizerDemo() {
