@@ -23,7 +23,7 @@ const DEMOS: DemoConfig[] = [
   {
     key: 'cfb-player-fit-summarizer',
     label: 'College Football Player Fit Summarizer',
-    version: 'v0.1.1',
+    version: 'v0.2.0',
     description: `
       Full-stack system that scrapes recruiting data and performs model-driven
       player-to-program fit evaluation through an interactive UI.
