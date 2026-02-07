@@ -1,11 +1,11 @@
 'use client'
 
-import { useState } from 'react'
-import { Card } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
-import { Icon } from 'lucide-react'
+import { Button } from '@/components/ui/button'
+import { Card } from '@/components/ui/card'
 import { football } from '@lucide/lab'
+import { Icon } from 'lucide-react'
+import { useState } from 'react'
 import { CfbPlayerFitSummarizerDemo } from './demos/cfb-player-fit-summarizer'
 
 type DemoKey = 'cfb-player-fit-summarizer'
@@ -23,11 +23,11 @@ const DEMOS: DemoConfig[] = [
   {
     key: 'cfb-player-fit-summarizer',
     label: 'College Football Player Fit Summarizer',
-    version: 'v0.1.0',
+    version: 'v0.1.1',
     description: `
       Full-stack system that scrapes recruiting data and performs model-driven
       player-to-program fit evaluation through an interactive UI.
-      (Runs on a 4 GB CPU-only instance; evaluations may take ~2–3 minutes)
+      (Runs on a 4 GB CPU-only instance; evaluations should take less than 2 minutes)
     `,
     icon: <Icon iconNode={football} />,
     component: <CfbPlayerFitSummarizerDemo />,
