@@ -292,7 +292,11 @@ export function ProfessionalSection() {
             {Object.entries(experienceData.skills).map(([category, skills]) => (
               <Card key={category} className='p-6'>
                 <h3 className='text-lg font-semibold mb-4 capitalize text-primary'>
-                  {category === 'datascience' ? 'Data Science' : category}
+                  {category === 'datascience'
+                    ? 'Data Science'
+                    : category === 'ai'
+                      ? 'AI & Agents'
+                      : category}
                 </h3>
                 <div className='flex flex-wrap gap-2'>
                   {skills.map(skill => (

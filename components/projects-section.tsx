@@ -272,12 +272,17 @@ export function ProjectsSection() {
                             rel='noopener noreferrer'
                           >
                             {'type' in project &&
-                              project.type === 'Technical Article' && (
-                                <>
-                                  <FileText className='w-3 h-3 mr-1' />
-                                  Read
-                                </>
-                              )}
+                            project.type === 'Technical Article' ? (
+                              <>
+                                <FileText className='w-3 h-3 mr-1' />
+                                Read
+                              </>
+                            ) : (
+                              <>
+                                <ExternalLink className='w-3 h-3 mr-1' />
+                                Visit Site
+                              </>
+                            )}
                           </a>
                         </Button>
                       )}
@@ -439,14 +444,23 @@ export function ProjectsSection() {
               <div className='flex gap-4 mt-6'>
                 {expandedProject.liveUrl && (
                   <Button className='flex-1' asChild>
-                    <a href={expandedProject.liveUrl}>
+                    <a
+                      href={expandedProject.liveUrl}
+                      target='_blank'
+                      rel='noopener noreferrer'
+                    >
                       {'type' in expandedProject &&
-                        expandedProject.type === 'Technical Article' && (
-                          <>
-                            <FileText className='w-4 h-4 mr-2' />
-                            Read Article
-                          </>
-                        )}
+                      expandedProject.type === 'Technical Article' ? (
+                        <>
+                          <FileText className='w-4 h-4 mr-2' />
+                          Read Article
+                        </>
+                      ) : (
+                        <>
+                          <ExternalLink className='w-4 h-4 mr-2' />
+                          Visit Site
+                        </>
+                      )}
                     </a>
                   </Button>
                 )}
@@ -461,8 +475,8 @@ export function ProjectsSection() {
                         </>
                       ) : (
                         <>
-                          <ExternalLink className='w-4 h-4 mr-2' />
-                          View Live Project
+                          <Play className='w-4 h-4 mr-2' />
+                          See Demo
                         </>
                       )}
                     </a>
