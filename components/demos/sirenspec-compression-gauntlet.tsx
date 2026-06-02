@@ -52,15 +52,22 @@ const SAMPLE_TEXT =
 
 const ROUND_DELAY_MS = 1400
 
-const WORKFLOW_YAML = `version: "0.1"
+const WORKFLOW_YAML = `
+version: "0.1"
+
+# Compression Gauntlet — passes a document through four summarizer agents,
+# each halving the length. Demonstrates the length guardrail under sustained
+# pressure and tracks how many rounds of compression a text can survive
+# before meaning collapses.
 
 agents:
   summarizer:
-    model: "anthropic:claude-haiku-4-5"
+    model: "openai:gpt-4o-mini"
     system: |
-      Rewrite the passage at exactly half the word count of the input.
-      Preserve the most important facts.
-      Drop examples and qualifiers first.
+      You are a ruthless editor. You will receive a passage of text.
+      Rewrite it at exactly half the word count of the input — no more, no less.
+      Preserve the most important facts and relationships. Drop examples, qualifiers,
+      and elaboration first. Never add new information.
     guardrails:
       - length
 
@@ -68,17 +75,17 @@ nodes:
   round_1:
     agent: summarizer
     writes: working.round_1
+
   round_2:
     agent: summarizer
-    input: "{{ working.round_1 }}"
     writes: working.round_2
+
   round_3:
     agent: summarizer
-    input: "{{ working.round_2 }}"
     writes: working.round_3
+
   round_4:
     agent: summarizer
-    input: "{{ working.round_3 }}"
     writes: output.final
 
 edges:
@@ -91,10 +98,8 @@ edges:
 
 guardrails:
   - injection
-
-budget:
-  max_cost_usd: 0.05
-  on_exceeded: abort`
+  - length
+`;
 
 /* -------------------------------------------------------------------------- */
 /*  Mock compression                                                          */

@@ -76,38 +76,42 @@ const TYPE_MOVES: Record<string, string[]> = {
 
 const WORKFLOW_YAML = `version: "0.1"
 
+# Pokemon Battle — single-turn workflow.
+#
+# The narrator picks a move and proposes a damage value; the driver
+# clamps damage to the defender's remaining HP and computes the next
+# state deterministically.
+
 agents:
   battle_narrator:
     model: "openai:gpt-4.1-mini"
     system: |
-      You are an enthusiastic Pokémon battle commentator.
-      Given the current battle state (attacker, defender, HP remaining),
-      narrate one turn: choose a move, calculate damage dealt,
-      and return a short exciting commentary line.
-    output_schema:
-      attacker_slot: integer   # 1 or 2
-      move: string
-      damage: integer
-      commentary: string
+      You are an enthusiastic Pokémon battle commentator scoring one turn
+      of a battle. You will receive a JSON state describing the attacker,
+      the defender, their remaining HP, and the move list available to the
+      attacker (based on the attacker's primary type).
+
+      Pick exactly one move from the attacker's move list. Estimate the
+      damage dealt as an integer using a simple formula:
+
+          base = max(5, (attacker.attack / (defender.defense + 1)) * 15 + 5)
+
+      Apply a 0.85x–1.15x variance to make it interesting. Clamp the
+      result between 1 and a reasonable ceiling for the matchup.
+
+      Respond with ONLY a single JSON object on one line, no markdown,
+      no extra text, in exactly this shape:
+
+      {"move": "<chosen move>", "damage": <integer>, "commentary": "<one short sentence>"}
 
 nodes:
-  battle:
-    type: loop
-    max_iterations: 20
-    until: "{{ working.hp1 <= 0 or working.hp2 <= 0 }}"
+  turn:
     agent: battle_narrator
-    input:
-      pokemon1: "{{ inputs.pokemon1 }}"
-      pokemon2: "{{ inputs.pokemon2 }}"
-      state: "{{ working.battle_state }}"
-    writes: working.battle_state
+    writes: output.turn
 
 guardrails:
   - injection
-
-budget:
-  max_cost_usd: 0.05
-  on_exceeded: abort`
+`;
 
 /* -------------------------------------------------------------------------- */
 /*  PokéAPI helpers                                                           */
