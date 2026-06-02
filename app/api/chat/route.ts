@@ -107,8 +107,8 @@ const handleChatRequest = async (req: Request) => {
     const result = await streamText({
       model: openai('gpt-3.5-turbo'),
       messages: messagesToConvert!,
-      temperature: 0.7,
-      maxOutputTokens: 1000,
+      temperature: 0.3,
+      maxOutputTokens: 300,
     })
 
     return result.toUIMessageStreamResponse()
