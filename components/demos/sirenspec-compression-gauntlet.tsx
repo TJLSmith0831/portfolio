@@ -17,10 +17,10 @@ import { cn } from '@/lib/utils'
 /* -------------------------------------------------------------------------- */
 /*  Backend contract                                                          */
 /*                                                                            */
-/*  This demo runs on MOCK data so it works with no backend. To go live,      */
-/*  replace `generateRounds` with a call to the SirenSpec compression-        */
-/*  gauntlet endpoint. The expected response shape is `RoundResult[]` below   */
-/*  — each round carries its input text, compressed output, and word counts.  */
+/*  POST  /sirenspec/compression_gauntlet  { message: string } → { job_id }  */
+/*  GET   /jobs/:id  → { status, result?: RoundResult[] }                    */
+/*                                                                            */
+/*  Polls until status === 'completed', then animates each round sequentially.*/
 /* -------------------------------------------------------------------------- */
 
 type RoundStatus = 'pending' | 'running' | 'done'
@@ -51,6 +51,9 @@ const SAMPLE_TEXT =
   'becoming a defining moment of human ingenuity under pressure.'
 
 const ROUND_DELAY_MS = 1400
+const API_BASE = process.env.NEXT_PUBLIC_PORTFOLIO_API_BASE ?? 'http://localhost:8000'
+const POLL_INTERVAL_MS = 2000
+const MAX_POLL_ATTEMPTS = 120
 
 const WORKFLOW_YAML = `
 version: "0.1"
@@ -102,57 +105,11 @@ guardrails:
 `;
 
 /* -------------------------------------------------------------------------- */
-/*  Mock compression                                                          */
+/*  Word-count helper (used for UI display only)                             */
 /* -------------------------------------------------------------------------- */
 
 function countWords(text: string): number {
   return text.trim().split(/\s+/).filter(Boolean).length
-}
-
-function mockCompress(text: string): string {
-  const sentences =
-    text
-      .match(/[^.!?]+[.!?]*/g)
-      ?.map(s => s.trim())
-      .filter(Boolean) ?? []
-
-  if (sentences.length <= 1) {
-    const words = text.trim().split(/\s+/)
-    const keep = Math.max(3, Math.ceil(words.length / 2))
-    return (
-      words.slice(0, keep).join(' ') + (words.length > keep ? '…' : '')
-    )
-  }
-
-  const keepCount = Math.max(1, Math.ceil(sentences.length / 2))
-  if (keepCount >= sentences.length) {
-    const words = text.trim().split(/\s+/)
-    const keep = Math.max(3, Math.ceil(words.length / 2))
-    return (
-      words.slice(0, keep).join(' ') + (words.length > keep ? '…' : '')
-    )
-  }
-
-  const step = sentences.length / keepCount
-  return Array.from({ length: keepCount }, (_, i) =>
-    sentences[Math.min(Math.floor(i * step), sentences.length - 1)]
-  ).join(' ')
-}
-
-function generateRounds(inputText: string): RoundResult[] {
-  const results: RoundResult[] = []
-  let current = inputText
-  for (let i = 0; i < 4; i++) {
-    const compressed = mockCompress(current)
-    results.push({
-      input: current,
-      output: compressed,
-      inputWords: countWords(current),
-      outputWords: countWords(compressed),
-    })
-    current = compressed
-  }
-  return results
 }
 
 /* -------------------------------------------------------------------------- */
@@ -168,44 +125,103 @@ export function SirenSpecCompressionGauntletDemo() {
   const [yamlOpen, setYamlOpen] = useState(false)
 
   const timerRef = useRef<NodeJS.Timeout | null>(null)
+  const pollRef = useRef<NodeJS.Timeout | null>(null)
+  const [runError, setRunError] = useState<string | null>(null)
 
   useEffect(() => {
     return () => {
       if (timerRef.current) clearInterval(timerRef.current)
+      if (pollRef.current) clearInterval(pollRef.current)
     }
   }, [])
 
-  function handleRun() {
+  async function handleRun() {
     const text = inputText.trim()
     if (!text || runState === 'running') return
 
     if (timerRef.current) clearInterval(timerRef.current)
+    if (pollRef.current) clearInterval(pollRef.current)
 
-    const generated = generateRounds(text)
-    setRounds(generated)
-    setActiveRound(0)
+    setRounds([])
+    setActiveRound(-1)
     setExpandedRounds(new Set())
     setRunState('running')
+    setRunError(null)
 
-    let round = 1
-    timerRef.current = setInterval(() => {
-      if (round >= 4) {
-        clearInterval(timerRef.current!)
-        setActiveRound(4)
-        setRunState('done')
-      } else {
-        setActiveRound(round)
-        round++
+    let job_id: string
+    try {
+      const res = await fetch(`${API_BASE}/sirenspec/compression_gauntlet`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ text: text }),
+      })
+      if (!res.ok) {
+        const body = await res.json().catch(() => ({})) as { detail?: string }
+        throw new Error(body.detail ?? `HTTP ${res.status}`)
       }
-    }, ROUND_DELAY_MS)
+      const data = await res.json() as { job_id: string }
+      job_id = data.job_id
+    } catch (err) {
+      setRunError(err instanceof Error ? err.message : 'Failed to start gauntlet')
+      setRunState('idle')
+      return
+    }
+
+    let attempts = 0
+    pollRef.current = setInterval(async () => {
+      attempts++
+      if (attempts > MAX_POLL_ATTEMPTS) {
+        clearInterval(pollRef.current!)
+        setRunError('Gauntlet timed out')
+        setRunState('idle')
+        return
+      }
+      try {
+        const pollRes = await fetch(`${API_BASE}/jobs/${job_id}`)
+        if (!pollRes.ok) {
+          clearInterval(pollRef.current!)
+          setRunError(`Poll error: HTTP ${pollRes.status}`)
+          setRunState('idle')
+          return
+        }
+        const status = await pollRes.json() as { status: string; result?: { rounds: RoundResult[] }; error?: string }
+        if (status.status === 'completed') {
+          clearInterval(pollRef.current!)
+          const generated = status.result!.rounds
+          setRounds(generated)
+          setActiveRound(0)
+          let round = 1
+          timerRef.current = setInterval(() => {
+            if (round >= 4) {
+              clearInterval(timerRef.current!)
+              setActiveRound(4)
+              setRunState('done')
+            } else {
+              setActiveRound(round)
+              round++
+            }
+          }, ROUND_DELAY_MS)
+        } else if (status.status === 'failed') {
+          clearInterval(pollRef.current!)
+          setRunError(status.error ?? 'Job failed')
+          setRunState('idle')
+        }
+      } catch {
+        clearInterval(pollRef.current!)
+        setRunError('Network error while polling')
+        setRunState('idle')
+      }
+    }, POLL_INTERVAL_MS)
   }
 
   function handleReset() {
     if (timerRef.current) clearInterval(timerRef.current)
+    if (pollRef.current) clearInterval(pollRef.current)
     setRunState('idle')
     setRounds([])
     setActiveRound(-1)
     setExpandedRounds(new Set())
+    setRunError(null)
   }
 
   function toggleRound(index: number) {
@@ -263,7 +279,7 @@ export function SirenSpecCompressionGauntletDemo() {
             <div className='flex flex-wrap items-center gap-2'>
               <Badge variant='secondary'>sequential</Badge>
               <Badge variant='secondary'>guardrail:length</Badge>
-              <Badge variant='outline'>anthropic:claude-haiku-4-5</Badge>
+              <Badge variant='outline'>openai:gpt-4o-mini</Badge>
               <a
                 href='https://github.com/sirenspec/sirenspec'
                 target='_blank'
@@ -294,6 +310,13 @@ export function SirenSpecCompressionGauntletDemo() {
               View workflow.yaml
             </button>
           </div>
+
+          {/* Error banner */}
+          {runError && (
+            <div className='rounded-lg border border-destructive/30 bg-destructive/5 px-3 py-2 text-xs text-destructive'>
+              {runError}
+            </div>
+          )}
 
           {/* Input passage (idle only) */}
           {!showResults && (
@@ -335,6 +358,15 @@ export function SirenSpecCompressionGauntletDemo() {
           {showResults && (
             <div className='space-y-3'>
               <h4 className='text-sm font-semibold'>Compression rounds</h4>
+
+              {/* Polling loader — shown before API results arrive */}
+              {rounds.length === 0 && (
+                <div className='flex flex-col items-center gap-3 py-8 text-center'>
+                  <Loader2 className='h-6 w-6 animate-spin text-muted-foreground' />
+                  <p className='text-sm text-muted-foreground'>Running compression workflow…</p>
+                </div>
+              )}
+
               <div className='space-y-2'>
                 {rounds.map((round, i) => {
                   const status = roundStatus(i)
@@ -454,8 +486,8 @@ export function SirenSpecCompressionGauntletDemo() {
                     ~{(rounds[0].inputWords * 4 * 1.5).toLocaleString()} tokens
                     est.
                   </span>
-                  <span className='text-amber-600 dark:text-amber-500'>
-                    mock data &mdash; backend not yet wired
+                  <span className='text-emerald-600 dark:text-emerald-500'>
+                    live &middot; portfolio-api
                   </span>
                 </div>
               )}
@@ -471,7 +503,7 @@ export function SirenSpecCompressionGauntletDemo() {
                 ? 'Running compression gauntlet…'
                 : runState === 'done'
                   ? 'Gauntlet complete.'
-                  : `${countWords(inputText)} words ready · 4 passes · claude-haiku-4-5`}
+                  : `${countWords(inputText)} words ready · 4 passes · gpt-4o-mini`}
             </p>
             <div className='flex gap-2'>
               {showResults && (

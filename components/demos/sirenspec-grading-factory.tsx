@@ -19,12 +19,10 @@ import { cn } from '@/lib/utils'
 /* -------------------------------------------------------------------------- */
 /*  Backend contract                                                          */
 /*                                                                            */
-/*  This demo currently runs on MOCK data so it works with no backend. To go  */
-/*  live, replace `runGradingFactoryMock` with a call to the SirenSpec        */
-/*  grading-factory endpoint. The expected response shape is `GradingResult`  */
-/*  below — each paper carries its three parallel agent outputs (editor,      */
-/*  ai_detector, grader), a synthesized per-paper report, and the run ends    */
-/*  with a compiled markdown gradebook plus a token/cost/duration summary.    */
+/*  POST  /sirenspec/grading_factory  { papers: string[] } → { job_id }      */
+/*  GET   /jobs/:id  → { status, result?: GradingResult }                    */
+/*                                                                            */
+/*  Polls until status === 'completed', then animates swarm phases.           */
 /* -------------------------------------------------------------------------- */
 
 type AgentId = 'editor' | 'ai_detector' | 'grader'
@@ -54,7 +52,6 @@ interface GradingResult {
   gradebook: GradebookRow[]
   summary: {
     totalTokens: number
-    estimatedUsd: number
     durationMs: number
   }
 }
@@ -91,7 +88,7 @@ version: "0.1"
 
 agents:
   gradebook_compiler:
-    model: "anthropic:claude-haiku-4-5-20251001"
+    model: "openai:gpt-4o-mini"
     system: |
       You are an academic administrator compiling a final gradebook.
       Below are the individual grade reports for each paper submitted.
@@ -114,8 +111,8 @@ nodes:
       concurrency: 3
       agents:
         - id: editor
-          provider: anthropic
-          model: claude-haiku-4-5-20251001
+          provider: openai
+          model: gpt-4o-mini
           prompt: |
             You are a writing editor. Review the following student paper (paper {{ index }} of {{ total }})
             and provide brief feedback on clarity, structure, and grammar. Be concise — 2-3 sentences.
@@ -135,8 +132,8 @@ nodes:
             {{ item }}
 
         - id: grader
-          provider: anthropic
-          model: claude-haiku-4-5-20251001
+          provider: openai
+          model: gpt-4o-mini
           prompt: |
             You are a professor grading a student paper. Score paper {{ index }} of {{ total }}
             on a scale of A, B, C, D, or F. Return the letter grade on the first line,
@@ -146,8 +143,8 @@ nodes:
             {{ item }}
 
       synthesis:
-        provider: anthropic
-        model: claude-haiku-4-5-20251001
+        provider: openai
+        model: gpt-4o-mini
         prompt: |
           Produce a concise grade report for paper {{ index }} of {{ total }}.
 
@@ -178,88 +175,9 @@ guardrails:
 `;
 
 const STAGE_INTERVAL_MS = 1100
-
-/* -------------------------------------------------------------------------- */
-/*  Mock execution                                                            */
-/* -------------------------------------------------------------------------- */
-
-function mockGradeForPaper(paper: string, index: number): PaperResult {
-  const words = paper.trim().split(/\s+/).length
-  const vague = /\b(big problem|lots of|something|more needs|many)\b/i.test(
-    paper
-  )
-  const precise =
-    /\b(ATP|oxidative phosphorylation|eukaryotic|photosynthesis|hypothesis)\b/i.test(
-      paper
-    )
-
-  let grade = 'B'
-  let integrity: PaperResult['integrity'] = 'LIKELY_HUMAN'
-  if (precise && words > 25) {
-    grade = 'A'
-    integrity = 'UNCERTAIN'
-  } else if (vague) {
-    grade = 'C'
-    integrity = 'LIKELY_HUMAN'
-  }
-
-  const editor =
-    grade === 'A'
-      ? 'Tight, well-sequenced prose with precise terminology. Could add a transitional sentence between the mechanism and its significance.'
-      : vague
-        ? 'Reads as a first draft — claims are asserted without evidence and sentences repeat the same idea. Tighten the thesis and cut filler phrasing.'
-        : 'Clear and readable, but the structure is list-like. Connect the sentences into a single argument and vary sentence length.'
-
-  const detector =
-    integrity === 'UNCERTAIN'
-      ? 'UNCERTAIN — phrasing is unusually polished for the length, but no definitive markers of generation.'
-      : 'LIKELY_HUMAN — natural hedging and uneven detail are consistent with student writing.'
-
-  const grader =
-    grade === 'A'
-      ? 'A — accurate, specific, and demonstrates real understanding of the mechanism.'
-      : grade === 'C'
-        ? 'C — on-topic but superficial; lacks evidence and specific detail.'
-        : 'B — solid summary with correct facts, but limited depth or analysis.'
-
-  const feedback =
-    grade === 'A'
-      ? 'Accurate and specific; add one connective sentence for flow.'
-      : grade === 'C'
-        ? 'On-topic but vague — needs evidence and a sharper thesis.'
-        : 'Correct and clear, but list-like; deepen the analysis.'
-
-  return {
-    index,
-    paper,
-    agents: [
-      { id: 'editor', output: editor },
-      { id: 'ai_detector', output: detector },
-      { id: 'grader', output: grader },
-    ],
-    grade,
-    integrity,
-    feedback,
-  }
-}
-
-function buildMockResult(papers: string[]): GradingResult {
-  const results = papers.map((p, i) => mockGradeForPaper(p, i))
-  const totalTokens = papers.length * 480 + 260
-  return {
-    papers: results,
-    gradebook: results.map(r => ({
-      index: r.index,
-      grade: r.grade,
-      feedback: r.feedback,
-    })),
-    summary: {
-      totalTokens,
-      estimatedUsd: Number((totalTokens * 0.0000006).toFixed(4)),
-      durationMs: papers.length * STAGE_INTERVAL_MS * 2 + STAGE_INTERVAL_MS,
-    },
-  }
-}
+const API_BASE = process.env.NEXT_PUBLIC_PORTFOLIO_API_BASE ?? 'http://localhost:8000'
+const POLL_INTERVAL_MS = 2000
+const MAX_POLL_ATTEMPTS = 120
 
 /* -------------------------------------------------------------------------- */
 /*  Component                                                                 */
@@ -275,12 +193,15 @@ export function SirenSpecGradingFactoryDemo() {
   const [expandedSwarms, setExpandedSwarms] = useState<Set<number>>(new Set())
 
   const timerRef = useRef<NodeJS.Timeout | null>(null)
+  const pollRef = useRef<NodeJS.Timeout | null>(null)
+  const [runError, setRunError] = useState<string | null>(null)
 
   const gradebookOrder = papers.length * 2
 
   useEffect(() => {
     return () => {
       if (timerRef.current) clearInterval(timerRef.current)
+      if (pollRef.current) clearInterval(pollRef.current)
     }
   }, [])
 
@@ -316,30 +237,89 @@ export function SirenSpecGradingFactoryDemo() {
     })
   }
 
-  function handleRun() {
+  async function handleRun() {
     const cleaned = papers.map(p => p.trim()).filter(Boolean)
     if (cleaned.length === 0 || runState === 'running') return
 
     if (timerRef.current) clearInterval(timerRef.current)
+    if (pollRef.current) clearInterval(pollRef.current)
 
     setPapers(cleaned)
-    setResult(buildMockResult(cleaned))
+    setResult(null)
     setDonePhases(0)
     setRunState('running')
     setPapersOpen(false)
     setExpandedSwarms(new Set())
+    setRunError(null)
 
-    const phaseCount = cleaned.length * 2 + 1
-    timerRef.current = setInterval(() => {
-      setDonePhases(prev => {
-        const next = prev + 1
-        if (next >= phaseCount) {
-          if (timerRef.current) clearInterval(timerRef.current)
-          setRunState('done')
-        }
-        return next
+    let job_id: string
+    try {
+      const res = await fetch(`${API_BASE}/sirenspec/grading_factory`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ papers: cleaned }),
       })
-    }, STAGE_INTERVAL_MS)
+      if (!res.ok) {
+        const body = await res.json().catch(() => ({})) as { detail?: string }
+        throw new Error(body.detail ?? `HTTP ${res.status}`)
+      }
+      const data = await res.json() as { job_id: string }
+      job_id = data.job_id
+    } catch (err) {
+      setRunError(err instanceof Error ? err.message : 'Failed to start grading')
+      setRunState('idle')
+      setPapersOpen(true)
+      return
+    }
+
+    let attempts = 0
+    pollRef.current = setInterval(async () => {
+      attempts++
+      if (attempts > MAX_POLL_ATTEMPTS) {
+        clearInterval(pollRef.current!)
+        setRunError('Grading timed out')
+        setRunState('idle')
+        setPapersOpen(true)
+        return
+      }
+      try {
+        const pollRes = await fetch(`${API_BASE}/jobs/${job_id}`)
+        if (!pollRes.ok) {
+          clearInterval(pollRef.current!)
+          setRunError(`Poll error: HTTP ${pollRes.status}`)
+          setRunState('idle')
+          setPapersOpen(true)
+          return
+        }
+        const status = await pollRes.json() as { status: string; result?: GradingResult; error?: string }
+        if (status.status === 'completed') {
+          clearInterval(pollRef.current!)
+          const data = status.result!
+          setResult(data)
+          const phaseCount = cleaned.length * 2 + 1
+          timerRef.current = setInterval(() => {
+            setDonePhases(prev => {
+              const next = prev + 1
+              if (next >= phaseCount) {
+                if (timerRef.current) clearInterval(timerRef.current)
+                setRunState('done')
+              }
+              return next
+            })
+          }, STAGE_INTERVAL_MS)
+        } else if (status.status === 'failed') {
+          clearInterval(pollRef.current!)
+          setRunError(status.error ?? 'Job failed')
+          setRunState('idle')
+          setPapersOpen(true)
+        }
+      } catch {
+        clearInterval(pollRef.current!)
+        setRunError('Network error while polling')
+        setRunState('idle')
+        setPapersOpen(true)
+      }
+    }, POLL_INTERVAL_MS)
   }
 
   const running = runState === 'running'
@@ -411,6 +391,13 @@ export function SirenSpecGradingFactoryDemo() {
               View workflow.yaml
             </button>
           </div>
+
+          {/* Error banner */}
+          {runError && (
+            <div className='rounded-lg border border-destructive/30 bg-destructive/5 px-3 py-2 text-xs text-destructive'>
+              {runError}
+            </div>
+          )}
 
           {/* Papers (collapsible) */}
           <div className='space-y-3'>
@@ -489,6 +476,14 @@ export function SirenSpecGradingFactoryDemo() {
               </div>
             )}
           </div>
+
+          {/* Polling loader — shown before API results arrive */}
+          {showResults && !result && (
+            <div className='flex flex-col items-center gap-3 py-8 text-center'>
+              <Loader2 className='h-6 w-6 animate-spin text-muted-foreground' />
+              <p className='text-sm text-muted-foreground'>Running grading workflow…</p>
+            </div>
+          )}
 
           {/* Live execution — accordion swarm rows */}
           {showResults && result && (
@@ -660,10 +655,9 @@ export function SirenSpecGradingFactoryDemo() {
                   <span>
                     {result.summary.totalTokens.toLocaleString()} tokens
                   </span>
-                  <span>~${result.summary.estimatedUsd.toFixed(4)} est. cost</span>
                   <span>budget cap $0.10</span>
-                  <span className='text-amber-600 dark:text-amber-500'>
-                    mock data — backend not yet wired
+                  <span className='text-emerald-600 dark:text-emerald-500'>
+                    live &middot; portfolio-api
                   </span>
                 </div>
               )}
@@ -686,11 +680,14 @@ export function SirenSpecGradingFactoryDemo() {
                 <Button
                   variant='outline'
                   onClick={() => {
+                    if (timerRef.current) clearInterval(timerRef.current)
+                    if (pollRef.current) clearInterval(pollRef.current)
                     setRunState('idle')
                     setResult(null)
                     setDonePhases(0)
                     setPapersOpen(true)
                     setExpandedSwarms(new Set())
+                    setRunError(null)
                   }}
                   disabled={running}
                 >

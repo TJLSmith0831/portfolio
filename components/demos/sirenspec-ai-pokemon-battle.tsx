@@ -11,11 +11,10 @@ import { cn } from '@/lib/utils'
 /* -------------------------------------------------------------------------- */
 /*  Backend contract                                                          */
 /*                                                                            */
-/*  This demo runs on MOCK data so it works with no backend. To go live,      */
-/*  replace `generateBattle` with a call to the SirenSpec pokemon-battle      */
-/*  endpoint. Pokemon stats are sourced live from the PokéAPI. The expected   */
-/*  response shape is `BattleResult` below — a list of turns each carrying    */
-/*  attacker, move, damage dealt, and remaining HP for both Pokemon.          */
+/*  POST  /sirenspec/pokemon_battle  { pokemon1, pokemon2 } → { job_id }     */
+/*  GET   /jobs/:id                  → { status, result?: BattleResult }     */
+/*                                                                            */
+/*  Polls until status === 'completed', then animates the returned turns.     */
 /* -------------------------------------------------------------------------- */
 
 interface StatEntry {
@@ -54,25 +53,9 @@ interface BattleResult {
 type BattleRunState = 'idle' | 'running' | 'done'
 
 const TURN_DELAY_MS = 1300
-
-const TYPE_MOVES: Record<string, string[]> = {
-  fire: ['Flamethrower', 'Fire Blast', 'Ember', 'Heat Wave'],
-  water: ['Hydro Pump', 'Surf', 'Bubble Beam', 'Water Gun'],
-  grass: ['Solar Beam', 'Vine Whip', 'Razor Leaf', 'Leaf Blade'],
-  electric: ['Thunderbolt', 'Thunder', 'Spark', 'Volt Tackle'],
-  psychic: ['Psychic', 'Psybeam', 'Confusion', 'Future Sight'],
-  normal: ['Tackle', 'Body Slam', 'Hyper Beam', 'Quick Attack'],
-  fighting: ['Close Combat', 'Karate Chop', 'Dynamic Punch', 'Focus Punch'],
-  rock: ['Rock Slide', 'Stone Edge', 'Rock Blast', 'Rock Throw'],
-  ground: ['Earthquake', 'Dig', 'Mud Shot', 'Earth Power'],
-  flying: ['Wing Attack', 'Aerial Ace', 'Air Slash', 'Hurricane'],
-  bug: ['Bug Buzz', 'X-Scissor', 'Pin Missile', 'Signal Beam'],
-  poison: ['Sludge Bomb', 'Poison Jab', 'Acid', 'Venoshock'],
-  ghost: ['Shadow Ball', 'Shadow Claw', 'Night Shade', 'Hex'],
-  ice: ['Ice Beam', 'Blizzard', 'Frost Breath', 'Ice Shard'],
-  dragon: ['Dragon Claw', 'Outrage', 'Draco Meteor', 'Dragon Pulse'],
-  steel: ['Iron Head', 'Flash Cannon', 'Metal Burst', 'Steel Wing'],
-}
+const API_BASE = process.env.NEXT_PUBLIC_PORTFOLIO_API_BASE ?? 'http://localhost:8000'
+const POLL_INTERVAL_MS = 2000
+const MAX_POLL_ATTEMPTS = 120
 
 const WORKFLOW_YAML = `version: "0.1"
 
@@ -146,44 +129,6 @@ async function fetchPokemonData(name: string): Promise<PokemonData | null> {
 }
 
 /* -------------------------------------------------------------------------- */
-/*  Mock battle engine                                                        */
-/* -------------------------------------------------------------------------- */
-
-function getMove(pokemon: PokemonData): string {
-  const type = pokemon.types[0] ?? 'normal'
-  const moves = TYPE_MOVES[type] ?? TYPE_MOVES['normal']
-  return moves[Math.floor(Math.random() * moves.length)]
-}
-
-function calcDamage(atk: PokemonData, def: PokemonData): number {
-  const base = Math.max(5, Math.floor((atk.attack / (def.defense + 1)) * 15) + 5)
-  const variation = 0.85 + Math.random() * 0.3
-  return Math.max(1, Math.round(base * variation))
-}
-
-function generateBattle(p1: PokemonData, p2: PokemonData): BattleResult {
-  let hp1 = p1.hp
-  let hp2 = p2.hp
-  const turns: BattleTurn[] = []
-  let attacker: 1 | 2 = p1.speed >= p2.speed ? 1 : 2
-
-  while (hp1 > 0 && hp2 > 0 && turns.length < 20) {
-    const atk = attacker === 1 ? p1 : p2
-    const def = attacker === 1 ? p2 : p1
-    const move = getMove(atk)
-    const damage = calcDamage(atk, def)
-
-    if (attacker === 1) hp2 = Math.max(0, hp2 - damage)
-    else hp1 = Math.max(0, hp1 - damage)
-
-    turns.push({ attacker, move, damage, hp1After: hp1, hp2After: hp2 })
-    attacker = attacker === 1 ? 2 : 1
-  }
-
-  return { turns, winner: hp2 <= 0 ? 1 : 2 }
-}
-
-/* -------------------------------------------------------------------------- */
 /*  Component                                                                 */
 /* -------------------------------------------------------------------------- */
 
@@ -204,7 +149,9 @@ export function SirenSpecAIPokemonBattleDemo() {
   const [yamlOpen, setYamlOpen] = useState(false)
 
   const timerRef = useRef<NodeJS.Timeout | null>(null)
+  const pollRef = useRef<NodeJS.Timeout | null>(null)
   const logContainerRef = useRef<HTMLDivElement | null>(null)
+  const [runError, setRunError] = useState<string | null>(null)
 
   // Fetch Pokémon list and pre-load defaults
   useEffect(() => {
@@ -233,6 +180,7 @@ export function SirenSpecAIPokemonBattleDemo() {
   useEffect(() => {
     return () => {
       if (timerRef.current) clearInterval(timerRef.current)
+      if (pollRef.current) clearInterval(pollRef.current)
     }
   }, [])
 
@@ -265,38 +213,96 @@ export function SirenSpecAIPokemonBattleDemo() {
     setP2Loading(false)
   }
 
-  function handleStartBattle() {
+  async function handleStartBattle() {
     if (!p1 || !p2 || battleRunState === 'running') return
 
     if (timerRef.current) clearInterval(timerRef.current)
+    if (pollRef.current) clearInterval(pollRef.current)
 
-    const result = generateBattle(p1, p2)
-    setBattle(result)
+    setBattle(null)
     setCurrentTurn(-1)
     setBattleRunState('running')
+    setRunError(null)
 
-    let turn = 0
-    setTimeout(() => {
-      setCurrentTurn(0)
-      turn = 1
-      timerRef.current = setInterval(() => {
-        if (turn >= result.turns.length) {
-          clearInterval(timerRef.current!)
-          setCurrentTurn(result.turns.length)
-          setBattleRunState('done')
-        } else {
-          setCurrentTurn(turn)
-          turn++
+    let job_id: string
+    try {
+      const res = await fetch(`${API_BASE}/sirenspec/pokemon_battle`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          pokemon1: { name: p1.name, displayName: p1.displayName, hp: p1.hp, attack: p1.attack, defense: p1.defense, speed: p1.speed, types: p1.types },
+          pokemon2: { name: p2.name, displayName: p2.displayName, hp: p2.hp, attack: p2.attack, defense: p2.defense, speed: p2.speed, types: p2.types },
+        }),
+      })
+      if (!res.ok) {
+        const body = await res.json().catch(() => ({})) as { detail?: string }
+        throw new Error(body.detail ?? `HTTP ${res.status}`)
+      }
+      const data = await res.json() as { job_id: string }
+      job_id = data.job_id
+    } catch (err) {
+      setRunError(err instanceof Error ? err.message : 'Failed to start battle')
+      setBattleRunState('idle')
+      return
+    }
+
+    let attempts = 0
+    pollRef.current = setInterval(async () => {
+      attempts++
+      if (attempts > MAX_POLL_ATTEMPTS) {
+        clearInterval(pollRef.current!)
+        setRunError('Battle timed out')
+        setBattleRunState('idle')
+        return
+      }
+      try {
+        const pollRes = await fetch(`${API_BASE}/jobs/${job_id}`)
+        if (!pollRes.ok) {
+          clearInterval(pollRef.current!)
+          setRunError(`Poll error: HTTP ${pollRes.status}`)
+          setBattleRunState('idle')
+          return
         }
-      }, TURN_DELAY_MS)
-    }, 400)
+        const status = await pollRes.json() as { status: string; result?: BattleResult; error?: string }
+        if (status.status === 'completed') {
+          clearInterval(pollRef.current!)
+          const result = status.result!
+          setBattle(result)
+          let turn = 0
+          setTimeout(() => {
+            setCurrentTurn(0)
+            turn = 1
+            timerRef.current = setInterval(() => {
+              if (turn >= result.turns.length) {
+                clearInterval(timerRef.current!)
+                setCurrentTurn(result.turns.length)
+                setBattleRunState('done')
+              } else {
+                setCurrentTurn(turn)
+                turn++
+              }
+            }, TURN_DELAY_MS)
+          }, 400)
+        } else if (status.status === 'failed') {
+          clearInterval(pollRef.current!)
+          setRunError(status.error ?? 'Job failed')
+          setBattleRunState('idle')
+        }
+      } catch {
+        clearInterval(pollRef.current!)
+        setRunError('Network error while polling')
+        setBattleRunState('idle')
+      }
+    }, POLL_INTERVAL_MS)
   }
 
   function handleReset() {
     if (timerRef.current) clearInterval(timerRef.current)
+    if (pollRef.current) clearInterval(pollRef.current)
     setBattle(null)
     setBattleRunState('idle')
     setCurrentTurn(-1)
+    setRunError(null)
   }
 
   const currentHp1 =
@@ -367,8 +373,7 @@ export function SirenSpecAIPokemonBattleDemo() {
             </div>
             <p className='text-sm leading-relaxed text-muted-foreground'>
               Pick two Pokémon and watch a multi-turn battle unfold. A SirenSpec{' '}
-              <span className='font-medium text-foreground'>loop node</span>{' '}
-              drives the battle, calling the narrator agent each turn until one
+              workflow drives the battle, calling the narrator agent each turn until one
               Pokémon faints. Stats sourced live from{' '}
               <a
                 href='https://pokeapi.co'
@@ -388,6 +393,21 @@ export function SirenSpecAIPokemonBattleDemo() {
               View workflow.yaml
             </button>
           </div>
+
+          {/* Error banner */}
+          {runError && (
+            <div className='rounded-lg border border-destructive/30 bg-destructive/5 px-3 py-2 text-xs text-destructive'>
+              {runError}
+            </div>
+          )}
+
+          {/* Polling loader */}
+          {showBattle && !battle && (
+            <div className='flex flex-col items-center gap-3 py-8 text-center'>
+              <Loader2 className='h-6 w-6 animate-spin text-muted-foreground' />
+              <p className='text-sm text-muted-foreground'>Running battle workflow…</p>
+            </div>
+          )}
 
           {/* Pickers (idle only) */}
           {!showBattle && (
@@ -491,8 +511,8 @@ export function SirenSpecAIPokemonBattleDemo() {
                   <span>
                     ~{(battle.turns.length * 300).toLocaleString()} tokens est.
                   </span>
-                  <span className='text-amber-600 dark:text-amber-500'>
-                    mock data &mdash; backend not yet wired
+                  <span className='text-emerald-600 dark:text-emerald-500'>
+                    live &middot; portfolio-api
                   </span>
                 </div>
               )}
