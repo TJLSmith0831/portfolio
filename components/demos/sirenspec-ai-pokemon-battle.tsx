@@ -53,7 +53,8 @@ interface BattleResult {
 type BattleRunState = 'idle' | 'running' | 'done'
 
 const TURN_DELAY_MS = 1300
-const API_BASE = process.env.NEXT_PUBLIC_PORTFOLIO_API_BASE ?? 'http://localhost:8000'
+const API_BASE =
+  process.env.NEXT_PUBLIC_PORTFOLIO_API_BASE ?? 'http://localhost:8000'
 const POLL_INTERVAL_MS = 2000
 const MAX_POLL_ATTEMPTS = 120
 
@@ -94,7 +95,7 @@ nodes:
 
 guardrails:
   - injection
-`;
+`
 
 /* -------------------------------------------------------------------------- */
 /*  PokéAPI helpers                                                           */
@@ -230,15 +231,31 @@ export function SirenSpecAIPokemonBattleDemo() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          pokemon1: { name: p1.name, displayName: p1.displayName, hp: p1.hp, attack: p1.attack, defense: p1.defense, speed: p1.speed, types: p1.types },
-          pokemon2: { name: p2.name, displayName: p2.displayName, hp: p2.hp, attack: p2.attack, defense: p2.defense, speed: p2.speed, types: p2.types },
+          pokemon1: {
+            name: p1.name,
+            displayName: p1.displayName,
+            hp: p1.hp,
+            attack: p1.attack,
+            defense: p1.defense,
+            speed: p1.speed,
+            types: p1.types,
+          },
+          pokemon2: {
+            name: p2.name,
+            displayName: p2.displayName,
+            hp: p2.hp,
+            attack: p2.attack,
+            defense: p2.defense,
+            speed: p2.speed,
+            types: p2.types,
+          },
         }),
       })
       if (!res.ok) {
-        const body = await res.json().catch(() => ({})) as { detail?: string }
+        const body = (await res.json().catch(() => ({}))) as { detail?: string }
         throw new Error(body.detail ?? `HTTP ${res.status}`)
       }
-      const data = await res.json() as { job_id: string }
+      const data = (await res.json()) as { job_id: string }
       job_id = data.job_id
     } catch (err) {
       setRunError(err instanceof Error ? err.message : 'Failed to start battle')
@@ -263,7 +280,11 @@ export function SirenSpecAIPokemonBattleDemo() {
           setBattleRunState('idle')
           return
         }
-        const status = await pollRes.json() as { status: string; result?: BattleResult; error?: string }
+        const status = (await pollRes.json()) as {
+          status: string
+          result?: BattleResult
+          error?: string
+        }
         if (status.status === 'completed') {
           clearInterval(pollRef.current!)
           const result = status.result!
@@ -308,12 +329,12 @@ export function SirenSpecAIPokemonBattleDemo() {
   const currentHp1 =
     battle && currentTurn >= 0
       ? battle.turns[Math.min(currentTurn, battle.turns.length - 1)].hp1After
-      : p1?.hp ?? 0
+      : (p1?.hp ?? 0)
 
   const currentHp2 =
     battle && currentTurn >= 0
       ? battle.turns[Math.min(currentTurn, battle.turns.length - 1)].hp2After
-      : p2?.hp ?? 0
+      : (p2?.hp ?? 0)
 
   const showBattle = battleRunState === 'running' || battleRunState === 'done'
   const running = battleRunState === 'running'
@@ -373,8 +394,8 @@ export function SirenSpecAIPokemonBattleDemo() {
             </div>
             <p className='text-sm leading-relaxed text-muted-foreground'>
               Pick two Pokémon and watch a multi-turn battle unfold. A SirenSpec{' '}
-              workflow drives the battle, calling the narrator agent each turn until one
-              Pokémon faints. Stats sourced live from{' '}
+              workflow drives the battle, calling the narrator agent each turn
+              until one Pokémon faints. Stats sourced live from{' '}
               <a
                 href='https://pokeapi.co'
                 target='_blank'
@@ -405,7 +426,9 @@ export function SirenSpecAIPokemonBattleDemo() {
           {showBattle && !battle && (
             <div className='flex flex-col items-center gap-3 py-8 text-center'>
               <Loader2 className='h-6 w-6 animate-spin text-muted-foreground' />
-              <p className='text-sm text-muted-foreground'>Running battle workflow…</p>
+              <p className='text-sm text-muted-foreground'>
+                Running battle workflow…
+              </p>
             </div>
           )}
 
@@ -474,7 +497,9 @@ export function SirenSpecAIPokemonBattleDemo() {
                       <span className='font-medium shrink-0 w-20 truncate'>
                         {attacker.displayName}
                       </span>
-                      <span className='text-muted-foreground shrink-0'>used</span>
+                      <span className='text-muted-foreground shrink-0'>
+                        used
+                      </span>
                       <span className='font-medium text-primary flex-1'>
                         {turn.move}
                       </span>
@@ -496,10 +521,8 @@ export function SirenSpecAIPokemonBattleDemo() {
               {battleRunState === 'done' && (
                 <div className='rounded-lg border bg-muted/20 p-4'>
                   <p className='text-sm font-semibold text-center'>
-                    {battle.winner === 1
-                      ? p1.displayName
-                      : p2.displayName}{' '}
-                    wins after {battle.turns.length} turns!
+                    {battle.winner === 1 ? p1.displayName : p2.displayName} wins
+                    after {battle.turns.length} turns!
                   </p>
                 </div>
               )}
@@ -660,13 +683,12 @@ function HpBar({
   pokemon: PokemonData
   currentHp: number
 }) {
-  const pct = Math.max(0, Math.min(100, Math.round((currentHp / pokemon.hp) * 100)))
+  const pct = Math.max(
+    0,
+    Math.min(100, Math.round((currentHp / pokemon.hp) * 100))
+  )
   const barColor =
-    pct > 50
-      ? 'bg-green-500'
-      : pct > 25
-        ? 'bg-yellow-500'
-        : 'bg-red-500'
+    pct > 50 ? 'bg-green-500' : pct > 25 ? 'bg-yellow-500' : 'bg-red-500'
 
   return (
     <div className='space-y-1.5'>
@@ -690,7 +712,10 @@ function HpBar({
       </div>
       <div className='h-2 rounded-full bg-muted overflow-hidden'>
         <div
-          className={cn('h-full rounded-full transition-all duration-500', barColor)}
+          className={cn(
+            'h-full rounded-full transition-all duration-500',
+            barColor
+          )}
           style={{ width: `${pct}%` }}
         />
       </div>

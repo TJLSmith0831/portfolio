@@ -43,7 +43,11 @@ export function ProjectsSection() {
 
   const toggleFlip = (id: string, name?: string) => {
     const isFlipping = !flippedCards.has(id)
-    if (isFlipping) posthog?.capture('project_card_flip', { project_id: id, project_name: name })
+    if (isFlipping)
+      posthog?.capture('project_card_flip', {
+        project_id: id,
+        project_name: name,
+      })
     setFlippedCards(prev => {
       const newSet = new Set(prev)
       if (newSet.has(id)) {
@@ -56,7 +60,10 @@ export function ProjectsSection() {
   }
 
   const expandCard = (id: string, name?: string) => {
-    posthog?.capture('project_card_expand', { project_id: id, project_name: name })
+    posthog?.capture('project_card_expand', {
+      project_id: id,
+      project_name: name,
+    })
     setExpandedCard(id)
   }
 
@@ -275,7 +282,13 @@ export function ProjectsSection() {
                             href={project.liveUrl}
                             target='_blank'
                             rel='noopener noreferrer'
-                            onClick={() => posthog?.capture('project_link_click', { project_id: project.id, project_name: project.name, link_type: 'live' })}
+                            onClick={() =>
+                              posthog?.capture('project_link_click', {
+                                project_id: project.id,
+                                project_name: project.name,
+                                link_type: 'live',
+                              })
+                            }
                           >
                             {'type' in project &&
                             project.type === 'Technical Article' ? (
@@ -296,7 +309,13 @@ export function ProjectsSection() {
                         <Button size='sm' className='flex-1' asChild>
                           <a
                             href={'#demos'}
-                            onClick={() => posthog?.capture('project_link_click', { project_id: project.id, project_name: project.name, link_type: 'demo' })}
+                            onClick={() =>
+                              posthog?.capture('project_link_click', {
+                                project_id: project.id,
+                                project_name: project.name,
+                                link_type: 'demo',
+                              })
+                            }
                           >
                             {'hasDemo' in project && project.hasDemo && (
                               <>
@@ -319,7 +338,13 @@ export function ProjectsSection() {
                             href={project.repository}
                             target='_blank'
                             rel='noopener noreferrer'
-                            onClick={() => posthog?.capture('project_link_click', { project_id: project.id, project_name: project.name, link_type: 'github' })}
+                            onClick={() =>
+                              posthog?.capture('project_link_click', {
+                                project_id: project.id,
+                                project_name: project.name,
+                                link_type: 'github',
+                              })
+                            }
                           >
                             <Github className='w-3 h-3 mr-1' />
                             Code
@@ -458,7 +483,14 @@ export function ProjectsSection() {
                       href={expandedProject.liveUrl}
                       target='_blank'
                       rel='noopener noreferrer'
-                      onClick={() => posthog?.capture('project_link_click', { project_id: expandedProject.id, project_name: expandedProject.name, link_type: 'live', context: 'modal' })}
+                      onClick={() =>
+                        posthog?.capture('project_link_click', {
+                          project_id: expandedProject.id,
+                          project_name: expandedProject.name,
+                          link_type: 'live',
+                          context: 'modal',
+                        })
+                      }
                     >
                       {'type' in expandedProject &&
                       expandedProject.type === 'Technical Article' ? (
@@ -476,7 +508,19 @@ export function ProjectsSection() {
                   </Button>
                 )}
                 {expandedProject.hasDemo && (
-                  <Button className='flex-1' asChild onClick={() => { posthog?.capture('project_link_click', { project_id: expandedProject.id, project_name: expandedProject.name, link_type: 'demo', context: 'modal' }); closeExpanded() }}>
+                  <Button
+                    className='flex-1'
+                    asChild
+                    onClick={() => {
+                      posthog?.capture('project_link_click', {
+                        project_id: expandedProject.id,
+                        project_name: expandedProject.name,
+                        link_type: 'demo',
+                        context: 'modal',
+                      })
+                      closeExpanded()
+                    }}
+                  >
                     <a href={'#demos'}>
                       {'type' in expandedProject &&
                       expandedProject.type === 'Technical Article' ? (
@@ -503,7 +547,14 @@ export function ProjectsSection() {
                       href={expandedProject.repository}
                       target='_blank'
                       rel='noopener noreferrer'
-                      onClick={() => posthog?.capture('project_link_click', { project_id: expandedProject.id, project_name: expandedProject.name, link_type: 'github', context: 'modal' })}
+                      onClick={() =>
+                        posthog?.capture('project_link_click', {
+                          project_id: expandedProject.id,
+                          project_name: expandedProject.name,
+                          link_type: 'github',
+                          context: 'modal',
+                        })
+                      }
                     >
                       <Github className='w-4 h-4 mr-2' />
                       View Source Code

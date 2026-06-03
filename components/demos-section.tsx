@@ -13,7 +13,11 @@ import { SirenSpecCompressionGauntletDemo } from './demos/sirenspec-compression-
 import { SirenSpecAIPokemonBattleDemo } from './demos/sirenspec-ai-pokemon-battle'
 import Image from 'next/image'
 
-type DemoKey = 'cfb-player-fit-summarizer' | 'sirenspec-grading-factory' | 'sirenspec-compression-gauntlet' |'sirenspec-ai-pokemon-battle'
+type DemoKey =
+  | 'cfb-player-fit-summarizer'
+  | 'sirenspec-grading-factory'
+  | 'sirenspec-compression-gauntlet'
+  | 'sirenspec-ai-pokemon-battle'
 
 interface DemoConfig {
   key: DemoKey
@@ -119,7 +123,10 @@ export function DemosSection() {
                     key={demo.key}
                     variant={isActive ? 'secondary' : 'ghost'}
                     onClick={() => {
-                      posthog?.capture('demo_tab_click', { demo: demo.key, demo_label: demo.label })
+                      posthog?.capture('demo_tab_click', {
+                        demo: demo.key,
+                        demo_label: demo.label,
+                      })
                       setActiveDemo(demo.key)
                     }}
                     className='

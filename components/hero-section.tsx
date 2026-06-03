@@ -41,7 +41,9 @@ export function HeroSection() {
             target='_blank'
             rel='noopener noreferrer'
             aria-label='GitHub Profile'
-            onClick={() => posthog?.capture('social_link_click', { platform: 'github' })}
+            onClick={() =>
+              posthog?.capture('social_link_click', { platform: 'github' })
+            }
           >
             <Github className='h-5 w-5' />
           </a>
@@ -57,7 +59,9 @@ export function HeroSection() {
             target='_blank'
             rel='noopener noreferrer'
             aria-label='LinkedIn Profile'
-            onClick={() => posthog?.capture('social_link_click', { platform: 'linkedin' })}
+            onClick={() =>
+              posthog?.capture('social_link_click', { platform: 'linkedin' })
+            }
           >
             <Linkedin className='h-5 w-5' />
           </a>
@@ -73,7 +77,9 @@ export function HeroSection() {
             target='_blank'
             rel='noopener noreferrer'
             aria-label='Medium Profile'
-            onClick={() => posthog?.capture('social_link_click', { platform: 'medium' })}
+            onClick={() =>
+              posthog?.capture('social_link_click', { platform: 'medium' })
+            }
           >
             <Image
               src={

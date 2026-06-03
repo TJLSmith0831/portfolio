@@ -37,7 +37,7 @@ const SAMPLE_TEXT =
   'The Apollo program, conducted by NASA between 1961 and 1972, stands as one of ' +
   "humanity's most ambitious scientific and engineering endeavors. Launched in the context " +
   'of the Cold War Space Race against the Soviet Union, the program sought to demonstrate ' +
-  'American technological prowess by achieving crewed lunar landings. President Kennedy\'s ' +
+  "American technological prowess by achieving crewed lunar landings. President Kennedy's " +
   '1961 declaration to land a man on the Moon before the end of the decade galvanized an ' +
   'entire generation of engineers, scientists, and astronauts. The program employed over ' +
   '400,000 people and cost approximately $25.4 billion, equivalent to roughly $257 billion ' +
@@ -51,7 +51,8 @@ const SAMPLE_TEXT =
   'becoming a defining moment of human ingenuity under pressure.'
 
 const ROUND_DELAY_MS = 1400
-const API_BASE = process.env.NEXT_PUBLIC_PORTFOLIO_API_BASE ?? 'http://localhost:8000'
+const API_BASE =
+  process.env.NEXT_PUBLIC_PORTFOLIO_API_BASE ?? 'http://localhost:8000'
 const POLL_INTERVAL_MS = 2000
 const MAX_POLL_ATTEMPTS = 120
 
@@ -102,7 +103,7 @@ edges:
 guardrails:
   - injection
   - length
-`;
+`
 
 /* -------------------------------------------------------------------------- */
 /*  Word-count helper (used for UI display only)                             */
@@ -156,13 +157,15 @@ export function SirenSpecCompressionGauntletDemo() {
         body: JSON.stringify({ text: text }),
       })
       if (!res.ok) {
-        const body = await res.json().catch(() => ({})) as { detail?: string }
+        const body = (await res.json().catch(() => ({}))) as { detail?: string }
         throw new Error(body.detail ?? `HTTP ${res.status}`)
       }
-      const data = await res.json() as { job_id: string }
+      const data = (await res.json()) as { job_id: string }
       job_id = data.job_id
     } catch (err) {
-      setRunError(err instanceof Error ? err.message : 'Failed to start gauntlet')
+      setRunError(
+        err instanceof Error ? err.message : 'Failed to start gauntlet'
+      )
       setRunState('idle')
       return
     }
@@ -184,7 +187,11 @@ export function SirenSpecCompressionGauntletDemo() {
           setRunState('idle')
           return
         }
-        const status = await pollRes.json() as { status: string; result?: { rounds: RoundResult[] }; error?: string }
+        const status = (await pollRes.json()) as {
+          status: string
+          result?: { rounds: RoundResult[] }
+          error?: string
+        }
         if (status.status === 'completed') {
           clearInterval(pollRef.current!)
           const generated = status.result!.rounds
@@ -363,7 +370,9 @@ export function SirenSpecCompressionGauntletDemo() {
               {rounds.length === 0 && (
                 <div className='flex flex-col items-center gap-3 py-8 text-center'>
                   <Loader2 className='h-6 w-6 animate-spin text-muted-foreground' />
-                  <p className='text-sm text-muted-foreground'>Running compression workflow…</p>
+                  <p className='text-sm text-muted-foreground'>
+                    Running compression workflow…
+                  </p>
                 </div>
               )}
 
@@ -379,16 +388,14 @@ export function SirenSpecCompressionGauntletDemo() {
                       : 0
 
                   return (
-                    <div
-                      key={i}
-                      className='rounded-lg border overflow-hidden'
-                    >
+                    <div key={i} className='rounded-lg border overflow-hidden'>
                       {/* Round header — always visible, clickable when done */}
                       <button
                         onClick={() => status === 'done' && toggleRound(i)}
                         className={cn(
                           'flex w-full items-center gap-3 px-3 py-2.5 text-xs text-left',
-                          status === 'done' && 'hover:bg-muted/30 transition-colors'
+                          status === 'done' &&
+                            'hover:bg-muted/30 transition-colors'
                         )}
                       >
                         <span className='font-mono font-medium text-muted-foreground shrink-0 w-14'>
@@ -451,7 +458,9 @@ export function SirenSpecCompressionGauntletDemo() {
                       )}
                       {status === 'running' && (
                         <div className='border-t bg-muted/20 px-3 pb-3 pt-2'>
-                          <SkeletonLines lines={i === 0 ? 3 : i === 1 ? 2 : 1} />
+                          <SkeletonLines
+                            lines={i === 0 ? 3 : i === 1 ? 2 : 1}
+                          />
                         </div>
                       )}
                     </div>

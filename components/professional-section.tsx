@@ -212,7 +212,11 @@ export function ProfessionalSection() {
           { key: 'experience', label: 'Experience', icon: Building },
           { key: 'education', label: 'Education', icon: Users },
           { key: 'skills', label: 'Skills', icon: Target },
-          { key: 'certifications', label: 'Certifications & Courses', icon: Award },
+          {
+            key: 'certifications',
+            label: 'Certifications & Courses',
+            icon: Award,
+          },
         ].map(({ key, label, icon: Icon }) => (
           <button
             key={key}

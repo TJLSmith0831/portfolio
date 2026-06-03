@@ -172,10 +172,11 @@ edges:
 
 guardrails:
   - injection
-`;
+`
 
 const STAGE_INTERVAL_MS = 1100
-const API_BASE = process.env.NEXT_PUBLIC_PORTFOLIO_API_BASE ?? 'http://localhost:8000'
+const API_BASE =
+  process.env.NEXT_PUBLIC_PORTFOLIO_API_BASE ?? 'http://localhost:8000'
 const POLL_INTERVAL_MS = 2000
 const MAX_POLL_ATTEMPTS = 120
 
@@ -260,13 +261,15 @@ export function SirenSpecGradingFactoryDemo() {
         body: JSON.stringify({ papers: cleaned }),
       })
       if (!res.ok) {
-        const body = await res.json().catch(() => ({})) as { detail?: string }
+        const body = (await res.json().catch(() => ({}))) as { detail?: string }
         throw new Error(body.detail ?? `HTTP ${res.status}`)
       }
-      const data = await res.json() as { job_id: string }
+      const data = (await res.json()) as { job_id: string }
       job_id = data.job_id
     } catch (err) {
-      setRunError(err instanceof Error ? err.message : 'Failed to start grading')
+      setRunError(
+        err instanceof Error ? err.message : 'Failed to start grading'
+      )
       setRunState('idle')
       setPapersOpen(true)
       return
@@ -291,7 +294,11 @@ export function SirenSpecGradingFactoryDemo() {
           setPapersOpen(true)
           return
         }
-        const status = await pollRes.json() as { status: string; result?: GradingResult; error?: string }
+        const status = (await pollRes.json()) as {
+          status: string
+          result?: GradingResult
+          error?: string
+        }
         if (status.status === 'completed') {
           clearInterval(pollRef.current!)
           const data = status.result!
@@ -481,16 +488,16 @@ export function SirenSpecGradingFactoryDemo() {
           {showResults && !result && (
             <div className='flex flex-col items-center gap-3 py-8 text-center'>
               <Loader2 className='h-6 w-6 animate-spin text-muted-foreground' />
-              <p className='text-sm text-muted-foreground'>Running grading workflow…</p>
+              <p className='text-sm text-muted-foreground'>
+                Running grading workflow…
+              </p>
             </div>
           )}
 
           {/* Live execution — accordion swarm rows */}
           {showResults && result && (
             <div className='space-y-3'>
-              <h4 className='text-sm font-semibold'>
-                grade_papers → output
-              </h4>
+              <h4 className='text-sm font-semibold'>grade_papers → output</h4>
 
               <div className='space-y-2'>
                 {result.papers.map(paper => {
@@ -499,7 +506,10 @@ export function SirenSpecGradingFactoryDemo() {
                   const isExpanded = expandedSwarms.has(paper.index)
 
                   return (
-                    <div key={paper.index} className='rounded-lg border overflow-hidden'>
+                    <div
+                      key={paper.index}
+                      className='rounded-lg border overflow-hidden'
+                    >
                       {/* Swarm header row — always visible */}
                       <button
                         onClick={() => toggleSwarm(paper.index)}
@@ -629,7 +639,10 @@ export function SirenSpecGradingFactoryDemo() {
                       </thead>
                       <tbody>
                         {result.gradebook.map(row => (
-                          <tr key={row.index} className='border-b last:border-0'>
+                          <tr
+                            key={row.index}
+                            className='border-b last:border-0'
+                          >
                             <td className='py-2 pr-4 font-mono text-muted-foreground'>
                               {row.index + 1}
                             </td>
@@ -743,13 +756,7 @@ function PhasePill({ status }: { status: StageStatus }) {
   )
 }
 
-function AgentPill({
-  label,
-  status,
-}: {
-  label: string
-  status: StageStatus
-}) {
+function AgentPill({ label, status }: { label: string; status: StageStatus }) {
   return (
     <span
       className={cn(
@@ -760,9 +767,7 @@ function AgentPill({
         status === 'pending' && 'bg-muted text-muted-foreground'
       )}
     >
-      {status === 'running' && (
-        <Loader2 className='h-2.5 w-2.5 animate-spin' />
-      )}
+      {status === 'running' && <Loader2 className='h-2.5 w-2.5 animate-spin' />}
       {status === 'done' && <Check className='h-2.5 w-2.5' />}
       {label}
     </span>
