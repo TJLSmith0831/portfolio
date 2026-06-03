@@ -136,6 +136,15 @@
   },
   "certifications": [
     {
+      "name": "AI Engineer Core Track",
+      "issuer": "Udemy",
+      "year": "2026",
+      "month": "Feb",
+      "logo": "udemy",
+      "skills": ["LLM Engineering", "QLoRA", "Agents"],
+      "description": "Completed formal training in LLM engineering and AI Agents"
+    },
+    {
       "name": "Learn RAG",
       "issuer": "Scrimba",
       "year": "2025",
