@@ -53,6 +53,7 @@ const DEMOS: DemoConfig[] = [
         width={16}
         height={16}
         style={{ marginLeft: '-3.5px' }}
+        className='dark:invert'
       />
     ),
     component: <SirenSpecAIPokemonBattleDemo />,
