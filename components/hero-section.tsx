@@ -5,11 +5,13 @@ import { ArrowDown, Github, Linkedin } from 'lucide-react'
 import Image from 'next/image'
 import { useTheme } from 'next-themes'
 import { useEffect, useState } from 'react'
+import { usePostHog } from 'posthog-js/react'
 
 export function HeroSection() {
   const { resolvedTheme } = useTheme()
   const [mounted, setMounted] = useState(false)
-  
+  const posthog = usePostHog()
+
   useEffect(() => {
     setMounted(true)
   }, [])
@@ -17,6 +19,7 @@ export function HeroSection() {
   if (!mounted) return null
 
   const scrollToWork = () => {
+    posthog?.capture('hero_cta_click')
     const experienceSection = document.getElementById('experience')
     if (experienceSection) {
       experienceSection.scrollIntoView({ behavior: 'smooth' })
@@ -38,6 +41,7 @@ export function HeroSection() {
             target='_blank'
             rel='noopener noreferrer'
             aria-label='GitHub Profile'
+            onClick={() => posthog?.capture('social_link_click', { platform: 'github' })}
           >
             <Github className='h-5 w-5' />
           </a>
@@ -53,6 +57,7 @@ export function HeroSection() {
             target='_blank'
             rel='noopener noreferrer'
             aria-label='LinkedIn Profile'
+            onClick={() => posthog?.capture('social_link_click', { platform: 'linkedin' })}
           >
             <Linkedin className='h-5 w-5' />
           </a>
@@ -68,6 +73,7 @@ export function HeroSection() {
             target='_blank'
             rel='noopener noreferrer'
             aria-label='Medium Profile'
+            onClick={() => posthog?.capture('social_link_click', { platform: 'medium' })}
           >
             <Image
               src={

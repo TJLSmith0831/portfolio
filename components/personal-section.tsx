@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { usePostHog } from 'posthog-js/react'
 import { Card } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { X, ChevronLeft, ChevronRight } from 'lucide-react'
@@ -51,8 +52,11 @@ const photos = [
 export function PersonalSection() {
   const [selectedPhoto, setSelectedPhoto] = useState<number | null>(null)
   const [hoveredPhoto, setHoveredPhoto] = useState<number | null>(null)
+  const posthog = usePostHog()
 
   const openPhoto = (id: number) => {
+    const photo = photos.find(p => p.id === id)
+    posthog?.capture('personal_photo_open', { photo_id: id, photo_alt: photo?.alt })
     setSelectedPhoto(id)
   }
 
@@ -71,6 +75,7 @@ export function PersonalSection() {
     } else {
       newIndex = currentIndex < photos.length - 1 ? currentIndex + 1 : 0
     }
+    posthog?.capture('personal_photo_navigate', { direction, photo_id: photos[newIndex].id })
 
     setSelectedPhoto(photos[newIndex].id)
   }

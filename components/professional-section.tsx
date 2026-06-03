@@ -16,6 +16,7 @@ import {
 } from 'lucide-react'
 import experienceData from '../data/experience.json'
 import Image from 'next/image'
+import { usePostHog } from 'posthog-js/react'
 
 interface Experience {
   title: string
@@ -46,6 +47,7 @@ export function ProfessionalSection() {
   >('experience')
   const [certificationPage, setCertificationPage] = useState(1)
   const certificationsPerPage = 6
+  const posthog = usePostHog()
 
   const formatDateRange = (startDate: string, endDate?: string) => {
     if (endDate) {
@@ -63,6 +65,7 @@ export function ProfessionalSection() {
       tableau: '/tableau-logo.svg',
       microsoft: '/microsoft-logo.svg',
       coursera: '/coursera-logo.png',
+      udemy: '/udemy-logo.png',
     }
 
     const logoSrc = logoMap[logo]
@@ -209,11 +212,14 @@ export function ProfessionalSection() {
           { key: 'experience', label: 'Experience', icon: Building },
           { key: 'education', label: 'Education', icon: Users },
           { key: 'skills', label: 'Skills', icon: Target },
-          { key: 'certifications', label: 'Certifications', icon: Award },
+          { key: 'certifications', label: 'Certifications & Courses', icon: Award },
         ].map(({ key, label, icon: Icon }) => (
           <button
             key={key}
-            onClick={() => setActiveTab(key as typeof activeTab)}
+            onClick={() => {
+              posthog?.capture('experience_tab_click', { tab: key })
+              setActiveTab(key as typeof activeTab)
+            }}
             className={`flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-colors ${
               activeTab === key
                 ? 'bg-primary text-primary-foreground'
@@ -343,7 +349,7 @@ export function ProfessionalSection() {
               </div>
             )}
 
-            {/* Certifications Grid */}
+            {/* Certifications & Courses Grid */}
             <div className='grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto'>
               {currentCertifications.map((cert, index) => (
                 <Card

@@ -1,12 +1,14 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import { usePostHog } from 'posthog-js/react'
 import { ChatBubble } from './chat-bubble'
 import { ChatWindow } from './chat-window'
 
 export function AIAssistant() {
   const [isOpen, setIsOpen] = useState(false)
   const [hasUnread, setHasUnread] = useState(false)
+  const posthog = usePostHog()
 
   useEffect(() => {
     if (isOpen) {
@@ -25,7 +27,9 @@ export function AIAssistant() {
   }, [isOpen])
 
   const toggleChat = () => {
-    setIsOpen(!isOpen)
+    const next = !isOpen
+    posthog?.capture(next ? 'ai_assistant_open' : 'ai_assistant_close')
+    setIsOpen(next)
   }
 
   const closeChat = () => {

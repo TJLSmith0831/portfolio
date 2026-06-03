@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { usePostHog } from 'posthog-js/react'
 import { Card } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
@@ -87,6 +88,7 @@ export function DemosSection() {
   const [activeDemo, setActiveDemo] = useState<DemoKey>(
     'cfb-player-fit-summarizer'
   )
+  const posthog = usePostHog()
 
   const activeDemoConfig = DEMOS.find(d => d.key === activeDemo)
 
@@ -115,7 +117,10 @@ export function DemosSection() {
                   <Button
                     key={demo.key}
                     variant={isActive ? 'secondary' : 'ghost'}
-                    onClick={() => setActiveDemo(demo.key)}
+                    onClick={() => {
+                      posthog?.capture('demo_tab_click', { demo: demo.key, demo_label: demo.label })
+                      setActiveDemo(demo.key)
+                    }}
                     className='
                       w-full
                       md:w-full
