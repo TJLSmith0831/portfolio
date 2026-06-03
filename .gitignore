@@ -7,3 +7,4 @@ CLAUDE.md
 package-lock.json
 next-env.d.ts
 .DS_Store
+tsconfig.tsbuildinfo
