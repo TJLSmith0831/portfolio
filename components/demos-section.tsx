@@ -81,8 +81,7 @@ const DEMOS: DemoConfig[] = [
     description: `
       Backed by SirenSpec, this demo compresses large documents using multiple
       compression passes through LLMs. The final output is compared to the original
-      to measure compression effectiveness. Powered using SirenSpec and Anthropics's 
-      haiku-4.5 model.
+      to measure compression effectiveness.
     `,
     icon: <Shrink />,
     component: <SirenSpecCompressionGauntletDemo />,
