@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { usePostHog } from 'posthog-js/react'
 import { Card } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
@@ -38,8 +39,15 @@ export function ProjectsSection() {
   const [expandedCard, setExpandedCard] = useState<string | null>(null)
   const [currentPage, setCurrentPage] = useState(1)
   const projectsPerPage = 6
+  const posthog = usePostHog()
 
-  const toggleFlip = (id: string) => {
+  const toggleFlip = (id: string, name?: string) => {
+    const isFlipping = !flippedCards.has(id)
+    if (isFlipping)
+      posthog?.capture('project_card_flip', {
+        project_id: id,
+        project_name: name,
+      })
     setFlippedCards(prev => {
       const newSet = new Set(prev)
       if (newSet.has(id)) {
@@ -51,7 +59,11 @@ export function ProjectsSection() {
     })
   }
 
-  const expandCard = (id: string) => {
+  const expandCard = (id: string, name?: string) => {
+    posthog?.capture('project_card_expand', {
+      project_id: id,
+      project_name: name,
+    })
     setExpandedCard(id)
   }
 
@@ -167,7 +179,7 @@ export function ProjectsSection() {
                 className={`relative w-full h-80 cursor-pointer transition-transform duration-600 preserve-3d ${
                   flippedCards.has(project.id) ? 'rotate-y-180' : ''
                 }`}
-                onClick={() => toggleFlip(project.id)}
+                onClick={() => toggleFlip(project.id, project.name)}
               >
                 {/* Front of card */}
                 <Card className='absolute inset-0 backface-hidden overflow-hidden group-hover:-translate-y-2 transition-transform duration-300'>
@@ -270,20 +282,41 @@ export function ProjectsSection() {
                             href={project.liveUrl}
                             target='_blank'
                             rel='noopener noreferrer'
+                            onClick={() =>
+                              posthog?.capture('project_link_click', {
+                                project_id: project.id,
+                                project_name: project.name,
+                                link_type: 'live',
+                              })
+                            }
                           >
                             {'type' in project &&
-                              project.type === 'Technical Article' && (
-                                <>
-                                  <FileText className='w-3 h-3 mr-1' />
-                                  Read
-                                </>
-                              )}
+                            project.type === 'Technical Article' ? (
+                              <>
+                                <FileText className='w-3 h-3 mr-1' />
+                                Read
+                              </>
+                            ) : (
+                              <>
+                                <ExternalLink className='w-3 h-3 mr-1' />
+                                Visit Site
+                              </>
+                            )}
                           </a>
                         </Button>
                       )}
                       {project.hasDemo && (
                         <Button size='sm' className='flex-1' asChild>
-                          <a href={'#demos'}>
+                          <a
+                            href={'#demos'}
+                            onClick={() =>
+                              posthog?.capture('project_link_click', {
+                                project_id: project.id,
+                                project_name: project.name,
+                                link_type: 'demo',
+                              })
+                            }
+                          >
                             {'hasDemo' in project && project.hasDemo && (
                               <>
                                 <Play className='w-3 h-3 mr-1' />
@@ -305,6 +338,13 @@ export function ProjectsSection() {
                             href={project.repository}
                             target='_blank'
                             rel='noopener noreferrer'
+                            onClick={() =>
+                              posthog?.capture('project_link_click', {
+                                project_id: project.id,
+                                project_name: project.name,
+                                link_type: 'github',
+                              })
+                            }
                           >
                             <Github className='w-3 h-3 mr-1' />
                             Code
@@ -318,7 +358,7 @@ export function ProjectsSection() {
                       className='w-full text-xs'
                       onClick={e => {
                         e.stopPropagation()
-                        expandCard(project.id)
+                        expandCard(project.id, project.name)
                       }}
                     >
                       View Details
@@ -439,20 +479,19 @@ export function ProjectsSection() {
               <div className='flex gap-4 mt-6'>
                 {expandedProject.liveUrl && (
                   <Button className='flex-1' asChild>
-                    <a href={expandedProject.liveUrl}>
-                      {'type' in expandedProject &&
-                        expandedProject.type === 'Technical Article' && (
-                          <>
-                            <FileText className='w-4 h-4 mr-2' />
-                            Read Article
-                          </>
-                        )}
-                    </a>
-                  </Button>
-                )}
-                {expandedProject.hasDemo && (
-                  <Button className='flex-1' asChild onClick={closeExpanded}>
-                    <a href={'#demos'}>
+                    <a
+                      href={expandedProject.liveUrl}
+                      target='_blank'
+                      rel='noopener noreferrer'
+                      onClick={() =>
+                        posthog?.capture('project_link_click', {
+                          project_id: expandedProject.id,
+                          project_name: expandedProject.name,
+                          link_type: 'live',
+                          context: 'modal',
+                        })
+                      }
+                    >
                       {'type' in expandedProject &&
                       expandedProject.type === 'Technical Article' ? (
                         <>
@@ -462,7 +501,37 @@ export function ProjectsSection() {
                       ) : (
                         <>
                           <ExternalLink className='w-4 h-4 mr-2' />
-                          View Live Project
+                          Visit Site
+                        </>
+                      )}
+                    </a>
+                  </Button>
+                )}
+                {expandedProject.hasDemo && (
+                  <Button
+                    className='flex-1'
+                    asChild
+                    onClick={() => {
+                      posthog?.capture('project_link_click', {
+                        project_id: expandedProject.id,
+                        project_name: expandedProject.name,
+                        link_type: 'demo',
+                        context: 'modal',
+                      })
+                      closeExpanded()
+                    }}
+                  >
+                    <a href={'#demos'}>
+                      {'type' in expandedProject &&
+                      expandedProject.type === 'Technical Article' ? (
+                        <>
+                          <FileText className='w-4 h-4 mr-2' />
+                          Read Article
+                        </>
+                      ) : (
+                        <>
+                          <Play className='w-4 h-4 mr-2' />
+                          See Demo
                         </>
                       )}
                     </a>
@@ -478,6 +547,14 @@ export function ProjectsSection() {
                       href={expandedProject.repository}
                       target='_blank'
                       rel='noopener noreferrer'
+                      onClick={() =>
+                        posthog?.capture('project_link_click', {
+                          project_id: expandedProject.id,
+                          project_name: expandedProject.name,
+                          link_type: 'github',
+                          context: 'modal',
+                        })
+                      }
                     >
                       <Github className='w-4 h-4 mr-2' />
                       View Source Code

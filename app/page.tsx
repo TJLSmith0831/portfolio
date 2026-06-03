@@ -7,6 +7,7 @@ import { ThemeToggle } from '@/components/theme-toggle'
 import { AnimatedBackground } from '@/components/animated-background'
 import { AIAssistant } from '@/components/ai-assistant/ai-assistant'
 import { DemosSection } from '@/components/demos-section'
+import { SectionTracker } from '@/components/section-tracker'
 
 export default function Home() {
   return (
@@ -36,6 +37,7 @@ export default function Home() {
       </section>
 
       <AIAssistant />
+      <SectionTracker />
     </main>
   )
 }

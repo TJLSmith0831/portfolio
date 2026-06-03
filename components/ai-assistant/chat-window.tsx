@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useRef, useEffect } from 'react'
+import { usePostHog } from 'posthog-js/react'
 import { Send, Loader2 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
@@ -41,6 +42,7 @@ export function ChatWindow({ isOpen, onClose }: ChatWindowProps) {
   const [isEmailLoading, setIsEmailLoading] = useState(false)
   const [hasEmailBeenSent, setHasEmailBeenSent] = useState(false)
 
+  const posthog = usePostHog()
   const messagesEndRef = useRef<HTMLDivElement>(null)
   const textareaRef = useRef<HTMLTextAreaElement>(null)
 
@@ -61,6 +63,10 @@ export function ChatWindow({ isOpen, onClose }: ChatWindowProps) {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     if (!input.trim() || isLoading) return
+
+    posthog?.capture('ai_assistant_message_sent', {
+      message_count: messages.filter(m => m.role === 'user').length + 1,
+    })
 
     const userMessage: ChatMessage = {
       id: Date.now().toString(),

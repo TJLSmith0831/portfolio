@@ -1,6 +1,64 @@
 {
   "featured": [
     {
+      "id": "audience-architect",
+      "name": "Audience Architect",
+      "date": "2026-03-01",
+      "image": "/audience-architect.png",
+      "description": "An agentic enhancement to PILYTIX's Audience Builder CDP. A LangGraph-powered AI agent that turns natural-language requests into targeted audience segments.",
+      "technologies": [
+        "LangGraph",
+        "LangChain",
+        "Python",
+        "OpenAI",
+        "React",
+        "Remotion"
+      ],
+      "features": [
+        "Natural-language requests converted into targeted audience segments",
+        "LangGraph agent orchestration over the Audience Builder CDP",
+        "Led product definition and competitive research",
+        "Executive proposal development, including a Remotion marketing video",
+        "Full-stack integration into the existing CDP product"
+      ],
+      "status": "Active",
+      "repository": "Private",
+      "liveUrl": "https://pilytix.ai/solutions/university-cdp/",
+      "deployed": true,
+      "myContribution": "Led product definition, competitive research, and executive proposal development (including a Remotion marketing video), plus full-stack development of the agent."
+    },
+    {
+      "id": "sirenspec",
+      "name": "SirenSpec",
+      "date": "2026-02-15",
+      "image": "/sirenspec-logo.svg",
+      "description": "An open-source, YAML-first workflow orchestration tool for LLMs, built in Python. Targets the middle ground between low-code tools like n8n and highly technical frameworks like LangChain.",
+      "technologies": [
+        "Python",
+        "YAML",
+        "OpenAI",
+        "Anthropic",
+        "Ollama",
+        "Textual",
+        "Pydantic"
+      ],
+      "features": [
+        "YAML-first multi-agent workflow definitions",
+        "Templated workflows with conditional, edge-based routing",
+        "Guardrails: injection detection, PII redaction, schema validation, and cost caps",
+        "Cassette testing for deterministic, replayable runs",
+        "Connectors for OpenAI, Anthropic, and Ollama",
+        "Simple Python SDK and CLI (init, run, validate, explain, render, test)",
+        "Textual TUI for turn-based chats, version control, and AI-powered workflow editing (in progress)"
+      ],
+      "status": "Active",
+      "repository": "https://github.com/sirenspec/sirenspec",
+      "liveUrl": "https://sirenspec.dev",
+      "deployed": true,
+      "hasDemo": true,
+      "myContribution": "Creator and lead developer — designed the YAML spec, orchestration engine, guardrails, provider connectors, Python SDK/CLI, and the in-progress Textual TUI."
+    },
+    {
       "id": "player-fit-summarizer",
       "name": "College Football Player Fit Summarizer",
       "date": "2026-01-29",

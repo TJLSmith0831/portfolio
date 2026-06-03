@@ -1,10 +1,12 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import { usePostHog } from 'posthog-js/react'
 import { Button } from '@/components/ui/button'
 
 export function Navigation() {
   const [activeSection, setActiveSection] = useState('hero')
+  const posthog = usePostHog()
 
   useEffect(() => {
     const handleScroll = () => {
@@ -31,6 +33,7 @@ export function Navigation() {
   }, [])
 
   const scrollToSection = (sectionId: string) => {
+    posthog?.capture('nav_click', { section: sectionId })
     const element = document.getElementById(sectionId)
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' })

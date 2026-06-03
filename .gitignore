@@ -4,3 +4,7 @@ node_modules
 .env
 CLAUDE.md
 .claude/
+package-lock.json
+next-env.d.ts
+.DS_Store
+tsconfig.tsbuildinfo

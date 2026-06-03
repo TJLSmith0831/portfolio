@@ -1,30 +1,30 @@
 {
   "currentPosition": {
-    "title": "Full-Stack Engineer & Data Scientist",
+    "title": "Data Scientist & Full-Stack Engineer",
     "company": "PILYTIX",
     "startDate": "Jan 2025",
     "location": "Austin, Texas Metropolitan Area",
-    "description": "Building predictive models with robust ETL processes and advanced analytics, delivering data-driven solutions across sectors through sophisticated AI and ML implementation",
+    "description": "Lead data scientist and lead full-stack engineer, covering everything from AI agent design to Flask APIs, Airflow pipelines, and frontend builds. Work directly with clients, client success, and the web team across the full product stack.",
     "responsibilities": [
-      "Maintained 10+ client-specific data pipelines using Airflow, Python, and SQL, ensuring accurate delivery of millions of records per week across diverse SaaS environments",
-      "Investigated and resolved data integrity issues across 100K+ client records, integrating clean datasets into AI and CDP systems to support model accuracy and downstream reporting",
-      "Deployed 20+ machine learning models using a Python-based JSON workflow engine, supporting scalable inference and rapid experimentation",
-      "Enhanced the ReactJS frontend by fixing 30+ UI bugs and delivering 10+ new features, improving usability and reducing support tickets by an estimated 25%",
-      "Expanded backend functionality by adding 15+ Flask API endpoints and optimizing database schemas for 3+ key modules, cutting response times by up to 200ms and enabling new product features"
+      "Leading full-stack development and marketing video construction of the Audience Architect, an agentic addition to the Audience Builder CDP",
+      "Built a Gemini 2.5 Flash sentiment-scoring pipeline for Kansas State Foundation contact report analysis",
+      "Converted a static RBAC file system into a Python-managed Postgres system, cutting access-control changes from 24 hours to under 5 minutes",
+      "Led modeling and product deployment over 9 months for the Seattle Mariners, LSU Tiger Athletic Foundation, Charlotte Hornets, Winnipeg Blue Bombers, Kansas State Foundation, and Nashville SC"
     ],
     "technologies": [
+      "Python",
+      "TypeScript",
       "React",
       "Next.js",
-      "TypeScript",
-      "Python",
+      "FastAPI",
       "Flask",
-      "Node.js",
-      "Tailwind CSS",
-      "Docker",
+      "LangGraph",
+      "LangChain",
       "PostgreSQL",
-      "R",
-      "AWS",
-      "GCP"
+      "Airflow",
+      "Gemini",
+      "GCP",
+      "Docker"
     ]
   },
   "previousExperience": [
@@ -33,11 +33,11 @@
       "company": "PILYTIX",
       "startDate": "Jan 2024",
       "endDate": "Jan 2025",
-      "description": "Specialized in frontend development and user interface design and data science",
+      "description": "Self-taught React and TypeScript to take on lead frontend development, then balanced that with Figma mockups and predictive modeling work across CDP product and client projects.",
       "keyAchievements": [
-        "Developed client-specific predictive models using R and PostgreSQL, enabling personalized insights and supporting key GTM workflows across enterprise accounts",
-        "Improved and designed new features for internal CDP and AI platforms, contributing to faster model iteration cycles and supporting 5+ live client deployments",
-        "Implemented test-driven development (TDD) practices to validate critical backend processes for the web application, increasing test coverage and reducing post-deploy bugs by 30%"
+        "Built the published-list framework for the Audience Builder CDP, letting 8+ clients share marketing lists across their organizations with non-obstructing web-worker auto-refreshes and rehydration validation",
+        "Refactored a 3+ year-old, 4.5K-line React context into 1K lines of clean Redux, keeping the mask-based filtering system intact with full unit coverage and rollback safety — eliminated 99% of breaking frontend bugs",
+        "Coordinated with gift officers and leadership on product construction and model deployments for the University of Arizona Foundation, leading to a long-term partnership"
       ]
     },
     {
@@ -45,14 +45,12 @@
       "company": "PILYTIX",
       "startDate": "Dec 2021",
       "endDate": "Jan 2024",
-      "description": "Specialized in data science and data analysis",
+      "description": "Modeler and data engineer focused on building Hierarchical Bayesian Logistic Regression models that gave clients explainable, coefficient-based predictions for lead scoring, pipeline management, and churn prevention.",
       "keyAchievements": [
-        "Developed and maintained 3 in-house R packages to standardize modeling workflows and accelerate internal analytics development",
-        "Led the development of a Shiny application to streamline predictive modeling and provide transparent visibility into model performance and historical changes",
-        "Built and deployed 4 client-facing predictive models using R, PostgreSQL, and Java, for the Pipeline Accelerator product",
-        "Contributed to the backend architecture of the CDP platform, supporting integration of modeling outputs and client data pipelines",
-        "Applied test-driven development (TDD) to major R package upgrades, reducing release-related bugs and increasing deployment stability",
-        "Enhanced feature evaluation techniques using ggplot and advanced statistical analysis in R, resulting in more accurate model selection and improved predictive performance"
+        "Assisted the frontend team with product backlog triage after a month-long course in React and TypeScript",
+        "Trained and deployed HBLR models for the Ottawa Redblacks and Houston Dynamo while finishing 18 hours of coursework, improving win rates by 7% and cutting cycle times by ~20 days",
+        "Developed filtering-table specs for the Audience Builder CDP — type, column name, and value constraints — for nightly Airflow DAG runs",
+        "Added 50+ unit tests across three in-house R packages, reducing errors in the model parsing workflow, feature evaluations, and JSON deployments to GCP for the Java-based scoring API"
       ]
     },
     {
@@ -60,7 +58,7 @@
       "company": "Frost Bank",
       "startDate": "May 2021",
       "endDate": "Dec 2021",
-      "description": "Specialized in data analysis for the mobile app team",
+      "description": "Analytics resource for the mobile app team. Used SQL, Tableau, and Splunk to surface user sentiment, daily login patterns, and in-app flow data for product and marketing decisions.",
       "keyAchievements": [
         "Queried and analyzed large datasets using SQL to generate insights for product and marketing stakeholders",
         "Created live, detailed Tableau dashboards for Frost product owners, enabling real-time monitoring of feature adoption and usage across thousands of users",
@@ -72,7 +70,7 @@
       "company": "KSAT 12",
       "startDate": "Jan 2021",
       "endDate": "May 2021",
-      "description": "Specialized in data analysis for the News team",
+      "description": "Standalone analyst for the news team. Monitored web traffic, built Tableau dashboards that got published directly in digital articles, and scraped public datasets for editorial use.",
       "keyAchievements": [
         "Created Tableau visualizations for digital publications",
         "Used Python to develop regressions and neural networks to optimize company performance",
@@ -112,30 +110,40 @@
       "React",
       "Next.js",
       "Node.js",
-      "Express.js",
+      "FastAPI",
       "Flask",
       "Tailwind CSS",
       "Redux"
     ],
     "tools": [
       "Git/GitHub",
-      "VS Code",
       "Docker",
-      "AWS",
-      "Vercel",
-      "Figma",
-      "CI/CD"
+      "Airflow",
+      "GCP",
+      "DigitalOcean",
+      "GitHub Actions",
+      "CircleCI"
     ],
-    "databases": ["PostgreSQL", "MongoDB", "Redis", "Tableau"],
+    "databases": ["PostgreSQL", "Redis", "MongoDB", "BigQuery", "SQL Server"],
     "datascience": [
       "Machine Learning",
-      "ETL Processes",
       "Predictive Modeling",
+      "ETL Processes",
       "Advanced Analytics",
       "TDD"
-    ]
+    ],
+    "ai": ["LangChain", "LangGraph", "OpenAI Agents SDK", "Gemini", "Ollama"]
   },
   "certifications": [
+    {
+      "name": "AI Engineer Core Track",
+      "issuer": "Udemy",
+      "year": "2026",
+      "month": "Feb",
+      "logo": "udemy",
+      "skills": ["LLM Engineering", "QLoRA", "Agents"],
+      "description": "Completed formal training in LLM engineering and AI Agents"
+    },
     {
       "name": "Learn RAG",
       "issuer": "Scrimba",

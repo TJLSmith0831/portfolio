@@ -5,6 +5,7 @@ A modern, responsive portfolio website built with Next.js 15 featuring an intell
 ## 🚀 Features
 
 ### Core Portfolio
+
 - **Responsive Design**: Optimized for desktop, tablet, and mobile devices
 - **Dark/Light/System Theme**: Three-mode theme switcher with system preference detection
 - **Smooth Navigation**: Section-based navigation with smooth scrolling
@@ -12,6 +13,7 @@ A modern, responsive portfolio website built with Next.js 15 featuring an intell
 - **Interactive Project Cards**: Detailed project showcases with modal views
 
 ### AI Assistant (Swishter)
+
 - **Context-Aware Chat**: AI assistant trained on personal and professional context
 - **Smart Email Notifications**: Intelligent filtering of business inquiries vs. general questions
 - **Rate Limiting**: Built-in protection against spam (3 emails per IP per 24 hours)
@@ -19,6 +21,7 @@ A modern, responsive portfolio website built with Next.js 15 featuring an intell
 - **Professional Filtering**: Advanced validation system for legitimate business inquiries
 
 ### Technical Features
+
 - **Performance Optimized**: Built with Next.js 15 and Turbopack
 - **Type-Safe**: Full TypeScript implementation
 - **Modern UI**: shadcn/ui components with Radix UI primitives
@@ -29,6 +32,7 @@ A modern, responsive portfolio website built with Next.js 15 featuring an intell
 ## 🛠️ Tech Stack
 
 ### Frontend
+
 - **Next.js 15** - React framework with App Router
 - **React 19** - UI library
 - **TypeScript** - Type safety
@@ -39,6 +43,7 @@ A modern, responsive portfolio website built with Next.js 15 featuring an intell
 - **Geist Font** - Typography
 
 ### Backend & AI
+
 - **Vercel AI SDK** - AI integration
 - **OpenAI GPT-3.5-turbo** - Language model
 - **Vercel KV** - Rate limiting storage
@@ -46,6 +51,7 @@ A modern, responsive portfolio website built with Next.js 15 featuring an intell
 - **OpenTelemetry** - Performance monitoring
 
 ### Development & Testing
+
 - **ESLint** - Code linting
 - **Prettier** - Code formatting
 - **Playwright** - E2E testing
@@ -54,29 +60,34 @@ A modern, responsive portfolio website built with Next.js 15 featuring an intell
 ## 🚀 Getting Started
 
 ### Prerequisites
-- Node.js 18+ 
+
+- Node.js 18+
 - npm, yarn, pnpm, or bun
 
 ### Installation
 
 1. Clone the repository:
+
 ```bash
 git clone <repository-url>
 cd portfolio
 ```
 
 2. Install dependencies:
+
 ```bash
 npm install
 ```
 
 3. Set up environment variables:
+
 ```bash
 # Copy and configure environment variables
 cp .env.example .env.local
 ```
 
 Required environment variables:
+
 - `OPENAI_API_KEY` - OpenAI API key for AI chat
 - `EMAIL_USER` - Email account for notifications
 - `EMAIL_PASS` - Email password/app password
@@ -87,6 +98,7 @@ Required environment variables:
 ### Development
 
 Start the development server:
+
 ```bash
 npm run dev --turbopack
 ```
@@ -96,6 +108,7 @@ Open [http://localhost:3000](http://localhost:3000) to see the portfolio.
 ### Build
 
 Build for production:
+
 ```bash
 npm run build
 npm start
@@ -104,11 +117,13 @@ npm start
 ### Code Quality
 
 Run linting:
+
 ```bash
 npm run lint
 ```
 
 Format code:
+
 ```bash
 npm run format
 ```
@@ -116,6 +131,7 @@ npm run format
 ### Testing
 
 Run E2E tests:
+
 ```bash
 npx playwright test
 ```
@@ -158,8 +174,9 @@ The AI assistant is designed to:
 ### Email Notification Criteria
 
 The AI validates conversations and sends notifications for:
+
 - ✅ Direct hiring requests
-- ✅ Interview opportunities  
+- ✅ Interview opportunities
 - ✅ Project proposals
 - ✅ Meeting/call requests
 - ✅ Consulting inquiries
@@ -167,6 +184,7 @@ The AI validates conversations and sends notifications for:
 - ✅ Collaboration proposals
 
 But **not** for:
+
 - ❌ General information questions
 - ❌ Portfolio browsing
 - ❌ Casual greetings
@@ -175,12 +193,15 @@ But **not** for:
 ## 🎨 Customization
 
 ### Theme System
+
 The portfolio supports three theme modes:
+
 - **System**: Matches user's OS preference
 - **Light**: Light theme
 - **Dark**: Dark theme
 
 ### Content Updates
+
 - Update personal information in component files
 - Modify project data in `data/projects.json`
 - Update experience in `data/experience.json`
@@ -189,6 +210,7 @@ The portfolio supports three theme modes:
 ## 📊 Monitoring
 
 Production deployments include:
+
 - OpenTelemetry performance monitoring
 - API endpoint tracking
 - Error reporting
@@ -197,15 +219,18 @@ Production deployments include:
 ## 🚀 Deployment
 
 ### Vercel (Recommended)
+
 1. Push to GitHub
 2. Connect repository to Vercel
 3. Configure environment variables
 4. Deploy automatically
 
 ### Other Platforms
+
 The application can be deployed to any platform supporting Next.js:
+
 - Netlify
-- Railway  
+- Railway
 - DigitalOcean App Platform
 - AWS Amplify
 
@@ -219,4 +244,4 @@ Built by **Tristan Smith** - Full-Stack Engineer and Data Scientist
 
 ---
 
-*This portfolio demonstrates modern web development practices, AI integration, and professional presentation in a single cohesive application.*
+_This portfolio demonstrates modern web development practices, AI integration, and professional presentation in a single cohesive application._
